@@ -1,0 +1,20 @@
+{
+  "name": "mseg-inbox-service",
+  "version": "1.0.0",
+  "description": "UKG Employee Inbox Service to handle notifications, messages, and events",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hugoamaralsantana/mseg-inbox-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hugoamaralsantana/mseg-inbox-service/issues"
+  },
+  "homepage": "https://github.com/hugoamaralsantana/mseg-inbox-service#readme"
+}
