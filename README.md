@@ -12,7 +12,7 @@ UKG Employee Inbox Service to handle notifications, messages, and events
 
 ## Cloning the Github Repository into your Workspace
 1. Navigate (through your terminal) to where on your workstation you would like to have your project files
-2. Run `git clone https://github.com/hugoamaralsantana/mseg-inbox-service`. A folder named **mseg-inbox-service**.
+2. Run `git clone https://github.com/hugoamaralsantana/mseg-inbox-service`. A folder named **mseg-inbox-service** should be added in the directory that your ran the `git clone` command.
 3. Navigate into said folder and voila. You set it up. That's really all there is to it.
 
 Let me know if you guys have any issues cloning the Github repository into your workspace
