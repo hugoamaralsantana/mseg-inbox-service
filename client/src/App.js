@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+import './styles/custom.scss'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import login from './components/pages/login';
 import landingPage from './components/pages/landingPage';
