@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
 
-export default class performanceReview extends Component {
-  render() {
-    return (
-      <h1>performanceReview</h1>
-    )
-  }
+
+const PerformanceReview = () => {
+  return (
+    <h1>performanceReview</h1>
+  )
 }
+
+export default PerformanceReview;

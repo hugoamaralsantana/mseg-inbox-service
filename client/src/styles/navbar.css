@@ -1,0 +1,52 @@
+.form {
+  height: 30px;
+  margin: 7.5px 4px 7.5px 0px;
+  padding: 0;
+}
+.brand {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+.navbar-brand {
+  width: 600px;
+}
+
+#page-title {
+  padding-left: 0px;
+  color: white;
+  font-size: 2.5em;
+  margin-bottom: 0;
+}
+
+#navbarSupportedContent {
+  width: 300px;
+}
+
+#settings-icon {
+  padding: 5px;
+  color: white;
+}
+
+#profile-icon {
+  padding: 5px;
+}
+
+#search-bar {
+  height: 30px;
+  width: 270px;
+}
+
+#navbarSupportedContent {
+  width: 350px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#navbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}

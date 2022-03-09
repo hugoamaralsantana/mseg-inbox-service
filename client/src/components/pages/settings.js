@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
 
-export default class settings extends Component {
-  render() {
-    return (
-      <h1>settings</h1>
-    )
-  }
+
+const Settings = () => {
+  return (
+    <h1>settings</h1>
+  )
 }
+
+export default Settings;
