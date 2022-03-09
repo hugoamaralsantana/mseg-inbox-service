@@ -15,7 +15,7 @@
 #page-title {
   padding-left: 0px;
   color: white;
-  font-size: 2.5em;
+  font-size: 2em;
   margin-bottom: 0;
 }
 
@@ -45,7 +45,7 @@
 }
 
 #navbar {
-  height: 60px;
+  height: 50px;
   display: flex;
   align-items: center;
   padding: 0;

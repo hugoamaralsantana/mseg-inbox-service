@@ -21,7 +21,7 @@ const Login = () => {
                     <label htmlFor="floatingPassword">Password</label>
                 </div>
                 <a href="#" className="text-primary font-weight-bold mb-4 mt-2 text-decoration-none">Forgot Password</a>
-                <button className="pl-4 pr-4 btn btn-med btn-primary rounded-pill" type="submit">Login</button>
+                <a href="/landingPage"><button className="pl-4 pr-4 btn btn-med btn-primary rounded-pill" type="submit">Login</button></a>
             </form>     
             </div>
         </div>

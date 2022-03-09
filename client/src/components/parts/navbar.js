@@ -9,7 +9,7 @@ const NavBar = (props) => {
     return(
         <nav id="navbar" className="navbar navbar-light bg-primary">
             <div className='brand'>
-                <a href="/landingPage"><img className="col-sm-auto" id="ukg-icon" src='/ukg_logo_white.svg' alt="settings-outline" width={45} height={35} /> </a>
+                <a href="/landingPage"><img className="col-sm-auto" id="ukg-icon" src='/ukg_logo_white.svg' alt="settings-outline" width={45} height={25} /> </a>
                 <a href="/landingPage"> <h1 id="page-title" className="col-sm-auto">Inbox - {pageTitle}</h1></a>
             </div>
             <div id="navbarSupportedContent">
