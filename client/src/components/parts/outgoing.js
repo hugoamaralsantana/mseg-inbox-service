@@ -5,13 +5,13 @@ const pendingTaskReelURL = 'performanceReview/outgoing/pending';
 const inProgressTaskReelURL = 'performanceReview/outgoing/inProgress';
 const completedTaskReelURL = 'performanceReview/outgoing/completed';
 
-const Outgoing = () => {
+const Outgoing = (props) => {
     return (
-        <div>
+        <div className='outgoing d-flex bg-dark m-2'>
             {/* these endpoints are passed to components where we will fetch data from the API later on*/}
-            <TaskReel name='Pending' endpoint={pendingTaskReelURL}></TaskReel>
-            <TaskReel name='In Progress' endpoint={inProgressTaskReelURL}></TaskReel>
-            <TaskReel name='Completed' endpoint={completedTaskReelURL}></TaskReel>
+            <TaskReel name={props.reelItems[0]} endpoint={pendingTaskReelURL} />
+            <TaskReel name={props.reelItems[1]} endpoint={inProgressTaskReelURL} />
+            <TaskReel name={props.reelItems[2]} endpoint={completedTaskReelURL} />
         </div>
     )
 }

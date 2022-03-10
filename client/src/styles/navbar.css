@@ -5,8 +5,6 @@
 }
 .brand {
   height: 50px;
-  display: flex;
-  align-items: center;
 }
 .navbar-brand {
   width: 600px;
@@ -40,13 +38,15 @@
 #navbarSupportedContent {
   width: 350px;
   height: 100%;
-  display: flex;
-  align-items: center;
 }
 
 #navbar {
   height: 50px;
-  display: flex;
-  align-items: center;
   padding: 0;
+}
+
+@media (max-width: 900px) {
+  #search-bar {
+    display: none;
+  }
 }
