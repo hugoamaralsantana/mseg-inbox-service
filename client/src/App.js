@@ -2,32 +2,31 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import './styles/custom.scss'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-import login from './components/pages/login';
-import landingPage from './components/pages/landingPage';
-import assignedTraining from './components/pages/assignedTraining';
-import performanceReview from './components/pages/performanceReview';
+
+import Login from './components/pages/login';
+import LandingPage from './components/pages/landingPage';
+import AssignedTraining from './components/pages/assignedTraining';
+import PerformanceReview from './components/pages/performanceReview';
 import PTORequest from './components/pages/PTORequest';
-import profilePage from './components/pages/profilePage';
-import settings from './components/pages/settings';
+import ProfilePage from './components/pages/profilePage';
+import Settings from './components/pages/settings';
 
-class App extends Component {
-  render() {
+const App = () => {
     return (
       <Router>
         <div>
-          <Route exact path='/' component={login} />
-          <Route path='/landingPage' component={landingPage} />
-          <Route path='/assignedTraining' component={assignedTraining} />
-          <Route path='/performanceReview' component={performanceReview} />
+          <Route exact path='/' component={Login} />
+          <Route path='/landingPage' component={LandingPage} />
+          <Route path='/assignedTraining' component={AssignedTraining} />
+          <Route path='/performanceReview' component={PerformanceReview} />
           <Route path='/PTORequest' component={PTORequest} />
-          <Route path='/profilePage' component={profilePage} />
-          <Route path='/settings' component={settings} />
+          <Route path='/profilePage' component={ProfilePage} />
+          <Route path='/settings' component={Settings} />
         </div>
       </Router>
+      
     );
-  }
 }
 
 export default App;

@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+
 import '../../styles/Login.css'
 
-export default class login extends Component {
-    render() {
-        return (
+
+const Login = () => {
+    return (
         <div className="login-background bg-primary">
             <div className="form-signin">
             <form className="wrapperLogin">
@@ -21,10 +21,11 @@ export default class login extends Component {
                     <label htmlFor="floatingPassword">Password</label>
                 </div>
                 <a href="#" className="text-primary font-weight-bold mb-4 mt-2 text-decoration-none">Forgot Password</a>
-                <button className="pl-4 pr-4 btn btn-med btn-primary rounded-pill" type="submit">Login</button>
+                <a href="/landingPage"><button className="pl-4 pr-4 btn btn-med btn-primary rounded-pill" type="submit">Login</button></a>
             </form>     
             </div>
         </div>
-        )
-    }
+    )
 }
+
+export default Login;
