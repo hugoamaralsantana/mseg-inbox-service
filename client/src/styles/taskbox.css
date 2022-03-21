@@ -1,0 +1,12 @@
+.date {
+  font-size: 80%;
+  font-weight: 300;
+}
+
+.task-box {
+  border-radius: 10px;
+}
+
+.address {
+  font-weight: 500;
+}

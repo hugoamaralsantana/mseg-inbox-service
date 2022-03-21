@@ -1,5 +1,27 @@
 .task-reel {
   width: 26%;
   height: 100%;
-  border-radius: 25px;
+  border-radius: 20px;
+}
+
+.title {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.gray {
+  background-color: rgb(187, 184, 184);
+}
+
+.yellow {
+  background-color: rgb(248, 246, 106);
+}
+
+.green {
+  background-color: rgb(117, 218, 117);
+}
+
+.task-box-container {
+  overflow: scroll;
+  height: 85%;
 }
