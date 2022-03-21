@@ -2,41 +2,20 @@
   width: 200px;
   height: 750px;
   background-color: #012323;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .sidebar {
   width: 50px;
   height: 750px;
   background-color: #012323;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.top {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: left;
 }
 
 .icon-container-extended {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
   color: white;
   padding: 3px;
 }
 
 .icon-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
   color: white;
   padding: 3px;
 }

@@ -13,7 +13,8 @@ $info: #7854e4;
 $warning: #b8c924;
 $danger: #d62518;
 $light: #f8f9fa;
-$dark: #343a40;
+$dark: #012d2d;
+$darkest: #012323;
 
 // this is used to map colors. change accordingly.
 $theme-colors: (
@@ -29,6 +30,7 @@ $theme-colors: (
   danger: $danger,
   light: $light,
   dark: $dark,
+  darkest: $darkest,
   // now bg-accent,btn-accent,etc.. can be called
 );
 

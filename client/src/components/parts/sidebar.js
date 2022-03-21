@@ -3,33 +3,28 @@ import '../../styles/custom.scss'
 import '../../styles/sidebar.css'
 
 const SideBar = (props) => {
-    const [expanded, updateState] = useState(props.expanded);
     function arrowClick() {
-        if (expanded) {
-            updateState(false);
-        }
-        else {
-            updateState(true);
-        }
+        props.expandSideBar();
     }
-    if (expanded) {
+
+    if (props.expanded) {
         return(
-            <div className="sidebar-extended">
-                <div className='top'>
+            <div className="sidebar-extended d-flex flex-column justify-content-between align-items-center">
+                <div className='top d-flex flex-column justify-content-start'>
                     <a href="/performanceReview">
-                        <div className='icon-container-extended'>
+                        <div className='icon-container-extended d-flex align-items-center justify-content-start'>
                             <img className="icon" id="perforace-review-icon" src='/icons/performance-review-icon.svg' alt="perforace-review-icon"/>
                             <h7>Performance Review</h7>
                         </div>
                     </a>
                     <a href="/PTORequest">
-                        <div className='icon-container-extended'>
+                        <div className='icon-container-extended d-flex align-items-center justify-content-start'>
                             <img className="icon" id="pto-request-icon" src='/icons/pto-request-icon.svg' alt="pto-request-icon"/>
                             <h7>PTO Request</h7>
                         </div>
                     </a>
                     <a href="/assignedTraining">
-                        <div className='icon-container-extended'>
+                        <div className='icon-container-extended d-flex align-items-center justify-content-start'>
                             <img className="icon" id="assigned-training-icon" src='/icons/assigned-training-icon.svg' alt="assigned-training-icon"/>
                             <h7>Assigned Training</h7>
                         </div>
@@ -43,20 +38,20 @@ const SideBar = (props) => {
     }
     
          return(
-            <div className="sidebar">
-                <div className='top'>
+            <div className="sidebar d-flex flex-column justify-content-between align-items-center">
+                <div className='top d-flex flex-column justify-content-start'>
                     <a href="/performanceReview">
-                        <div className='icon-container'>
+                        <div className='icon-container d-flex align-items-center justify-content-start'>
                             <img className="icon" id="perforace-review-icon" src='/icons/performance-review-icon.svg' alt="perforace-review-icon"/>
                         </div>
                     </a>
                     <a href="/PTORequest">
-                        <div className='icon-container'>
+                        <div className='icon-container d-flex align-items-center justify-content-start'>
                             <img className="icon" id="pto-request-icon" src='/icons/pto-request-icon.svg' alt="pto-request-icon"/>
                         </div>
                     </a>
                     <a href="/assignedTraining">
-                        <div className='icon-container'>
+                        <div className='icon-container d-flex align-items-center justify-content-start'>
                             <img className="icon" id="assigned-training-icon" src='/icons/assigned-training-icon.svg' alt="assigned-training-icon"/>
                         </div>
                     </a>
