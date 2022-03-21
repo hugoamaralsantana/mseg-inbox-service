@@ -4,6 +4,8 @@
   "description": "UKG Employee Inbox Service to handle notifications, messages, and events",
   "main": "index.js",
   "scripts": {
+    "start": "node server/server.js",
+    "app": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +18,16 @@
   "bugs": {
     "url": "https://github.com/hugoamaralsantana/mseg-inbox-service/issues"
   },
-  "homepage": "https://github.com/hugoamaralsantana/mseg-inbox-service#readme"
+  "homepage": "https://github.com/hugoamaralsantana/mseg-inbox-service#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.2",
+    "config": "^3.3.7",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.4",
+    "validation": "^0.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
