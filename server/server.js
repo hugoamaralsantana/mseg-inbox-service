@@ -1,5 +1,6 @@
 const express = require('express');
 const connectDB = require('./config/db');
+const users = require('./routes/users')
 
 const app = express();
 
@@ -7,6 +8,7 @@ const app = express();
 connectDB();
 
 app.get('/', (req, res) => res.send('Test server!'));
+app.use('/user', users);
 
 const port = process.env.PORT || 8082;
 

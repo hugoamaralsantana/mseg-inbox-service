@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
   router.get('/:id', (req, res) => {
     User.findById(req.params.id)
       .then(user => res.json(user))
-      .catch(err => res.status(404).json({ nouserfound: 'No User found' }));
+      .catch(err => res.status(404).json({ nouserfound: `No User found at ${req.params.id}` }));
   });
 
   router.post('/', (req, res) => {
