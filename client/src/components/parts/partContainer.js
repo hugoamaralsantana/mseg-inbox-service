@@ -7,14 +7,14 @@ const PartContainer = (props) => {
   if (props.expanded) {
     return (
       <div className="part-container-expanded bg-secondary d-flex flex-column">
-        <Incoming reelItems={props.reelItems}/>
+        <Incoming type={props.type} showModal={props.showModal} closeModal={props.closeModal} reelItems={props.reelItems}/>
         <Outgoing reelItems={props.reelItems}/>
       </div>
     )
   }
   return(
     <div className="part-container bg-secondary d-flex flex-column">
-        <Incoming reelItems={props.reelItems}/>
+        <Incoming type={props.type} showModal={props.showModal} closeModal={props.closeModal} reelItems={props.reelItems}/>
         <Outgoing reelItems={props.reelItems}/>
     </div>
   )
