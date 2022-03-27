@@ -19,6 +19,8 @@ const PerformanceReview = (props) => {
     }
   }
 
+  const user = 'employee'
+
 
   return (
     <div>
@@ -27,7 +29,7 @@ const PerformanceReview = (props) => {
       <NavBar title="Performance Review" /> 
       <div className="d-flex">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
-        <PartContainer type='performanceReview' reelItems={reelItems} expanded={expanded}/>
+        <PartContainer type='performanceReview' reelItems={reelItems} expanded={expanded} user={user}/>
       </div>
     </div>
   )

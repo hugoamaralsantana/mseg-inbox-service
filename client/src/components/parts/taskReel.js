@@ -25,12 +25,12 @@ const TaskReel = (props) => {
         <h4 className="text-primary pl-2">{props.name}</h4>
       </div>
       <div className="task-box-container">
-        <TaskBox source={props.source} pageType={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action}/>
-        <TaskBox source={props.source} pageType={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action}/>
-        <TaskBox source={props.source} pageType={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action}/>
-        <TaskBox source={props.source} pageType={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action}/>
-        <TaskBox source={props.source} pageType={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action}/>
-        <TaskBox source={props.source} pageType={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action}/>
+        <TaskBox source={props.source} type={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
+        <TaskBox source={props.source} type={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
+        <TaskBox source={props.source} type={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
+        <TaskBox source={props.source} type={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
+        <TaskBox source={props.source} type={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
+        <TaskBox source={props.source} type={props.type} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
       </div>
     </div>
   )

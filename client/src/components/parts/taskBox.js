@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import '../../styles/taskbox.css';
 import CompletePerformanceReviewModal from "../modals/completePerformance";
 import RequestPerformanceReviewModal from "../modals/requestPerformance";
+import PTOModal from "../modals/PTO";
 
 const TaskBox = (props) => {
   const [completeModalState, updateCompleteModalState] = useState(false);
@@ -18,7 +19,11 @@ const TaskBox = (props) => {
   }
 
   //here we do conditional for type of page were looking at (performanceReview, PTORequest, assignedTrainings)
-  const completeModal = <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal}/>
+  // const completeModal = <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal}/>
+  // const completeModal = <PTOModal show={completeModalState} closeModal={closeModal}/>
+  const completeModal = props.type === 'performanceReview' ? <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal}/> :
+                        props.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} user={props.user}/> :
+                        <></>
   const requestModal = <RequestPerformanceReviewModal show={requestModalState} closeModal={closeModal}/>
   const incoming = (
     <div className="task-box bg-secondary d-flex justify-content-between m-2">
