@@ -10,3 +10,7 @@
 .address {
   font-weight: 500;
 }
+
+.start {
+  cursor: pointer;
+}
