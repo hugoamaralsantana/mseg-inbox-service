@@ -9,3 +9,7 @@
 .task-reel-container {
   height: 80%;
 }
+
+.plus {
+  cursor: pointer;
+}
