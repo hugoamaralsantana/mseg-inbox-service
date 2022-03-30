@@ -19,8 +19,8 @@ router.get('/', (req, res) => {
 
   router.post('/', (req, res) => {
     User.create(req.body)
-      .then(user => res.json({ msg : 'User added successfully'}))
-      .catch(err => res.status(400).json({ error: `Unable to add this user ${req.body}` }));
+     .then(user => res.json({ msg : 'User added successfully'}))
+     .catch(err => res.status(400).json({ error: `Unable to add this user ${req.body}` }));
   });
 
   router.put('/:id', (req, res) => {

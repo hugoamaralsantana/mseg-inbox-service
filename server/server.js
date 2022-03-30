@@ -3,6 +3,7 @@ const connectDB = require('./config/db');
 const users = require('./routes/users')
 
 const app = express();
+app.use(express.json());
 
 // Connect to the Database
 connectDB();
