@@ -71,6 +71,10 @@ const TaskBox = (props) => {
             <h7 className="start" onClick={showModal}>{action}</h7>
           </div>
           <div className="right-side">
+            <img className="star-button" src='/icons/star-button-unfilled.svg' alt=''></img>
+            <div className="profile-icon">
+              <div className="profile-icon-initial">M</div>
+            </div>
           </div>
           {completeModal}
       </div>
