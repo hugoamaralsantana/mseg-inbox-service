@@ -29,7 +29,7 @@ const PerformanceReview = (props) => {
       <NavBar title="Performance Review" /> 
       <div className="d-flex">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
-        <PartContainer type='performanceReview' reelItems={reelItems} expanded={expanded} user={user}/>
+        <PartContainer type='performanceReview' reelItems={reelItems} expanded={expanded} user={user} containerCount='2'/>
       </div>
     </div>
   )

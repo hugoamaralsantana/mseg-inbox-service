@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
-import AssignTraining from "../parts/assignTraining"
+
+import PartContainer from "../parts/partContainer"
 
 const AssignedTraining = (props) => {
   const [expanded, updateState] = useState(true);
   const reelItems = ['Pending', 'In Progress', 'Completed']
+  const user = 'employee'
 
   function expandSideBar() {
     if (expanded) {
@@ -21,7 +23,7 @@ const AssignedTraining = (props) => {
       <NavBar title="Assign Training" /> 
       <div className="d-flex">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
-        <AssignTraining reelItems={reelItems} expanded={expanded}/>
+        <PartContainer type='assignedTraining' reelItems={reelItems} expanded={expanded} user={user} containerCount='1'/>
       </div>
     </div>
   )

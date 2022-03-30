@@ -23,8 +23,13 @@ const TaskBox = (props) => {
   // const completeModal = <PTOModal show={completeModalState} closeModal={closeModal}/>
   const completeModal = props.type === 'performanceReview' ? <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal}/> :
                         props.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} user={props.user}/> :
-                        <></>
-  const requestModal = <RequestPerformanceReviewModal show={requestModalState} closeModal={closeModal}/>
+                        <></>;
+  const requestModal = props.type === 'performanceReview' ? <RequestPerformanceReviewModal show={requestModalState} closeModal={closeModal}/> :
+                       props.type === 'PTORequest' ? <PTOModal show={requestModalState} closeModal={closeModal} user={props.user}/> :
+                       <></>
+
+
+
   const incoming = (
     <div className="task-box bg-secondary d-flex justify-content-between m-2">
         <div className="left-side pl-2">
@@ -43,7 +48,6 @@ const TaskBox = (props) => {
         <div className="left-side pl-2">
           <h6 className="mb-0 lead address">From: Marius Minea</h6>
           <p className="mb-0 date">Recieved: 04/20/2020</p>
-          <h7 className="start" onClick={() => showModal(props.source)}>{props.action}</h7>
         </div>
         <div className="right-side">
         </div>

@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
-import PTORequest from "../parts/ptoRequest"
+import PartContainer from "../parts/partContainer"
+
 
 const PTORequestPage = (props) => {
   const [expanded, updateState] = useState(true);
   const reelItems = ['Pending', 'In Progress', 'Completed']
+  const user = 'employee'
 
   function expandSideBar() {
     if (expanded) {
@@ -21,7 +23,7 @@ const PTORequestPage = (props) => {
       <NavBar title="PTO Request" /> 
       <div className="d-flex">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
-        <PTORequest reelItems={reelItems} expanded={expanded}/>
+        <PartContainer type='PTORequest' reelItems={reelItems} expanded={expanded} user={user} containerCount='1'/>
       </div>
     </div>
   )

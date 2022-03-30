@@ -1,7 +1,10 @@
 .part-container {
   width: 98vw;
+  height: 93vh;
 }
 
 .part-container-expanded {
   width: 95vw;
+  height: 100%;
+  height: 93vh;
 }
