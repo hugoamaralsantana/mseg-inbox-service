@@ -11,6 +11,7 @@ const TaskBox = (props) => {
   const [expanded, updateExpansion] = useState(false)
   const [remindExpand, updateRemind] = useState(false)
   const [dueDateExpand, updatedueDate] = useState(false)
+  const [isStarred, updateStar] = useState(false);
 
   function showModal(source) {
     updateCompleteModalState(true)
@@ -30,6 +31,11 @@ const TaskBox = (props) => {
 
   function expandDueDate() {
     updatedueDate(!dueDateExpand)
+  }
+
+  function clickStar(e) {
+    updateStar(!isStarred);
+    e.stopPropagation();
   }
 
   const taskBoxCSS = expanded ? 'task-box-expanded bg-secondary d-flex justify-content-between m-2 mb-0' : 'task-box bg-secondary d-flex justify-content-between m-2 mb-0';
@@ -62,6 +68,12 @@ const TaskBox = (props) => {
     </form>
   </div> : ''
 
+  const Star = () => {
+    return isStarred 
+      ? <img id="star-button" className="star-button" src='/icons/star-button-filled.svg' alt='' onClick={clickStar}></img>
+      : <img id="star-button" className="star-button" src='/icons/star-button-unfilled.svg' alt='' onClick={clickStar}></img>;
+  }
+
   return (
     <div>
       <div className={taskBoxCSS} onClick={expandBox}>
@@ -71,7 +83,7 @@ const TaskBox = (props) => {
             <h7 className="start" onClick={showModal}>{action}</h7>
           </div>
           <div className="right-side">
-            <img className="star-button" src='/icons/star-button-unfilled.svg' alt=''></img>
+            <Star/>
             <div className="profile-icon">
               <div className="profile-icon-initial">M</div>
             </div>
