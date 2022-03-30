@@ -4,7 +4,13 @@
 }
 
 .task-box {
-  border-radius: 10px;
+  border-radius: 5px;
+  height: 67.2px;
+}
+
+.task-box-expanded {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   height: 67.2px;
 }
 
@@ -14,4 +20,28 @@
 
 .start {
   cursor: pointer;
+}
+
+.expanded-none {
+  display: none;
+}
+
+.input {
+  height: 20px;
+  width: 120px;
+  font-size: 12px;
+}
+
+.option-submit {
+  height: 20px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.option-text {
+  cursor: pointer;
+}
+
+.none {
+  display: none;
 }
