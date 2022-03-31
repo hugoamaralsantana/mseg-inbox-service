@@ -45,3 +45,32 @@
 .none {
   display: none;
 }
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  margin-right: 0.5em;
+}
+
+.star-button {
+  height: 20px;
+  width: 20px;
+  margin-top: 0.3em;
+  margin: auto;
+  cursor: pointer;
+}
+
+.profile-icon {
+  height: 25px;
+  width: 25px;
+  margin: auto;
+  background-color: #D4F0F1;
+  border-radius: 50%;
+}
+
+.profile-icon-initial {
+  display: flex;
+  justify-content: center;
+  color: black;
+  font-weight: bold;
+}

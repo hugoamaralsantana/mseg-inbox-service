@@ -1,0 +1,140 @@
+{
+    "user_type": "employee",
+    "data":{
+        "favorited":[
+            {
+                "type":"performance_review",
+                "task_id":1,
+                "recipient":"Jake Plackard",
+                "recipient_id":1,
+                "recipient_due_date":null,
+                "sender":"John Doe",
+                "sender_id":2,
+                "sender_due_date":null,
+                "date":"10/20/2020",
+                "recipient_comments":null,
+                "sender_comments":"Hi Im John, please review my performance Jake!",
+                "growth_score":null,
+                "growth_comments":null,
+                "kindness_score":null,
+                "kindness_comments":null,
+                "delivery_score":null,
+                "delivery_comments":null
+            }
+        ],
+        "performanceReviewPage":{
+            "incoming":{
+                "pending":[
+                    {
+                        "type":"performance_review",
+                        "task_id":1,
+                        "recipient":"Jake Plackard",
+                        "recipient_id":1,
+                        "recipient_due_date":null,
+                        "sender":"John Doe",
+                        "sender_id":2,
+                        "sender_due_date":null,
+                        "date":"10/20/2020",
+                        "recipient_comments":null,
+                        "sender_comments":"Hi Im John, please review my performance Jake!",
+                        "growth_score":null,
+                        "growth_comments":null,
+                        "kindness_score":null,
+                        "kindness_comments":null,
+                        "delivery_score":null,
+                        "delivery_comments":null
+                    }
+                ],
+                "inProgress":[
+                    
+                ],
+                "completed":[
+                    
+                ]
+            },
+            "outgoing":{
+                "pending":[
+                    {
+                        "type":"performance_review",
+                        "task_id":3,
+                        "recipient":"Alana Blake",
+                        "recipient_id":3,
+                        "recipient_due_date":null,
+                        "sender":"Jake Plackard",
+                        "sender_id":1,
+                        "sender_due_date":null,
+                        "date":"10/20/2020",
+                        "recipient_comments":null,
+                        "sender_comments":"Hi Im Jake, please review my performance Alana!",
+                        "growth_score":null,
+                        "growth_comments":null,
+                        "kindness_score":null,
+                        "kindness_comments":null,
+                        "delivery_score":null,
+                        "delivery_comments":null
+                    }
+                ],
+                "inProgress":[
+                    
+                ],
+                "completed":[
+                    
+                ]
+            }
+        },
+        "assignedTrainingPage":{
+            "incoming":{
+                "pending":[
+                    {
+                        "type":"assigned_training",
+                        "task_id":4,
+                        "recipient":"Jake Plackard",
+                        "recipient_id":1,
+                        "recipient_due_date":null,
+                        "sender":"Mark Zuckerberg",
+                        "sender_id":4,
+                        "sender_due_date":null,
+                        "date":"10/20/2020",
+                        "recipient_comments":null,
+                        "sender_comments":"Hi its Mark, the admin. Please complete this training Jake.",
+                        "training":"https://www.facebook.com/business/learn"
+                    }
+                ],
+                "inProgress":[
+                    
+                ],
+                "completed":[
+                    
+                ]
+            }
+        },
+        "PTORequestPage":{
+            "outgoing":{
+                "pending":[
+                    {
+                        "type":"pto_request",
+                        "task_id":5,
+                        "recipient":"Marius Minea",
+                        "recipient_id":5,
+                        "recipient_due_date":null,
+                        "sender":"Jake Plackard",
+                        "sender_id":1,
+                        "sender_due_date":null,
+                        "date":"10/20/2020",
+                        "recipient_comments":null,
+                        "sender_comments":"Hi its Jake, can I have PTO Marius?",
+                        "pto_type":"Vacation",
+                        "pto_date_start":"10/25/2020",
+                        "pto_date_end":"10/31/2020"
+                    }
+                ],
+                "inProgress":[
+                    
+                ],
+                "completed":[
+                    
+                ]
+            }
+        }
+    }
+}
