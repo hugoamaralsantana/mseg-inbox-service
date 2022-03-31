@@ -7,7 +7,7 @@ import PartContainer from "../parts/partContainer"
 const PTORequestPage = (props) => {
   const [expanded, updateState] = useState(true);
   const reelItems = ['Pending', 'In Progress', 'Completed']
-  const user = 'manager'
+  const user = 'admin'
 
   function expandSideBar() {
     if (expanded) {

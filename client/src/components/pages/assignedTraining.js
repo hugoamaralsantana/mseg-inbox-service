@@ -6,7 +6,7 @@ import PartContainer from "../parts/partContainer"
 const AssignedTraining = (props) => {
   const [expanded, updateState] = useState(true);
   const reelItems = ['Pending', 'In Progress', 'Completed']
-  const user = 'admin'
+  const user = 'employee'
 
   function expandSideBar() {
     if (expanded) {
