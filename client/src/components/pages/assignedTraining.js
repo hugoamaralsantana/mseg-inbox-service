@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
-
 import PartContainer from "../parts/partContainer"
 
 const AssignedTraining = (props) => {
   const [expanded, updateState] = useState(true);
   const reelItems = ['Pending', 'In Progress', 'Completed']
-  const user = 'employee'
+  const user = 'admin'
 
   function expandSideBar() {
     if (expanded) {
