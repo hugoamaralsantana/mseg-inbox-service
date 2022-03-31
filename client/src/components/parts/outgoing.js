@@ -3,6 +3,7 @@ import TaskReel from "../parts/taskReel";
 import '../../styles/outgoing.css'
 import RequestPerformanceReviewModal from "../modals/requestPerformance";
 import PTOModal from "../modals/PTO";
+import AssignTrainingModal from "../modals/assignTraining";
 
 const pendingTaskReelURL = 'performanceReview/outgoing/pending';
 const inProgressTaskReelURL = 'performanceReview/outgoing/inProgress';
@@ -21,7 +22,7 @@ const Outgoing = (props) => {
 
     const requestModal = props.type === 'performanceReview' ? <RequestPerformanceReviewModal show={requestModalState} closeModal={closeModal}/> :
       props.type === 'PTORequest' ? <PTOModal show={requestModalState} closeModal={closeModal} user={props.user}/> :
-      <></>
+      <AssignTrainingModal show={requestModalState} closeModal={closeModal} user={props.user}/>
 
     const outgoingCSS = props.containerCount === '1' ? 'outgoing-expanded d-flex bg-dark ml-3 mr-3 mb-2 mt-2 flex-column justify-content-center' : 'outgoing d-flex bg-dark ml-3 mr-3 mb-2 mt-2 flex-column justify-content-center'
 

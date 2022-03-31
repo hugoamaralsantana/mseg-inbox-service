@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import '../../styles/taskbox.css';
 import CompletePerformanceReviewModal from "../modals/completePerformance";
-import RequestPerformanceReviewModal from "../modals/requestPerformance";
 import PTOModal from "../modals/PTO";
 
 const TaskBox = (props) => {
