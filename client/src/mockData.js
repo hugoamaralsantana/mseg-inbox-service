@@ -3,6 +3,10 @@ import moment from 'moment';
 
 let now = moment();
 
+const randomInt = (min, max) => {
+    return Math.random() * (max - min) + min;
+}
+
 let dataJSON = {
     "user_type": "employee",
     "data":{
@@ -68,7 +72,7 @@ const mockPerformanceReview = (id) => {
         "sender":faker.name.firstName() + ' ' + faker.name.lastName(),
         "sender_id":2,
         "sender_due_date":null,
-        "date": now.add(Math.random(2), 'days'),
+        "date": moment().subtract(randomInt(1,8), 'days'),
         "recipient_comments":null,
         "sender_comments":"Hi Im John, please review my performance Jake!",
         "growth_score":null,
@@ -91,7 +95,7 @@ const mockAssignedTraining  = (id) => {
         "sender":"Mark Zuckerberg",
         "sender_id":4,
         "sender_due_date":null,
-        "date": now.add(Math.random(2), 'days'),
+        "date": moment().add(randomInt(1,8), 'days'),
         "recipient_comments":null,
         "sender_comments":"Hi its Mark, the admin. Please complete this training Jake.",
         "training":"https://www.facebook.com/business/learn"
@@ -109,12 +113,12 @@ const mockPTORequest = (id) => {
         "sender":faker.name.firstName() + ' ' + faker.name.lastName(),
         "sender_id":1,
         "sender_due_date":null,
-        "date": now.add(Math.random(2), 'days'),
+        "date": moment().subtract(randomInt(1,8), 'days'),
         "recipient_comments":null,
         "sender_comments":"Hi its Jake, can I have PTO Marius?",
         "pto_type":"Vacation",
-        "pto_date_start":now,
-        "pto_date_end":now.add(Math.random(7), 'days')
+        "pto_date_start":moment(),
+        "pto_date_end":moment().add(randomInt(7,14), 'days')
     }
 }
 

@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
+import data from "../../mockData.js";
 
 import PartContainer from "../parts/partContainer"
+
+const assigned_training_data = data.assignedTrainingPage;
 
 const AssignedTraining = (props) => {
   const [expanded, updateState] = useState(true);
@@ -23,7 +26,7 @@ const AssignedTraining = (props) => {
       <NavBar title="Assign Training" /> 
       <div className="d-flex">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
-        <PartContainer type='assignedTraining' reelItems={reelItems} expanded={expanded} user={user} containerCount='1'/>
+        <PartContainer data={assigned_training_data} type='assignedTraining' reelItems={reelItems} expanded={expanded} user={user} containerCount='1'/>
       </div>
     </div>
   )

@@ -78,14 +78,17 @@ const TaskBox = (props) => {
     <div>
       <div className={taskBoxCSS} onClick={expandBox}>
           <div className="left-side pl-2">
-            <h6 className="mb-0 lead address">From: Marius Minea</h6>
-            <p className="mb-0 date">Recieved: 04/20/2020</p>
+            <h6 className="mb-0 lead address">
+              {props.source === 'outgoing' ? 'To: ': 'From: '} 
+              {props.data.recipient}
+            </h6>
+            <p className="mb-0 date">Recieved: {props.data.date.format('MM/DD/YYYY')}</p>
             <h7 className="start" onClick={showModal}>{action}</h7>
           </div>
           <div className="right-side">
             <Star/>
             <div className="profile-icon">
-              <div className="profile-icon-initial">M</div>
+              <div className="profile-icon-initial">{props.data.recipient[0]}</div>
             </div>
           </div>
           {completeModal}

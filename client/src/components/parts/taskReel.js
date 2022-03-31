@@ -5,6 +5,8 @@ import '../../styles/taskReel.css'
 // TODO: fetch data from API using props.endpoint later on
 
 const TaskReel = (props) => {
+  const data = props.data; // arr of objects
+  console.log(data);
   let color;
   let action;
   if (props.reelTitle === 'Pending') {
@@ -25,12 +27,19 @@ const TaskReel = (props) => {
         <h4 className="text-primary pl-2">{props.reelTitle}</h4>
       </div>
       <div className="task-box-container">
-        <TaskBox source={props.source} type={props.type} reelTitle={props.reelTitle} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
-        <TaskBox source={props.source} type={props.type} reelTitle={props.reelTitle} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
-        <TaskBox source={props.source} type={props.type} reelTitle={props.reelTitle} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
-        <TaskBox source={props.source} type={props.type} reelTitle={props.reelTitle} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
-        <TaskBox source={props.source} type={props.type} reelTitle={props.reelTitle} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
-        <TaskBox source={props.source} type={props.type} reelTitle={props.reelTitle} showModal={props.showModal} closeModal={props.closeModal} action={action} user={props.user}/>
+        {data.map((task) =>
+          <TaskBox 
+            key={task.task_id}
+            data={task}
+            source={props.source}
+            type={props.type}
+            reelTitle={props.reelTitle}
+            showModal={props.showModal}
+            closeModal={props.closeModal}
+            action={action}
+            userType={props.user}
+          />)
+        }
       </div>
     </div>
   )

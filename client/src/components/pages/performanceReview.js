@@ -5,6 +5,8 @@ import NavBar from "../parts/navbar";
 import PartContainer from "../parts/partContainer"
 import data from "../../mockData.js";
 
+const performance_review_data = data.performanceReviewPage;
+
 const PerformanceReview = (props) => {
   const [expanded, updateState] = useState(true);
   // const [modalState, updateModalState] = useState(false);
@@ -30,7 +32,7 @@ const PerformanceReview = (props) => {
       <NavBar title="Performance Review" /> 
       <div className="d-flex">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
-        <PartContainer type='performanceReview' reelItems={reelItems} expanded={expanded} user={user} containerCount='2'/>
+        <PartContainer data={performance_review_data} type='performanceReview' reelItems={reelItems} expanded={expanded} user={user} containerCount='2'/>
       </div>
     </div>
   )
