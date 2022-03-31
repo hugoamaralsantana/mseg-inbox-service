@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
 import PartContainer from "../parts/partContainer"
+import data from "../../mockData.js";
 
 const PerformanceReview = (props) => {
   const [expanded, updateState] = useState(true);
