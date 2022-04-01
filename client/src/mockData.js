@@ -129,14 +129,18 @@ const GENERATE_MOCK_TASK_CYCLE = 5;
 for (let i=0; i<GENERATE_MOCK_TASK_CYCLE; ++i) {
     data.data.performanceReviewPage.incoming.pending.push(mockPerformanceReview(id_counter++));
     data.data.performanceReviewPage.incoming.inProgress.push(mockPerformanceReview(id_counter++));
+    data.data.performanceReviewPage.incoming.completed.push(mockPerformanceReview(id_counter++));
     data.data.performanceReviewPage.outgoing.pending.push(mockPerformanceReview(id_counter++));
     data.data.performanceReviewPage.outgoing.inProgress.push(mockPerformanceReview(id_counter++));
+    data.data.performanceReviewPage.outgoing.completed.push(mockPerformanceReview(id_counter++));
 
     data.data.assignedTrainingPage.incoming.pending.push(mockAssignedTraining(id_counter++));
     data.data.assignedTrainingPage.incoming.inProgress.push(mockAssignedTraining(id_counter++));
+    data.data.assignedTrainingPage.incoming.completed.push(mockAssignedTraining(id_counter++));
     
     data.data.PTORequestPage.outgoing.pending.push(mockPTORequest(id_counter++));
     data.data.PTORequestPage.outgoing.inProgress.push(mockPTORequest(id_counter++));
+    data.data.PTORequestPage.outgoing.completed.push(mockPTORequest(id_counter++));
 }
 
 export default data;
