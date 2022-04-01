@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
 import PartContainer from "../parts/partContainer"
-import data from "../../mockData.js";
+import mockData from "../../mockData.js";
 
-const pto_request_data = data.PTORequestPage;
+const pto_request_data = mockData.data.PTORequestPage;
+const user_type = mockData.user_type;
 
 const PTORequestPage = (props) => {
   const [expanded, updateState] = useState(true);
   const reelItems = ['Pending', 'In Progress', 'Completed']
-  const user = 'employee'
+  const user = user_type;
 
   function expandSideBar() {
     if (expanded) {

@@ -122,21 +122,21 @@ const mockPTORequest = (id) => {
     }
 }
 
-let data = JSON.parse(JSON.stringify(dataJSON)).data;
+let data = JSON.parse(JSON.stringify(dataJSON));
 
 let id_counter = 0;
 const GENERATE_MOCK_TASK_CYCLE = 5;
 for (let i=0; i<GENERATE_MOCK_TASK_CYCLE; ++i) {
-    data.performanceReviewPage.incoming.pending.push(mockPerformanceReview(id_counter++));
-    data.performanceReviewPage.incoming.inProgress.push(mockPerformanceReview(id_counter++));
-    data.performanceReviewPage.outgoing.pending.push(mockPerformanceReview(id_counter++));
-    data.performanceReviewPage.outgoing.inProgress.push(mockPerformanceReview(id_counter++));
+    data.data.performanceReviewPage.incoming.pending.push(mockPerformanceReview(id_counter++));
+    data.data.performanceReviewPage.incoming.inProgress.push(mockPerformanceReview(id_counter++));
+    data.data.performanceReviewPage.outgoing.pending.push(mockPerformanceReview(id_counter++));
+    data.data.performanceReviewPage.outgoing.inProgress.push(mockPerformanceReview(id_counter++));
 
-    data.assignedTrainingPage.incoming.pending.push(mockAssignedTraining(id_counter++));
-    data.assignedTrainingPage.incoming.inProgress.push(mockAssignedTraining(id_counter++));
+    data.data.assignedTrainingPage.incoming.pending.push(mockAssignedTraining(id_counter++));
+    data.data.assignedTrainingPage.incoming.inProgress.push(mockAssignedTraining(id_counter++));
     
-    data.PTORequestPage.outgoing.pending.push(mockPTORequest(id_counter++));
-    data.PTORequestPage.outgoing.inProgress.push(mockPTORequest(id_counter++));
+    data.data.PTORequestPage.outgoing.pending.push(mockPTORequest(id_counter++));
+    data.data.PTORequestPage.outgoing.inProgress.push(mockPTORequest(id_counter++));
 }
 
 export default data;

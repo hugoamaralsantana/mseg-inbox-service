@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
 import PartContainer from "../parts/partContainer"
-import data from "../../mockData.js";
+import mockData from "../../mockData.js";
 
-const performance_review_data = data.performanceReviewPage;
+const performance_review_data = mockData.data.performanceReviewPage;
+const user_type = mockData.user_type;
 
 const PerformanceReview = (props) => {
   const [expanded, updateState] = useState(true);
@@ -22,7 +23,7 @@ const PerformanceReview = (props) => {
     }
   }
 
-  const user = 'employee'
+  const user = user_type;
 
 
   return (
