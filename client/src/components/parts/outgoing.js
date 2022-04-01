@@ -36,9 +36,9 @@ const Outgoing = (props) => {
                     
                     {/* these endpoints are passed to components where we will fetch data from the API later on*/}
                     <div className='task-reel-container d-flex bg-dark m-2 align-items-end justify-content-center h-95'>
-                        <TaskReel source='outgoing' type={props.type} reelTitle={props.reelItems[0]} endpoint={pendingTaskReelURL} />
-                        <TaskReel source='outgoing' type={props.type} reelTitle={props.reelItems[1]} endpoint={inProgressTaskReelURL} />
-                        <TaskReel source='outgoing' type={props.type} reelTitle={props.reelItems[2]} endpoint={completedTaskReelURL} />
+                        <TaskReel source='outgoing' data={props.data.pending} type={props.type} reelTitle={props.reelItems[0]} endpoint={pendingTaskReelURL} />
+                        <TaskReel source='outgoing' data={props.data.inProgress} type={props.type} reelTitle={props.reelItems[1]} endpoint={inProgressTaskReelURL} />
+                        <TaskReel source='outgoing' data={props.data.completed} type={props.type} reelTitle={props.reelItems[2]} endpoint={completedTaskReelURL} />
                     </div>
                 </div>
                 {requestModal}
