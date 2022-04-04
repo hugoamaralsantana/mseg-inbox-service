@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
         "companyName" : "Atlas Technology",
         "positionTitle" : "CEO",
         "startDate" : "2005-02-20",
-        "isManager" : true,
+        "userType": "employee"
         "password" : "bartonha"
         }
 
@@ -52,14 +52,15 @@ const userSchema = mongoose.Schema({
         required: true,
         default: Date.now
     },
-    isManager: {
-        type: Boolean,
+    userType: {
+        type: String,
         required: true,
     },
     password: {
         type: String,
         required: true,
     },
+    
 }, {timestamps: true});
 
 const User = mongoose.model("User", userSchema);
