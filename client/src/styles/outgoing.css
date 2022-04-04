@@ -2,6 +2,14 @@
   height: 45vh;
 }
 
+.outgoing-expanded {
+  height: 90vh;
+}
+
 .task-reel-container {
   height: 80%;
+}
+
+.plus {
+  cursor: pointer;
 }

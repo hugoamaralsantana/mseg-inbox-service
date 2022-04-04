@@ -4,9 +4,73 @@
 }
 
 .task-box {
-  border-radius: 10px;
+  border-radius: 5px;
+  height: 67.2px;
+}
+
+.task-box-expanded {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  height: 67.2px;
 }
 
 .address {
   font-weight: 500;
+}
+
+.start {
+  cursor: pointer;
+}
+
+.expanded-none {
+  display: none;
+}
+
+.input {
+  height: 20px;
+  width: 120px;
+  font-size: 12px;
+}
+
+.option-submit {
+  height: 20px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.option-text {
+  cursor: pointer;
+}
+
+.none {
+  display: none;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  margin-right: 0.5em;
+}
+
+.star-button {
+  height: 20px;
+  width: 20px;
+  margin-top: 0.3em;
+  margin: auto;
+  cursor: pointer;
+}
+
+.profile-icon {
+  height: 25px;
+  width: 25px;
+  margin: auto;
+  background-color: #D4F0F1;
+  border-radius: 50%;
+}
+
+.profile-icon-initial {
+  display: flex;
+  justify-content: center;
+  color: black;
+  font-weight: bold;
 }

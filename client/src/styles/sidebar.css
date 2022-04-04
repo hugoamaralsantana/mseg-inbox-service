@@ -3,13 +3,13 @@
 }
 .sidebar-extended {
   width: 200px;
-  height: 770px;
+  height: auto;
   background-color: #012323;
 }
 
 .sidebar {
   width: 50px;
-  height: 770px;
+  height: auto;
   background-color: #012323;
   
 }
