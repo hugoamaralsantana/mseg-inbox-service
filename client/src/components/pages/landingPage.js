@@ -1,14 +1,29 @@
-
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
+import PartContainer_landingPage from "../parts/partContainer_landingPage";
 import '../../styles/landingPage.css'
 
-const LandingPage = () => {
+const LandingPage = (props) => {
+const [expanded, updateState] = useState(true);
+const reelItems = ['My Day', 'Favorited', 'Coming Up']
+
+function expandSideBar() {
+  if (expanded) {
+    updateState(false);
+}
+else {
+    updateState(true);
+}
+}
   return (
     <div>
       <NavBar title="Landing Page" />
-      <SideBar expanded={true}/>
+      <div className="d-flex">
+      <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
+      <PartContainer_landingPage reelItems={reelItems} expanded={expanded}/>
+      </div>
     </div>
   )
 }

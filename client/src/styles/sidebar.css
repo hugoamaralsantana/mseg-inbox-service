@@ -1,13 +1,17 @@
+* {
+  overflow-y: hidden;
+}
 .sidebar-extended {
   width: 200px;
-  height: 750px;
+  height: 770px;
   background-color: #012323;
 }
 
 .sidebar {
   width: 50px;
-  height: 750px;
+  height: 770px;
   background-color: #012323;
+  
 }
 
 .icon-container-extended {

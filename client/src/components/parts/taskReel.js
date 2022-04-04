@@ -9,6 +9,9 @@ const TaskReel = (props) => {
   if (props.name === 'Pending') {color = 'title gray'}
   else if (props.name === 'In Progress') {color = 'title yellow'}
   else if (props.name === 'Completed') {color = 'title green'}
+  else if (props.name === 'My Day') {color = 'title green'}
+  else if (props.name === 'Favorited') {color = 'title green'}
+  else if (props.name === 'Coming Up') {color = 'title green'}
   return (
     <div className="task-reel ml-3 mr-3 mb-1 text-white bg-darkest">
       <div className={color}>
