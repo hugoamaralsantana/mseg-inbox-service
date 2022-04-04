@@ -52,8 +52,8 @@ const userSchema = mongoose.Schema({
         required: true,
         default: Date.now
     },
-    isManager: {
-        type: Boolean,
+    userType: {
+        type: String,
         required: true,
     },
     password: {
