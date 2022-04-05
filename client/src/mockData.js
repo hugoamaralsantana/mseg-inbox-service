@@ -2,13 +2,14 @@ import { faker } from '@faker-js/faker';
 import moment from 'moment';
 
 let now = moment();
+console.log(now)
 
 const randomInt = (min, max) => {
     return Math.random() * (max - min) + min;
 }
 
 let dataJSON = {
-    "user_type": "employee",
+    "user_type": "admin",
     "data":{
         "favorited":[
         ],
@@ -44,9 +45,29 @@ let dataJSON = {
                 "completed":[
                     
                 ]
+            },
+            "outgoing":{
+                "pending":[
+                ],
+                "inProgress":[
+                    
+                ],
+                "completed":[
+                    
+                ]
             }
         },
         "PTORequestPage":{
+            "incoming":{
+                "pending":[
+                ],
+                "inProgress":[
+                    
+                ],
+                "completed":[
+                    
+                ]
+            },
             "outgoing":{
                 "pending":[
                 ],
@@ -80,7 +101,8 @@ const mockPerformanceReview = (id) => {
         "kindness_score":null,
         "kindness_comments":null,
         "delivery_score":null,
-        "delivery_comments":null
+        "delivery_comments":null,
+        'favorited': false
     }
 }
 
@@ -98,7 +120,8 @@ const mockAssignedTraining  = (id) => {
         "date": moment().add(randomInt(1,8), 'days'),
         "recipient_comments":null,
         "sender_comments":"Hi its Mark, the admin. Please complete this training Jake.",
-        "training":"https://www.facebook.com/business/learn"
+        "training":"https://www.facebook.com/business/learn",
+        'favorited': false
     }
 }
 
@@ -118,7 +141,8 @@ const mockPTORequest = (id) => {
         "sender_comments":"Hi its Jake, can I have PTO Marius?",
         "pto_type":"Vacation",
         "pto_date_start":moment(),
-        "pto_date_end":moment().add(randomInt(7,14), 'days')
+        "pto_date_end":moment().add(randomInt(7,14), 'days'),
+        'favorited': false
     }
 }
 
@@ -141,6 +165,10 @@ for (let i=0; i<GENERATE_MOCK_TASK_CYCLE; ++i) {
     data.data.PTORequestPage.outgoing.pending.push(mockPTORequest(id_counter++));
     data.data.PTORequestPage.outgoing.inProgress.push(mockPTORequest(id_counter++));
     data.data.PTORequestPage.outgoing.completed.push(mockPTORequest(id_counter++));
+
+    data.data.PTORequestPage.incoming.pending.push(mockPTORequest(id_counter++));
+    data.data.PTORequestPage.incoming.inProgress.push(mockPTORequest(id_counter++));
+    data.data.PTORequestPage.incoming.completed.push(mockPTORequest(id_counter++));
 }
 
 export default data;

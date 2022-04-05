@@ -12,6 +12,7 @@ const TaskBox = (props) => {
   const [dueDateExpand, updatedueDate] = useState(false)
   const [isStarred, updateStar] = useState(false);
 
+
   function showModal(source) {
     updateCompleteModalState(true)
   }
@@ -34,13 +35,14 @@ const TaskBox = (props) => {
 
   function clickStar(e) {
     updateStar(!isStarred);
+    props.starTask(props.data.task_id)
     e.stopPropagation();
   }
 
   const taskBoxCSS = expanded ? 'task-box-expanded bg-secondary d-flex justify-content-between m-2 mb-0' : 'task-box bg-secondary d-flex justify-content-between m-2 mb-0';
   const expandedBoxCSS = expanded ? 'expanded bg-secondary mt-1 ml-2 mr-2 mb-2' : 'expanded-none bg-secondary mt-1 ml-2 mr-2 mb-2'
   const completeModal = props.type === 'performanceReview' ? <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal}/> :
-                        props.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} user={props.user}/> :
+                        props.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} userType={props.userType}/> :
                         <></>;
   const action = props.source === 'incoming' ? props.action : 
                  props.reelTitle === 'Completed' ? props.action : ''

@@ -42,7 +42,7 @@ const PTOModal = (props) => {
 
     const approve = (
         <div className={showHideClassName}>
-            <div className="modal-main d-flex flex-column">
+            <div className="main d-flex flex-column">
                 <div className='exit text-end pr-2 pt-1 align-self-end text-black' onClick={props.closeModal}>X</div>
                 <div className='title ml-3 text-primary'><h3>Employee PTO Request</h3></div>
                 <form>
@@ -87,7 +87,7 @@ const PTOModal = (props) => {
             </div>
         </div>
     )
-    return props.user === 'manager' ? approve : request
+    return props.userType === 'manager' ? approve : request
 }
 
 export default PTOModal
