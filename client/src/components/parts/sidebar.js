@@ -7,7 +7,7 @@ const SideBar = (props) => {
         props.expandSideBar();
     }
 
-    if (props.expanded) {
+    if (props.expanded && window.outerWidth > 800) {
         return(
             <div className="sidebar-extended d-flex flex-column justify-content-between align-items-center">
                 <div className='top d-flex flex-column justify-content-start'>

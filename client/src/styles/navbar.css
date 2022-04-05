@@ -35,9 +35,12 @@
   width: 270px;
 }
 
-#navbarSupportedContent {
-  width: 350px;
+.navbarSupportedContent {
+  width: auto;
   height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 #navbar {
@@ -47,6 +50,12 @@
 
 @media (max-width: 900px) {
   #search-bar {
+    display: none;
+  }
+}
+
+@media (max-width: 630px) {
+  .navbarSupportedContent {
     display: none;
   }
 }

@@ -1,7 +1,8 @@
 .task-reel {
   width: 26%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 15px;
+  margin: 0% 2% 0.5% 2%;
 }
 
 .title {
@@ -22,6 +23,13 @@
 }
 
 .task-box-container {
-  overflow: scroll;
+  overflow-y: scroll;
   height: 85%;
+}
+
+@media only screen and (max-width: 970px) {
+  .task-reel {
+    min-width: 250px;
+    margin-right: 0;
+  }
 }

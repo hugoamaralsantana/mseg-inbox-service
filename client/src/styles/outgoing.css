@@ -7,9 +7,25 @@
 }
 
 .task-reel-container {
-  height: 80%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 82%;
+  width: 97%;
+  margin: auto;
 }
 
 .plus {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 800px) {
+  .outgoing {
+    overflow-x: scroll;
+  }
+
+  .task-reel-container {
+    display: flex;
+    justify-content: flex-start;
+  }
 }
