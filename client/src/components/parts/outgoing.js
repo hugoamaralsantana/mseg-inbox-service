@@ -24,13 +24,13 @@ const Outgoing = (props) => {
       props.type === 'PTORequest' ? <PTOModal show={requestModalState} closeModal={closeModal} user={props.user}/> :
       <AssignTrainingModal show={requestModalState} closeModal={closeModal} user={props.user}/>
 
-    const outgoingCSS = props.containerCount === '1' ? 'outgoing-expanded d-flex bg-dark ml-3 mr-3 mb-2 flex-column justify-content-center' : 'outgoing d-flex bg-dark ml-3 mr-3 mb-2 flex-column justify-content-center'
+    const outgoingCSS = props.containerCount === '1' ? 'outgoing-expanded d-flex bg-dark ml-3 mr-3 mb-2 flex-column justify-content-around' : 'outgoing d-flex bg-dark ml-3 mr-3 mb-2 flex-column justify-content-around'
 
         return (
             <div>
                 <div className={outgoingCSS}>
                     <div className='title d-flex'>
-                        <h1 className="text-white ml-5 pt-1">Outgoing</h1>
+                        <h1 className="box-title text-white pt-1">Outgoing</h1>
                         <img className="plus ml-2" src='/icons/plus-icon.svg' alt='add-modal' onClick={showModal}></img>
                     </div>
                     

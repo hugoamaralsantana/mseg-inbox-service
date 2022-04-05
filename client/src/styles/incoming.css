@@ -1,6 +1,8 @@
 .incoming {
   height: 45vh;
   margin: auto;
+  margin-top: 0px;
+  min-height: 300px;
 }
 
 .incoming-expanded {
@@ -14,15 +16,24 @@
   height: 82%;
   width: 97%;
   margin: auto;
+  margin-top: 0px;
 }
 
-@media only screen and (max-width: 730px) {
-  .incoming {
-    overflow-x: scroll;
-  }
+.box-title {
+  margin-left: 5%;
+}
 
+@media only screen and (max-width: 900px) {
   .task-reel-container {
     display: flex;
     justify-content: flex-start;
+    overflow-x: scroll;
+    /* scroll-padding-right: 2%; */
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .box-title {
+    margin-left: 1%;
   }
 }

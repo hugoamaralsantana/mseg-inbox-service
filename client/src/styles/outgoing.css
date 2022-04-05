@@ -1,5 +1,6 @@
 .outgoing {
   height: 45vh;
+  min-height: 300px;
 }
 
 .outgoing-expanded {
@@ -13,19 +14,28 @@
   height: 82%;
   width: 97%;
   margin: auto;
+  margin-top: 0px;
+  /* min-height: 300px; */
 }
 
 .plus {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 800px) {
-  .outgoing {
-    overflow-x: scroll;
-  }
+.box-title {
+  margin-left: 5%;
+}
 
+@media only screen and (max-width: 900px) {
   .task-reel-container {
     display: flex;
     justify-content: flex-start;
+    overflow-x: scroll;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .box-title {
+    margin-left: 1%;
   }
 }

@@ -6,8 +6,13 @@ const SideBar = (props) => {
     function arrowClick() {
         props.expandSideBar();
     }
+    const [width, updateWidth] = useState(window.screen.width)
 
-    if (props.expanded && window.outerWidth > 800) {
+    window.addEventListener('resize', () => {
+        updateWidth(window.screen.width)
+    })
+    //console.log(window.screen.height)
+    if (props.expanded && width > 1000) {
         return(
             <div className="sidebar-extended d-flex flex-column justify-content-between align-items-center">
                 <div className='top d-flex flex-column justify-content-start'>

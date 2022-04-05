@@ -1,17 +1,22 @@
 .part-container {
-  width: 98vw;
+  width: calc(100vw - 50px);
   height: 93vh;
   border: solid 1px red;
+  overflow: hidden;
+  min-height: 650px;
 }
 
 .part-container-expanded {
-  width: 95vw;
+  width: calc(100vw - 200px);
   height: 100%;
   height: 93vh;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
   .part-container {
+    width: calc(100vw - 50px);
+  }
+  .part-container-expanded {
     width: calc(100vw - 50px);
   }
 }

@@ -31,7 +31,7 @@ const PerformanceReview = (props) => {
       {/* TODO: when I change title = Performance Review, it gets rid of some 
       of the navbar (styling issue) */}
       <NavBar title="Performance Review" /> 
-      <div className="d-flex overflow-hidden">
+      <div className="d-inline-flex overflow-hidden">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
         <PartContainer data={performance_review_data} type='performanceReview' reelItems={reelItems} expanded={expanded} user={user} containerCount='2'/>
       </div>

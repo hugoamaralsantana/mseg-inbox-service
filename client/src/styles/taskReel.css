@@ -3,6 +3,7 @@
   height: 100%;
   border-radius: 15px;
   margin: 0% 2% 0.5% 2%;
+  /* min-height: 325px; */
 }
 
 .title {
@@ -27,9 +28,12 @@
   height: 85%;
 }
 
-@media only screen and (max-width: 970px) {
+@media only screen and (max-width: 1050px) {
   .task-reel {
     min-width: 250px;
-    margin-right: 0;
+    margin-right: 1%;
+    margin-left: 1%;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
