@@ -10,7 +10,7 @@
   height: calc(100vh - 55px);
 }
 
-@media only screen and (max-width: 1040px) {
+@media only screen and (max-width: 1050px) {
   .part-container {
     width: calc(100vw - 50px);
   }
