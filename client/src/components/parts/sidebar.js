@@ -10,9 +10,10 @@ const SideBar = (props) => {
 
     window.addEventListener('resize', () => {
         updateWidth(window.innerWidth)
+        console.log(width)
     })
     //console.log(window.screen.height)
-    if (props.expanded && width > 1000) {
+    if (props.expanded && width > 1050) {
         return(
             <div className="sidebar-extended d-flex flex-column justify-content-between align-items-center">
                 <div className='top d-flex flex-column justify-content-start'>
