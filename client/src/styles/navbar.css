@@ -44,10 +44,8 @@
 }
 
 #navbar {
-  height: 7vh;
+  height: 55px;
   padding: 0;
-  min-height: 50px;
-  max-height: 65px;
 }
 
 @media (max-width: 900px) {

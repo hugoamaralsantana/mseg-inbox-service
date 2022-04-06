@@ -1,7 +1,6 @@
 .part-container {
   width: calc(100vw - 50px);
-  height: 93vh;
-  border: solid 1px red;
+  height: calc(100vh - 55px);
   overflow: hidden;
   min-height: 650px;
 }
