@@ -12,7 +12,7 @@ const PartContainer = (props) => {//check if page has 1 or two containers
   if (props.type === 'performanceReview') {
     return (
       <div className={parentCSS}>
-        <ProfileButtonBox expanded={props.expanded} boxState={props.boxState} closeBox={props.closeBox}/>
+        <ProfileButtonBox expanded={props.expanded} user_name={props.user_name} boxState={props.boxState} closeBox={props.closeBox}/>
         <div className={expandedCSS}>
           {IncomingJSX()}
           {OutgoingJSX()}
@@ -22,7 +22,8 @@ const PartContainer = (props) => {//check if page has 1 or two containers
   }
   else if (props.type === 'PTORequest') {
     return (
-      <div>
+      <div className={parentCSS}>
+        <ProfileButtonBox expanded={props.expanded} user_name={props.user_name} boxState={props.boxState} closeBox={props.closeBox}/>
         <div className={expandedCSS}>
 
           {props.user === 'employee' 
@@ -37,7 +38,8 @@ const PartContainer = (props) => {//check if page has 1 or two containers
   } 
   else if (props.type === 'assignedTraining') {
     return (
-      <div>
+      <div className={parentCSS}>
+        <ProfileButtonBox expanded={props.expanded} user_name={props.user_name} boxState={props.boxState} closeBox={props.closeBox}/>
         <div className={expandedCSS}>
           {props.user === 'employee' || props.user === 'manager' 
           ?

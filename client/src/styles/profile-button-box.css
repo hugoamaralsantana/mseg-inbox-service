@@ -6,7 +6,7 @@
 }
 
 .expanded {
-  width: calc(100vw - 200);
+  width: calc(100vw - 200px);
   height: calc(100vh - 55px);
 }
 
@@ -23,13 +23,32 @@
   display: none;
 }
 
-.box-main {
+#main {
   background: white;
   width: 20%;
   min-width: 300px;
-  height: 20%;
+  height: auto;
   min-height: 150px;
   border-radius: 5px;
+}
+
+#profile-info {
+  border-bottom: 0.5px solid lightgray;
+}
+
+#box-profile-icon {
+  height: 30px;
+  width: 30px;
+  background-color: #d4f0f1;
+  border-radius: 50%;
+}
+
+#box-profile-icon-initial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-weight: bold;
 }
 
 @media only screen and (max-width: 1040px) {

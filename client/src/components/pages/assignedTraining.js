@@ -8,6 +8,7 @@ import PartContainer from "../parts/partContainer"
 
 const assigned_training_data = mockData.data.assignedTrainingPage;
 const user_type = mockData.user_type;
+const user_name = mockData.user_name
 
 const AssignedTraining = (props) => {
   const [expanded, updateState] = useState(true);
@@ -27,7 +28,7 @@ const AssignedTraining = (props) => {
       <NavBar title="Assign Training" /> 
       <div className="d-flex">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
-        <PartContainer data={assigned_training_data} type='assignedTraining' reelItems={reelItems} expanded={expanded} user={user} containerCount='1'/>
+        <PartContainer data={assigned_training_data} type='assignedTraining' reelItems={reelItems} expanded={expanded} user={user} user_name={user_name} containerCount='1'/>
       </div>
     </div>
   )
