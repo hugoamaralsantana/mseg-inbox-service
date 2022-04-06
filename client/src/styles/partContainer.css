@@ -10,11 +10,29 @@
   height: calc(100vh - 55px);
 }
 
+.parent-expanded {
+  width: calc(100vw - 200);
+  height: calc(100vh - 55px);
+}
+
+.parent {
+  width: calc(100vw - 50px);
+  height: calc(100vh - 55px);
+}
+
 @media only screen and (max-width: 1040px) {
   .part-container {
     width: calc(100vw - 50px);
   }
   .part-container-expanded {
+    width: calc(100vw - 50px);
+  }
+
+  .parent-expanded {
+    width: calc(100vw - 50px);
+  }
+
+  .parent {
     width: calc(100vw - 50px);
   }
 }

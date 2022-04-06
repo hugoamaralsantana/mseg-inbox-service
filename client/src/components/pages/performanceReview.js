@@ -13,6 +13,15 @@ const PerformanceReview = (props) => {
   // const [modalState, updateModalState] = useState(false);
   const reelItems = ['Pending', 'In Progress', 'Completed']
   //problem is that theres just one modal for this page, we need each task to have its own
+  const [boxState, updateBoxState] = useState(false);
+
+  function showBox() {
+      updateBoxState(true);
+  }
+    
+  function closeBox() {
+      updateBoxState(false);
+  }
 
   function expandSideBar() {
     if (expanded) {
@@ -30,10 +39,10 @@ const PerformanceReview = (props) => {
     <div>
       {/* TODO: when I change title = Performance Review, it gets rid of some 
       of the navbar (styling issue) */}
-      <NavBar title="Performance Review" /> 
+      <NavBar title="Performance Review" showBox={showBox}/> 
       <div className="d-inline-flex overflow-hidden">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
-        <PartContainer data={performance_review_data} type='performanceReview' reelItems={reelItems} expanded={expanded} user={user} containerCount='2'/>
+        <PartContainer data={performance_review_data} type='performanceReview' reelItems={reelItems} expanded={expanded} user={user} containerCount='2' boxState={boxState} closeBox={closeBox}/>
       </div>
     </div>
   )
