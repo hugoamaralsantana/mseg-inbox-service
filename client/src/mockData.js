@@ -11,6 +11,7 @@ const randomInt = (min, max) => {
 let dataJSON = {
     "user_type": "admin",
     "user_name": "Jeff Bouttotte",
+    "user_email": 'JBouttotte@UKG.com',
     "data":{
         "favorited":[
         ],
