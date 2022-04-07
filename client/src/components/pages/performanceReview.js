@@ -10,7 +10,7 @@ const user_type = mockData.user_type;
 
 const PerformanceReview = (props) => {
   const [expanded, updateState] = useState(true);
-  // const [modalState, updateModalState] = useState(false);
+  const [filteredData, filterData] = useState(performance_review_data)
   const reelItems = ['Pending', 'In Progress', 'Completed']
   //problem is that theres just one modal for this page, we need each task to have its own
 
@@ -23,6 +23,21 @@ const PerformanceReview = (props) => {
     }
   }
 
+  function filteringData(filter) {
+    for (const key in performance_review_data.incoming) {
+      performance_review_data.incoming[key].filter(task => {
+        if (task.sender.startsWith(filter)) return true;
+        else return false;
+      })
+    }
+    for (const key in performance_review_data.outgoing) {
+      performance_review_data.outgoing[key].filter(task => {
+        if (task.sender.startsWith(filter)) return true;
+        else return false;
+      })
+    }
+  }
+
   const user = user_type;
 
 
@@ -30,7 +45,7 @@ const PerformanceReview = (props) => {
     <div>
       {/* TODO: when I change title = Performance Review, it gets rid of some 
       of the navbar (styling issue) */}
-      <NavBar title="Performance Review" /> 
+      <NavBar title="Performance Review" filteringData={filteringData}/> 
       <div className="d-flex">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
         <PartContainer data={performance_review_data} type='performanceReview' reelItems={reelItems} expanded={expanded} user={user} containerCount='2'/>

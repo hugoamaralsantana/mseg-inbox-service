@@ -9,7 +9,6 @@ const completedTaskReelURL = 'performanceReview/incoming/completed';
 
 
 const Incoming = (props) => {
-  console.log(props.data.pending)
   const incomingCSS = props.containerCount === '1' ? "incoming-expanded d-flex bg-dark ml-3 mr-3 mb-2 mt-2 flex-column justify-content-center" : "incoming d-flex bg-dark ml-3 mr-3 mb-2 mt-2 flex-column justify-content-center"
     return (
         <div className={incomingCSS}>
