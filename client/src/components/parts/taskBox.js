@@ -13,8 +13,9 @@ const TaskBox = (props) => {
   const [isStarred, updateStar] = useState(false);
 
 
-  function showModal(source) {
+  function showModal(e) {
     updateCompleteModalState(true)
+    e.stopPropagation();
   }
 
   function closeModal() {
@@ -92,9 +93,9 @@ const TaskBox = (props) => {
               <div className="profile-icon-initial">{props.data.recipient[0]}</div>
             </div>
           </div>
-          {completeModal}
       </div>
       {expandedBox}
+      {completeModal}
     </div>
   )
 }

@@ -5,10 +5,13 @@ import NavBar from "../parts/navbar";
 import PartContainer from "../parts/partContainer"
 import mockData from "../../mockData.js";
 
-const performance_review_data = mockData.data.performanceReviewPage;
+
 const user_type = mockData.user_type;
 
 const PerformanceReview = (props) => {
+  const performance_review_data = mockData.data.performanceReviewPage;
+  console.log(performance_review_data)
+  console.log(mockData.data.performanceReviewPage)
   const [expanded, updateState] = useState(true);
   const [filteredData, filterData] = useState(performance_review_data)
   const reelItems = ['Pending', 'In Progress', 'Completed']
@@ -24,19 +27,46 @@ const PerformanceReview = (props) => {
   }
 
   function filteringData(filter) {
+    const newObj = {
+      "incoming":{
+          "pending":[
+          ],
+          "inProgress":[
+              
+          ],
+          "completed":[
+              
+          ]
+      },
+      "outgoing":{
+          "pending":[
+          ],
+          "inProgress":[
+              
+          ],
+          "completed":[
+              
+          ]
+      }
+  }
     for (const key in performance_review_data.incoming) {
-      performance_review_data.incoming[key].filter(task => {
-        if (task.sender.startsWith(filter)) return true;
+      newObj.incoming[key] = performance_review_data.incoming[key].filter(task => {
+        if (task.sender.toLowerCase().startsWith(filter.toLowerCase())){
+          return true;
+        }
         else return false;
       })
     }
     for (const key in performance_review_data.outgoing) {
-      performance_review_data.outgoing[key].filter(task => {
-        if (task.sender.startsWith(filter)) return true;
+      newObj.outgoing[key] = performance_review_data.outgoing[key].filter(task => {
+        if (task.recipient.toLowerCase().startsWith(filter.toLowerCase())) return true;
         else return false;
       })
     }
+    filterData(newObj)
+    //console.log(filteredData)
   }
+
 
   const user = user_type;
 
@@ -46,9 +76,9 @@ const PerformanceReview = (props) => {
       {/* TODO: when I change title = Performance Review, it gets rid of some 
       of the navbar (styling issue) */}
       <NavBar title="Performance Review" filteringData={filteringData}/> 
-      <div className="d-flex">
+      <div className="d-inline-flex overflow-hidden">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
-        <PartContainer data={performance_review_data} type='performanceReview' reelItems={reelItems} expanded={expanded} user={user} containerCount='2'/>
+        <PartContainer data={filteredData} type='performanceReview' reelItems={reelItems} expanded={expanded} user={user} containerCount='2'/>
       </div>
     </div>
   )

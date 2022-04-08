@@ -5,13 +5,15 @@
 
 .task-box {
   border-radius: 5px;
-  height: 67.2px;
+  min-height: 67.2px;
+  height: auto;
 }
 
 .task-box-expanded {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  height: 67.2px;
+  min-height: 67.2px;
+  height: auto;
 }
 
 .address {
@@ -64,7 +66,7 @@
   height: 25px;
   width: 25px;
   margin: auto;
-  background-color: #D4F0F1;
+  background-color: #d4f0f1;
   border-radius: 50%;
 }
 
