@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
 
 const User = require('../models/USER');
 
@@ -23,7 +24,20 @@ router.get('/', (req, res) => {
      .catch(err => res.status(400).json({ error: `Unable to add this user ${req.body}` }));
   });
 
-  router.put('/:id', (req, res) => {
+  router.put('/:id',[
+    check('firstName').isLength({min : 1}),
+    check('lastName').isLength({min : 1}),
+    check('employeeId').isNumeric(),
+    check('email').isEmail(),
+    check('companyId').isNumeric(),
+    check('companyName').isLength({min : 1}),
+    check('positionTitle').isLength({min : 1}),
+    check('startDate').isDate(), //requirements for the date
+    check('isManager').isBoolean(),
+    check('password').isLength({min : 8}) //what kind of requirements on the password?
+
+  ], (req, res) => {
+
     User.findByIdAndUpdate(req.params.id, req.body)
       .then(user => res.json({ msg: 'Updated successfully' }))
       .catch(err =>
