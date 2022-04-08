@@ -35,9 +35,11 @@ router.get('/', (req, res) => {
     check('startDate').isDate(), //requirements for the date
     check('isManager').isBoolean(),
     check('password').isLength({min : 8}) //what kind of requirements on the password?
-
   ], (req, res) => {
-
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
+    }
     User.findByIdAndUpdate(req.params.id, req.body)
       .then(user => res.json({ msg: 'Updated successfully' }))
       .catch(err =>
