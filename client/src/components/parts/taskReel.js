@@ -1,18 +1,28 @@
 import TaskBox from "../parts/taskBox"
 import '../../styles/taskReel.css'
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 
 // TODO: fetch data from API using props.endpoint later on
 
 const TaskReel = (props) => {
   const data = props.data;
-  console.log(data.length)
-  const favoritedOrder = favoriteOrder(data)
-  const [dataList, updateTaskBoxOrder] = useState(favoritedOrder)
+  const isMounted = useRef(false);
+  const [dataList, updateTaskBoxOrder] = useState(favoriteOrder(data))
+  useEffect(() => {
+    function handleEvent(data) {
+      if (!isMounted.current){
+        updateTaskBoxOrder(data)
+      } else {
+        isMounted.current = false
+      }
+    }
+    handleEvent(data)
+  });
   let color;
   let action;
 
   function favoriteOrder(arr) {
+    console.log('butt')
     arr.sort((a, b) => (b.date._d > a.date._d) ? 1: -1)
     let favoritedOrdered = []
     arr.forEach((taskbox) => {
@@ -24,12 +34,13 @@ const TaskReel = (props) => {
   }
 
   function starTask(id) {
-    dataList.forEach((task) => {
+    data.forEach((task) => {
       if (task.task_id === id) {
         task.favorited = !task.favorited;
       }
     })
     const newList = favoriteOrder(dataList)
+    isMounted.current = true;
     updateTaskBoxOrder(newList);
   }
 
@@ -45,7 +56,6 @@ const TaskReel = (props) => {
     color = 'title green d-flex justify-content-between';
     action = 'Review';
   }
-
   return (
     <div className="task-reel text-white bg-darkest">
       <div className={color}>

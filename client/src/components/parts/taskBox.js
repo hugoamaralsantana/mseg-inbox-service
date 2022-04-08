@@ -82,7 +82,7 @@ const TaskBox = (props) => {
           <div className="left-side pl-2">
             <h6 className="mb-0 lead address">
               {props.source === 'outgoing' ? 'To: ': 'From: '} 
-              {props.data.recipient}
+              {props.source === 'outgoing' ? props.data.recipient : props.data.sender}
             </h6>
             <p className="mb-0 date">Recieved: {props.data.date.format('MM/DD/YYYY')}</p>
             <h7 className="start" onClick={showModal}>{action}</h7>
