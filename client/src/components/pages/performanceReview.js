@@ -10,8 +10,6 @@ const user_type = mockData.user_type;
 
 const PerformanceReview = (props) => {
   const performance_review_data = mockData.data.performanceReviewPage;
-  console.log(performance_review_data)
-  console.log(mockData.data.performanceReviewPage)
   const [expanded, updateState] = useState(true);
   const [filteredData, filterData] = useState(performance_review_data)
   const reelItems = ['Pending', 'In Progress', 'Completed']
@@ -64,7 +62,6 @@ const PerformanceReview = (props) => {
       })
     }
     filterData(newObj)
-    //console.log(filteredData)
   }
 
 

@@ -161,11 +161,13 @@ for (let i=0; i<GENERATE_MOCK_TASK_CYCLE; ++i) {
     data.data.assignedTrainingPage.incoming.pending.push(mockAssignedTraining(id_counter++));
     data.data.assignedTrainingPage.incoming.inProgress.push(mockAssignedTraining(id_counter++));
     data.data.assignedTrainingPage.incoming.completed.push(mockAssignedTraining(id_counter++));
+    data.data.assignedTrainingPage.outgoing.pending.push(mockAssignedTraining(id_counter++));
+    data.data.assignedTrainingPage.outgoing.inProgress.push(mockAssignedTraining(id_counter++));
+    data.data.assignedTrainingPage.outgoing.completed.push(mockAssignedTraining(id_counter++));
     
     data.data.PTORequestPage.outgoing.pending.push(mockPTORequest(id_counter++));
     data.data.PTORequestPage.outgoing.inProgress.push(mockPTORequest(id_counter++));
     data.data.PTORequestPage.outgoing.completed.push(mockPTORequest(id_counter++));
-
     data.data.PTORequestPage.incoming.pending.push(mockPTORequest(id_counter++));
     data.data.PTORequestPage.incoming.inProgress.push(mockPTORequest(id_counter++));
     data.data.PTORequestPage.incoming.completed.push(mockPTORequest(id_counter++));
