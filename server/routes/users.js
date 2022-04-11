@@ -18,7 +18,18 @@ router.get('/', (req, res) => {
       .catch(err => res.status(404).json({ nouserfound: `No User found at ${req.params.id}` }));
   });
 
-  router.post('/', (req, res) => {
+  router.post('/', [
+    check('firstName').isLength({min : 1}),
+    check('lastName').isLength({min : 1}),
+    check('employeeId').isNumeric(),
+    check('email').isEmail(),
+    check('companyId').isNumeric(),
+    check('companyName').isLength({min : 1}),
+    check('positionTitle').isLength({min : 1}),
+    check('startDate').isDate(), //requirements for the date
+    check('isManager').isBoolean(),
+    check('password').isLength({min : 10}).isAlphanumeric() //what kind of requirements on the password?
+  ],(req, res) => {
     User.create(req.body)
      .then(user => res.json({ msg : 'User added successfully'}))
      .catch(err => res.status(400).json({ error: `Unable to add this user ${req.body}` }));
@@ -34,7 +45,7 @@ router.get('/', (req, res) => {
     check('positionTitle').isLength({min : 1}),
     check('startDate').isDate(), //requirements for the date
     check('isManager').isBoolean(),
-    check('password').isLength({min : 8}) //what kind of requirements on the password?
+    check('password').isLength({min : 12}).isAlphanumeric() //what kind of requirements on the password?
   ], (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
