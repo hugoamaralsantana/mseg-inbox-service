@@ -1,23 +1,5 @@
 const mongoose = require('mongoose');
 
-
-/*
-    Example User
-        {
-        "firstName" : "Hans",
-        "lastName" : "Barton",
-        "employeeId" : 1,
-        "email" : "Hans_Barton@atlastechnology.com",
-        "companyId" : 2,
-        "companyName" : "Atlas Technology",
-        "positionTitle" : "CEO",
-        "startDate" : "2005-02-20",
-        "isManager" : true,
-        "password" : "bartonha"
-        }
-
-*/
-
 const userSchema = mongoose.Schema({
     employee_id: {
         type: Number,
@@ -62,16 +44,16 @@ const userSchema = mongoose.Schema({
     },
     data: {
         performanceReviewPage: {
-            incoming: [Number], 
-            outgoing: [Number] 
+            incoming: [Schema.Types.ObjectId], 
+            outgoing: [Schema.Types.ObjectId] 
         },
         assignedTrainingPage: {
-            incoming: [Number], 
-            outgoing: [Number] 
+            incoming: [Schema.Types.ObjectId], 
+            outgoing: [Schema.Types.ObjectId] 
         },
         PTORequestPage: {
-            incoming: [Number], 
-            outgoing: [Number] 
+            incoming: [Schema.Types.ObjectId], 
+            outgoing: [Schema.Types.ObjectId] 
         }
     },
 }, {timestamps: true});
