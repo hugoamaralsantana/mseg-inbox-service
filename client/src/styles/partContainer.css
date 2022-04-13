@@ -10,6 +10,7 @@
   height: calc(100vh - 55px);
 }
 
+
 .parent-expanded {
   width: calc(100vw - 200);
   height: calc(100vh - 55px);
@@ -19,6 +20,7 @@
   width: calc(100vw - 50px);
   height: calc(100vh - 55px);
 }
+
 
 @media only screen and (max-width: 1050px) {
   .part-container {

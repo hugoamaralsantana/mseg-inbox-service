@@ -37,7 +37,8 @@
   padding-bottom: 10px;
 }
 
-@media only screen and (max-width: 1045px) {
+
+@media only screen and (max-width: 1050px) {
   .bottom {
     display: none;
   }
