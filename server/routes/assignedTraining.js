@@ -3,7 +3,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
 // const User = require('../src/models/AssignedTraining');
-const AssignedTraining = require('../src/models/AssignedTraining');
+const AssignedTraining = require('../src/models/ASSIGNEDTRAINING');
 
 router.get('/test', (req, res) => res.send('assigned training route testing!'));
 

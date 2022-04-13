@@ -1,15 +1,11 @@
 const mongoose = require('mongoose');
 
 const assignedTrainingSchema = mongoose.Schema({
-    assignedTrainingId: {
-        type: Number,
-        required: true
-    },
     type: {
         type: String,
         required: true
     },
-    url: {
+    status: {
         type: String,
         required: true
     },
@@ -18,16 +14,29 @@ const assignedTrainingSchema = mongoose.Schema({
         required: true
     },
     recipient_id: {
-        type: Number,
+        type: String,
         required: true
+    },
+    recipient_due_date: {
+        type: Date,
+        required: false
     },
     sender: {
         type: String,
         required: true
     },
     sender_id: {
-        type: Number, 
+        type: String,
         required: true
+    },
+    sender_due_date: {
+        type: Date,
+        required: false
+    },
+    date_created: {
+        type: Date,
+        required: true,
+        default: Date.now
     },
     recipient_comments: {
         type: String,
@@ -37,24 +46,19 @@ const assignedTrainingSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    isCompleted: {
+    training: {
+        type: String,
+        required: true
+    },
+    is_completed: {
         type: Boolean,
         required: true,
-        default: false
-    },
-    startDate: {
-        type: Date,
-        required: true,
-        default: Date.now
-    },
-    dueDate: {
-        type: Date,
-        required: true
+        default: false,
     },
     favorited: {
         type: Boolean,
         required: true,
-        default: false
+        default: false,
     },
 }, {timestamps: true});
 

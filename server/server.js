@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const users = require('./routes/users')
+const assignedTraining = require('./routes/assignedTraining')
 
 const app = express();
 app.use(express.json());
@@ -10,6 +11,7 @@ connectDB();
 
 app.get('/', (req, res) => res.send('Test server!'));
 app.use('/users', users);
+app.use('/assignedTraining', assignedTraining);
 
 const port = process.env.PORT || 8082;
 
