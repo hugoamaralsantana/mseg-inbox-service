@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import '../../styles/custom.scss'
 import '../../styles/navbar.css'
+
 
 
 const NavBar = (props) => {
@@ -18,7 +19,7 @@ const NavBar = (props) => {
             </div>
             <div class="navbarSupportedContent">
                 <div class="d-flex justify-content-md-end align-items-center">
-                    <img className="col-md-auto mr-3" id="profile-icon" src='/icons/person-circle-outline.svg' alt="person-circle-outline" width={45} height={45} />
+                    <img onClick={props.showBox} className="col-md-auto mr-3" id="profile-icon" src='/icons/person-circle-outline.svg' alt="person-circle-outline" width={45} height={45} />
                 </div>
             </div>
         </nav>
