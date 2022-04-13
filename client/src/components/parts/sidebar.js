@@ -10,7 +10,6 @@ const SideBar = (props) => {
 
     window.addEventListener('resize', () => {
         updateWidth(window.innerWidth)
-        console.log(width)
     })
     //console.log(window.screen.height)
     if (props.expanded && width > 1050) {
