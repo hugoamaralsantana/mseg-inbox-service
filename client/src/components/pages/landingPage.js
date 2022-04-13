@@ -7,7 +7,7 @@ import '../../styles/landingPage.css'
 
 const LandingPage = (props) => {
 const [expanded, updateState] = useState(true);
-const reelItems = ['My Day', 'Favorited', 'Coming Up']
+const reelItems = ['Favorited', 'Coming Up']
 
 function expandSideBar() {
   if (expanded) {

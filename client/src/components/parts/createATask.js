@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import '../../styles/createATask.css'
 import '../../styles/bts.css'
 
-const createATask= (props) => {
+const createATask = (props) => {
   return (
     <div className="createATask d-flex bg-dark ml-3 mr-3 mb-2 mt-2 flex-column">
       <h1 className="text-white ml-5 pt-1">Create a Task</h1>
