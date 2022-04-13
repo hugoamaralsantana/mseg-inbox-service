@@ -46,7 +46,7 @@ const TaskReel = (props) => {
   }
 
   return (
-    <div className="task-reel ml-3 mr-3 mb-1 text-white bg-darkest">
+    <div className="task-reel text-white bg-darkest">
       <div className={color}>
         <h4 className="text-primary pl-2">{props.reelTitle}</h4>
       </div>
