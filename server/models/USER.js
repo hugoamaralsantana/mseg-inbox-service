@@ -19,46 +19,60 @@ const mongoose = require('mongoose');
 */
 
 const userSchema = mongoose.Schema({
-    firstName: {
-        type: String,
-        required: true,
-    },
-    lastName: {
-        type: String,
-        required: true,
-    },
-    employeeId: {
+    employee_id: {
         type: Number,
+        required: true,
+    },
+    user_type: {
+        type: String,
+        required: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    first_name: {
+        type: String,
+        required: true,
+    },
+    last_name: {
+        type: String,
         required: true,
     },
     email: {
         type: String,
         required: true,
     },
-    companyId: {
+    company_id: {
         type: Number,
         required: true,
     },
-    companyName: {
+    company_name: {
         type: String,
         required: true,
     },
-    positionTitle: {
+    position_title: {
         type: String,
         required: true,
     },
-    startDate: {
+    start_date: {
         type: Date,
         required: true,
         default: Date.now
     },
-    isManager: {
-        type: Boolean,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
+    data: {
+        performanceReviewPage: {
+            incoming: [Number], 
+            outgoing: [Number] 
+        },
+        assignedTrainingPage: {
+            incoming: [Number], 
+            outgoing: [Number] 
+        },
+        PTORequestPage: {
+            incoming: [Number], 
+            outgoing: [Number] 
+        }
     },
 }, {timestamps: true});
 

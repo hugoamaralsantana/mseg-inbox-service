@@ -19,16 +19,15 @@ router.get('/', (req, res) => {
   });
 
   router.post('/', [
-    check('firstName').isLength({min : 1}),
-    check('lastName').isLength({min : 1}),
-    check('employeeId').isNumeric(),
+    check('employee_id').isNumeric(),
+    check('password').isLength({min : 10}).isAlphanumeric(), //what kind of requirements on the password?
+    check('first_name').isLength({min : 1}),
+    check('last_name').isLength({min : 1}),
     check('email').isEmail(),
-    check('companyId').isNumeric(),
-    check('companyName').isLength({min : 1}),
-    check('positionTitle').isLength({min : 1}),
-    check('startDate').isDate(), //requirements for the date
-    check('isManager').isBoolean(),
-    check('password').isLength({min : 10}).isAlphanumeric() //what kind of requirements on the password?
+    check('company_id').isNumeric(),
+    check('company_name').isLength({min : 1}),
+    check('position_title').isLength({min : 1}),
+    check('start_date').isDate(), //requirements for the date
   ],(req, res) => {
     User.create(req.body)
      .then(user => res.json({ msg : 'User added successfully'}))
@@ -36,16 +35,16 @@ router.get('/', (req, res) => {
   });
 
   router.put('/:id',[
-    check('firstName').isLength({min : 1}),
-    check('lastName').isLength({min : 1}),
-    check('employeeId').isNumeric(),
+    check('employee_id').isNumeric(),
+    check('password').isLength({min : 10}).isAlphanumeric(), //what kind of requirements on the password?
+    check('first_name').isLength({min : 1}),
+    check('last_name').isLength({min : 1}),
     check('email').isEmail(),
-    check('companyId').isNumeric(),
-    check('companyName').isLength({min : 1}),
-    check('positionTitle').isLength({min : 1}),
-    check('startDate').isDate(), //requirements for the date
-    check('isManager').isBoolean(),
-    check('password').isLength({min : 12}).isAlphanumeric() //what kind of requirements on the password?
+    check('company_id').isNumeric(),
+    check('company_name').isLength({min : 1}),
+    check('position_title').isLength({min : 1}),
+    check('start_date').isDate(), //requirements for the date
+    
   ], (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {

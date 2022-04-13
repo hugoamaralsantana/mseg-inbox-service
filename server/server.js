@@ -9,7 +9,7 @@ app.use(express.json());
 connectDB();
 
 app.get('/', (req, res) => res.send('Test server!'));
-app.use('/user', users);
+app.use('/users', users);
 
 const port = process.env.PORT || 8082;
 
