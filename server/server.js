@@ -13,7 +13,7 @@ connectDB();
 app.get('/', (req, res) => res.send('Test server!'));
 app.use('/users', users);
 app.use('/companies', companies);
-app.use('/assignedTraining', assignedTraining);
+app.use('/assignedTrainings', assignedTraining);
 
 const port = process.env.PORT || 8082;
 

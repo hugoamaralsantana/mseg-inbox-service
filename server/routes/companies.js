@@ -6,18 +6,22 @@ const Company = require('../models/COMPANY');
 
 router.get('/test', (req, res) => res.send('company route testing!'));
 
-router.get('/', (req, res) => {
+  // get all companies from database
+  router.get('/', (req, res) => {
     Company.find()
       .then(companies => res.json(companies))
       .catch(err => res.status(404).json({error: 'No companies found' }));
   });
 
+  // get a company by id from database
   router.get('/:id', (req, res) => {
     Company.findById(req.params.id)
       .then(company => res.json(company))
       .catch(err => res.status(404).json({ error: `No  company found at ${req.params.id}` }));
   });
 
+  // create a company and insert into database
+  // if company already exists, nothing happens
   router.post('/', [
     check('name').isLength({min : 20}).isAlphanumeric(),
   ],(req, res) => {
@@ -26,6 +30,7 @@ router.get('/', (req, res) => {
      .catch(err => res.status(400).json({ error: `Unable to add this company ${req.body}` }));
   });
 
+  // update a company in the database
   router.put('/:id',[
     check('name').isLength({min : 20}).isAlphanumeric(),
   ], (req, res) => {
