@@ -15,7 +15,7 @@ const AssignedTraining = require('../models/ASSIGNEDTRAINING');
   });
 
   // get an assigned training by id from database
-  router.get('/:id', (req, res) => {
+  router.get('/getById/:id', (req, res) => {
     AssignedTraining.findById(req.params.id)
       .then(training => res.json(training))
       .catch(err => res.status(404).json({ error: `No Training found at ${req.params.id}` }));
@@ -79,6 +79,25 @@ const AssignedTraining = require('../models/ASSIGNEDTRAINING');
       .catch(err =>
         res.status(400).json({ error: 'Unable to update the Database' })
       );
+  });
+
+  // get an assigned training data for a user from database
+  router.get('/userData/:userId/:type', (req, res) => {
+    // if we want incoming -> we look for recipient id
+    // if we want outgoing -> we look for sender id
+    const userId = req.params.userId;
+    const type = req.params.type;
+    if (!userId || !type) {
+      return res.json({error: "An error occured getting user data"});
+    }
+    const response = {incoming: [], outgoing: []}
+    const query = type === 'incoming' ? {recipient_id: userId} : {sender_id: userId};
+    AssignedTraining.find(query)
+      .then(trainings => {
+        response[type] = trainings;
+        return res.json(response);
+      })
+      .catch(err => res.status(404).json({ error: `No Trainings found at ${req.params.id}` }));
   });
 
   router.delete('/:assignedTrainingId', (req, res) => {
