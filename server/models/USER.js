@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
-    employee_id: {
-        type: Number,
-        required: true,
-    },
     user_type: {
         type: String,
         required: true,
@@ -26,7 +22,7 @@ const userSchema = mongoose.Schema({
         required: true,
     },
     company_id: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
     company_name: {
@@ -41,21 +37,7 @@ const userSchema = mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now
-    },
-    data: {
-        performanceReviewPage: {
-            incoming: [Schema.Types.ObjectId], 
-            outgoing: [Schema.Types.ObjectId] 
-        },
-        assignedTrainingPage: {
-            incoming: [Schema.Types.ObjectId], 
-            outgoing: [Schema.Types.ObjectId] 
-        },
-        PTORequestPage: {
-            incoming: [Schema.Types.ObjectId], 
-            outgoing: [Schema.Types.ObjectId] 
-        }
-    },
+    }
 }, {timestamps: true});
 
 const User = mongoose.model("User", userSchema);

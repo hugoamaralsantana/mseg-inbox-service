@@ -33,11 +33,6 @@ const assignedTrainingSchema = mongoose.Schema({
         type: Date,
         required: false
     },
-    date_created: {
-        type: Date,
-        required: true,
-        default: Date.now
-    },
     recipient_comments: {
         type: String,
         required: false
