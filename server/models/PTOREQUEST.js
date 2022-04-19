@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const performanceReviewSchema = mongoose.Schema({
+const PTORequestSchema = mongoose.Schema({
     type: {
         type: String,
         required: true
@@ -35,11 +35,6 @@ const performanceReviewSchema = mongoose.Schema({
         required: false,
         default: null
     },
-    overall_comments: {
-        type: String,
-        required: false,
-        default: ''
-    },
     recipient_comments: {
         type: String,
         required: false,
@@ -50,35 +45,22 @@ const performanceReviewSchema = mongoose.Schema({
         required: false,
         default: ''
     },
-    growth_score: {
-        type: Number,
-        required: false,
-        default: null
-    },
-    growth_comments: {
+    pto_type: {
         type: String,
-        required: false,
-        default: ''
+        required: true,
     },
-    kindness_score: {
-        type: Number,
-        required: false,
-        default: null
+    pto_start: {
+        type: Date,
+        required: true,
     },
-    kindness_comments: {
-        type: String,
-        required: false,
-        default: ''
+    pto_end: {
+        type: Date,
+        required: true
     },
-    delivery_score: {
-        type: Number,
-        required: false,
-        default: null
-    },
-    delivery_comments: {
-        type: String,
-        required: false,
-        default: ''
+    isApproved: {
+        type: Boolean,
+        required: true,
+        default: false,
     },
     favorited: {
         type: Boolean,
@@ -89,7 +71,7 @@ const performanceReviewSchema = mongoose.Schema({
 
 // EXAMPLE POST BODY
 // {
-//     "type": "performanceReview",
+//     "type": "PTORequest",
 //     "status": "inProgress",
 //     "recipient": "Jacob Matthews",
 //     "recipient_id": "6257a1fd43e724e24c03dd50",
@@ -97,17 +79,13 @@ const performanceReviewSchema = mongoose.Schema({
 //     "sender": "Colby Jack",
 //     "sender_id": "6257a21d43e724e24c03dd55",
 //     "sender_due_date": null,
-//     "overall_comments": null,
 //     "recipient_comments": null,
 //     "sender_comments": null,
-// 	   "growth_score": null,
-// 	   "growth_comments": null,
-// 	   "kindness_score": null,
-// 	   "kindness_comments": null,
-// 	   "delivery_score": null,
-// 	   "delivery_comments": null,
+// 	"pto_type": "vacation",
+// 	"pto_start": "11/20/22",
+// 	"pto_end": "11/21/22",
 //     "favorited": false
 // }
 
-const PerformanceReview = mongoose.model("PerformanceReview", performanceReviewSchema);
-module.exports = PerformanceReview
+const PTORequest = mongoose.model("PTORequest", PTORequestSchema);
+module.exports = PTORequest
