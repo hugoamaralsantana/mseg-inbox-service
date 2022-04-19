@@ -66,7 +66,7 @@ const assignedTrainingSchema = mongoose.Schema({
 //     "type": "assignedTraining",
 //     "status": "inProgress",
 //     "recipient": "Jacob Matthews",
-//     "recipient_id": "6257a1fd43e724e24c03dd50",
+//     "recipient_id": "625f267aa6aeb39ee40b7aa8",
 //     "recipient_due_date": null,
 //     "sender": "Colby Jack",
 //     "sender_id": "6257a21d43e724e24c03dd55",

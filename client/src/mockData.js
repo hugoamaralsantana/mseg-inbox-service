@@ -9,7 +9,7 @@ const randomInt = (min, max) => {
 }
 
 let dataJSON = {
-    "user_type": "admin",
+    "user_type": "employee",
     "data":{
         "favorited":[
         ],

@@ -49,10 +49,6 @@ const User = require('../models/USER');
       }        
     }),
     check('position_title').isLength({min : 1}),
-    check('start_date').custom(start_date => {
-      const date = new Date(start_date);
-      return date instanceof Date && !isNaN(date.valueOf())
-    }),
   ],(req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
