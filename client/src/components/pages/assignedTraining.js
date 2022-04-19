@@ -11,33 +11,24 @@ const assigned_training_data = mockData.data.assignedTrainingPage;
 const user_type = mockData.user_type;
 
 const AssignedTraining = (props) => {
-  const [userData, setUserData] = useState({});
-  const [assignedTrainingData, setAssignedTrainingData] = useState({});
-  
-  const callUserDataAPI = () => {
-    useEffect(async() => {
-      await axios.get('http://localhost:8082/users/6257a21d43e724e24c03dd55')
-      .then(response => {
-        console.log(response.data)
-        setUserData(response.data)
-      })
-      .catch(err => console.log(err))
-    }, [])
-  }
 
-  const callAssignedTrainingAPI = () => {
-    useEffect(async() => {
-      await axios.get('http://localhost:8082/assignedTrainings/userData/6257a21d43e724e24c03dd55/incoming')
-      .then(response => {
-        console.log(response.data)
-        setAssignedTrainingData(response.data)
-      })
-      .catch(err => console.log(err))
-    }, [])
-  }
+  // DRAFT FOR FRONTEND INTEGRATION
+  // const [userData, setUserData] = useState({});
+  // const [assignedTrainingData, setAssignedTrainingData] = useState({});
 
-  callUserDataAPI();
-  callAssignedTrainingAPI();
+  // const callAssignedTrainingAPI = () => {
+  //   useEffect(async() => {
+  //     await axios.get('http://localhost:8082/assignedTrainings/userData/6257a21d43e724e24c03dd55/incoming')
+  //     .then(response => {
+  //       console.log(response.data)
+  //       setAssignedTrainingData(response.data)
+  //     })
+  //     .catch(err => console.log(err))
+  //   }, [])
+  // }
+
+  // callUserDataAPI();
+  // callAssignedTrainingAPI();
 
   // assigned training API return example
   // {
