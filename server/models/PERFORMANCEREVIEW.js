@@ -87,5 +87,26 @@ const performanceReviewSchema = mongoose.Schema({
     },
 }, {timestamps: true});
 
+// EXAMPLE POST BODY
+// {
+//     "type": "performanceReview",
+//     "status": "inProgress",
+//     "recipient": "Jacob Matthews",
+//     "recipient_id": "6257a1fd43e724e24c03dd50",
+//     "recipient_due_date": null,
+//     "sender": "Colby Jack",
+//     "sender_id": "6257a21d43e724e24c03dd55",
+//     "sender_due_date": null,
+//     "recipient_comments": null,
+//     "sender_comments": null,
+// 	   "growth_score": null,
+// 	   "growth_comments": null,
+// 	   "kindness_score": null,
+// 	   "kindness_comments": null,
+// 	   "delivery_score": null,
+// 	   "delivery_comments": null,
+//     "favorited": false
+// }
+
 const PerformanceReview = mongoose.model("PerformanceReview", performanceReviewSchema);
 module.exports = PerformanceReview

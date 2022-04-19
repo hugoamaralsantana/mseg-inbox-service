@@ -66,13 +66,13 @@ const PerformanceReview = require('../models/PERFORMANCEREVIEW');
     check('recipient_comments').isLength({max: 200}),
     check('sender_comments').isLength({max: 200}),
     check('favorited').isBoolean(),
-    check('overall_comments').isAlphanumeric(),
-    check('growth_score').isNumeric().isin([1, 2, 3, 4, 5]),
-    check('growth_comments').isAlphanumeric(),
-    check('kindness_score').isNumeric().isin([1, 2, 3, 4, 5]),
-    check('kindness_comments').isAlphanumeric(),
-    check('delivery_score').isNumeric().isin([1, 2, 3, 4, 5]),
-    check('delivery_comments').isAlphanumeric()
+    check('overall_comments').custom(overall_comments => !overall_comments || overall_comments.length < 200),
+    check('growth_score').custom(growth_score => !growth_score || [1, 2, 3, 4, 5].includes(growth_score)),
+    check('growth_comments').custom(growth_comments => !growth_comments || growth_comments.length < 200),
+    check('kindness_score').custom(kindness_score => !kindness_score || [1, 2, 3, 4, 5].includes(kindness_score)),
+    check('kindness_comments').custom(kindness_comments => !kindness_comments || kindness_comments.length < 200),
+    check('delivery_score').custom(delivery_score => !delivery_score || [1, 2, 3, 4, 5].includes(delivery_score)),
+    check('delivery_comments').custom(delivery_comments => !delivery_comments || delivery_comments.length < 200),
   ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
