@@ -3,6 +3,7 @@ const connectDB = require('./config/db');
 const users = require('./routes/users')
 const companies = require('./routes/companies')
 const assignedTraining = require('./routes/assignedTraining')
+const performanceReviews = require('./routes/performanceReviews')
 const cors = require('cors');
 
 const app = express();
@@ -16,6 +17,7 @@ app.get('/', (req, res) => res.send('Test server!'));
 app.use('/users', users);
 app.use('/companies', companies);
 app.use('/assignedTrainings', assignedTraining);
+app.use('/performanceReviews', performanceReviews);
 
 const port = process.env.PORT || 8082;
 
