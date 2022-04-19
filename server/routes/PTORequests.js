@@ -35,6 +35,14 @@ const PTORequest = require('../models/PTORequest');
     check('recipient_comments').isLength({max: 200}),
     check('sender_comments').isLength({max: 200}),
     check('favorited').custom(favorited => favorited === false),
+    check('pto_start').custom(pto_start => {
+      const date = new Date(pto_start);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
+    check('pto_end').custom(pto_end => {
+      const date = new Date(pto_end);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
   ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -66,6 +74,14 @@ const PTORequest = require('../models/PTORequest');
     check('recipient_comments').isLength({max: 200}),
     check('sender_comments').isLength({max: 200}),
     check('favorited').isBoolean(),
+    check('pto_start').custom(pto_start => {
+      const date = new Date(pto_start);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
+    check('pto_end').custom(pto_end => {
+      const date = new Date(pto_end);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
   ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
