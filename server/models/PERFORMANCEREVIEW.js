@@ -35,6 +35,11 @@ const performanceReviewSchema = mongoose.Schema({
         required: false,
         default: null
     },
+    overall_comments: {
+        type: String,
+        required: false,
+        default: ''
+    },
     recipient_comments: {
         type: String,
         required: false,

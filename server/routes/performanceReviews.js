@@ -66,6 +66,13 @@ const PerformanceReview = require('../models/PERFORMANCEREVIEW');
     check('recipient_comments').isLength({max: 200}),
     check('sender_comments').isLength({max: 200}),
     check('favorited').isBoolean(),
+    check('overall_comments').isAlphanumeric(),
+    check('growth_score').isNumeric().isin([1, 2, 3, 4, 5]),
+    check('growth_comments').isAlphanumeric(),
+    check('kindness_score').isNumeric().isin([1, 2, 3, 4, 5]),
+    check('kindness_comments').isAlphanumeric(),
+    check('delivery_score').isNumeric().isin([1, 2, 3, 4, 5]),
+    check('delivery_comments').isAlphanumeric()
   ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
