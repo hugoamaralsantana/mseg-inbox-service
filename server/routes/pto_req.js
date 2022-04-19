@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const {check, validationRes} = require('express-validator') 
 
 //Load PTO Request Model
 const PTO_Req = require('../../models/PTO'); //Ask Steven
@@ -34,7 +35,10 @@ router.get('/:id', (req, res) => {
 // @descriptioon add/save pto requests
 // @access User Directed
 router.post('/', [
-    check('startDate')
+    check('startDate').isDate(),
+    check('EndDate').isDate(),
+    check("Reason").isAlphanumeric(),
+    check("assignID").isNumeric()
 ], (res, req) => {
     PTO_Req.create(req.body)
         .then(request => res.json({msg : "Request addded!"}))
@@ -44,7 +48,12 @@ router.post('/', [
 // @route PUT api/pto_req/:id
 // @description update pto request
 // @access User Directed
-router.put('/:id', (res, req) => {
+router.put('/:id',[
+    check('startDate').isDate(),
+    check('EndDate').isDate(),
+    check("Reason").isAlphanumeric(),
+    check("assignID").isNumeric()
+] ,(res, req) => {
     PTO_Req.findByIdAndUpdate(req.params.id, req.body)
         .then(request => res.json({msgs : "Updated Successfully"}))
         .catch(err => res.status(400).json({error : "Unable to update this request"}));
@@ -53,7 +62,9 @@ router.put('/:id', (res, req) => {
 // @route PUT api/pto_req/:id
 // @description delete pto request
 // @access User Directed
-router.put('/:id', (res, req) => {
+router.put('/:id',[
+    check("assignID").isNumeric()
+] ,(res, req) => {
     Pref_rev.findByIdAndDelete(req.params.id, req.body)
         .then(request => res.json({msgs : "Deleted Successfully"}))
         .catch(err => res.status(400).json({error : "Unable to delete this review"}));
