@@ -10,7 +10,7 @@ const NavBar = (props) => {
     return(
         <nav id="navbar" className="navbar navbar-light bg-secondary d-flex align-items-center justify-content-between">
             <div className='brand d-flex align-items-center'>
-                <img className="brand-part" id="ukg-icon" src='/ukg_logo_white.svg' alt="settings-outline" width={80} height={50} />
+                <a href='/landingPage'><img className="brand-part" id="ukg-icon" src='/ukg_logo_white.svg' alt="settings-outline" width={80} height={50} /></a>
                 <h1 id="inbox-title" className="brand-part">Inbox -</h1>
                 <h1 id="page-title" className="brand-part">{pageTitle}</h1>
                 <form className="form brand-part" height={150}>

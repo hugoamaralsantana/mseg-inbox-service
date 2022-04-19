@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const TaskReel = (props) => {
   const data = props.data;
+  console.log(props.data)
   console.log(data.length)
   const favoritedOrder = favoriteOrder(data)
   const [dataList, updateTaskBoxOrder] = useState(favoritedOrder)
@@ -46,8 +47,22 @@ const TaskReel = (props) => {
     action = 'Review';
   }
 
+  else if (props.reelTitle === 'Favorited') {
+    color = 'title green d-flex justify-content-between';
+    action = 'Review';
+  }
+
+  else if (props.reelTitle === 'Coming up') {
+    color = 'title green d-flex justify-content-between';
+    action = 'Review';
+  }
+
+  const taskReelCSS = props.type === 'landingPage' ? 'task-reel-landing text-white bg-darkest' : 'task-reel text-white bg-darkest'
+
+
+
   return (
-    <div className="task-reel text-white bg-darkest">
+    <div className={taskReelCSS}>
       <div className={color}>
         <h4 className="text-primary pl-2 mb-0">{props.reelTitle}</h4>
         <div id='task-count' className="d-flex align-items-center mr-3">

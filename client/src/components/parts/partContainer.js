@@ -3,6 +3,8 @@ import Incoming from '../parts/incoming';
 import Outgoing from '../parts/outgoing';
 import '../../styles/partContainer.css'
 import ProfileButtonBox from "./profile-button-box";
+import GeneralModalSelect from "./generalModalSelect";
+import GeneralTasks from "./generalTasks";
 
 const PartContainer = (props) => {//check if page has 1 or two containers
   const expandedCSS = props.expanded ? "part-container-expanded bg-secondary d-inline-flex flex-column" : "part-container bg-secondary d-flex flex-column"
@@ -49,6 +51,17 @@ const PartContainer = (props) => {//check if page has 1 or two containers
         </div>
         </div>
       )
+  }
+  else if (props.type === 'landingPage') {
+    return(
+      <div className={parentCSS}>
+        <ProfileButtonBox expanded={props.expanded} user_name={props.user_name} boxState={props.boxState} closeBox={props.closeBox}/>
+        <div className={expandedCSS}>
+          {/* <GeneralModalSelect /> */}
+          <GeneralTasks expanded={props.expanded} data={props.data} type={props.type} reelItems={props.reelItems} user={props.user}/>
+        </div>
+      </div>
+    )
   }
   
 }

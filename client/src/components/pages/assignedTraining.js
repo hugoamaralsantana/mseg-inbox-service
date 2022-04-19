@@ -26,7 +26,7 @@ const AssignedTraining = (props) => {
   return (
     <div>
       <NavBar title="Assign Training" /> 
-      <div className="d-flex">
+      <div className="d-inline-flex overflow-hidden">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
         <PartContainer data={assigned_training_data} type='assignedTraining' reelItems={reelItems} expanded={expanded} user={user} user_name={user_name} containerCount='1'/>
       </div>

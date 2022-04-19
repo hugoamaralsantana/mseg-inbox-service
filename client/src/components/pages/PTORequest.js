@@ -24,7 +24,7 @@ const PTORequestPage = (props) => {
   return (
     <div>
       <NavBar title="PTO Request" /> 
-      <div className="d-flex">
+      <div className="d-inline-flex overflow-hidden">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
         <PartContainer data={pto_request_data} type='PTORequest' reelItems={reelItems} expanded={expanded} user={user} user_name={user_name} containerCount='1'/>
       </div>
