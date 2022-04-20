@@ -14,6 +14,7 @@ const user_name = mockData.user_name
 const AssignedTraining = (props) => {
   const [userData, setUserData] = useState({});
   const [assignedTrainingData, setAssignedTrainingData] = useState({});
+
   const [expanded, updateState] = useState(true);
   const [boxState, updateBoxState] = useState(false);
   const reelItems = ['Pending', 'In Progress', 'Completed']

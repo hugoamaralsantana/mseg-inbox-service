@@ -36,6 +36,15 @@ const PTORequest = require('../models/PTORequest');
     check('sender_comments').isLength({max: 200}),
     check('sender_favorited').custom(favorited => favorited === false),
     check('recipient_favorited').custom(favorited => favorited === false),
+    check('pto_start').custom(pto_start => {
+      const date = new Date(pto_start);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
+    check('pto_end').custom(pto_end => {
+      const date = new Date(pto_end);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
+
   ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -54,9 +63,9 @@ const PTORequest = require('../models/PTORequest');
     }),
     check('recipient').isLength({min : 1}),
     check('recipient_id').custom(recipient_id => mongoose.isValidObjectId(recipient_id)),
-    check('due_date').custom(recipient_due_date => {
-      const date = new Date(recipient_due_date);
-      return date instanceof Date && !isNaN(date.valueOf()) || recipient_due_date == null
+    check('due_date').custom(due_date => {
+      const date = new Date(due_date);
+      return date instanceof Date && !isNaN(date.valueOf()) || due_date == null
     }),
     check('sender').isLength({min : 1}),
     check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),
@@ -64,6 +73,14 @@ const PTORequest = require('../models/PTORequest');
     check('sender_comments').isLength({max: 200}),
     check('sender_favorited').isBoolean(),
     check('recipient_favorited').isBoolean(),
+    check('pto_start').custom(pto_start => {
+      const date = new Date(pto_start);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
+    check('pto_end').custom(pto_end => {
+      const date = new Date(pto_end);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
   ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -94,6 +111,7 @@ const PTORequest = require('../models/PTORequest');
       })
       .catch(err => res.status(404).json({ error: `No PTOs found at ${req.params.id}` }));
   });
+
 
   router.get('/userData/:userId', (req, res) => {
     // if we want incoming -> we look for recipient id
