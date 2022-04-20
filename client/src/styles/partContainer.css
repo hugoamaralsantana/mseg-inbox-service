@@ -1,10 +1,40 @@
 .part-container {
-  width: 98vw;
-  height: 93vh;
+  width: calc(100vw - 50px);
+  height: calc(100vh - 55px);
+  overflow: hidden;
+  min-height: 650px;
 }
 
 .part-container-expanded {
-  width: 95vw;
-  height: 100%;
-  height: 93vh;
+  width: calc(100vw - 200px);
+  height: calc(100vh - 55px);
+}
+
+
+.parent-expanded {
+  width: calc(100vw - 200);
+  height: calc(100vh - 55px);
+}
+
+.parent {
+  width: calc(100vw - 50px);
+  height: calc(100vh - 55px);
+}
+
+
+@media only screen and (max-width: 1050px) {
+  .part-container {
+    width: calc(100vw - 50px);
+  }
+  .part-container-expanded {
+    width: calc(100vw - 50px);
+  }
+
+  .parent-expanded {
+    width: calc(100vw - 50px);
+  }
+
+  .parent {
+    width: calc(100vw - 50px);
+  }
 }

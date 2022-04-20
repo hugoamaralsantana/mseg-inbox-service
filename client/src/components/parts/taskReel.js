@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const TaskReel = (props) => {
   const data = props.data;
+  console.log(data.length)
   const favoritedOrder = favoriteOrder(data)
   const [dataList, updateTaskBoxOrder] = useState(favoritedOrder)
   let color;
@@ -33,22 +34,26 @@ const TaskReel = (props) => {
   }
 
   if (props.reelTitle === 'Pending') {
-    color = 'title gray';
+    color = 'title gray d-flex justify-content-between';
     action = 'Start';
   }
   else if (props.reelTitle === 'In Progress') {
-    color = 'title yellow';
+    color = 'title yellow d-flex justify-content-between';
     action = 'Continue';
   }
   else if (props.reelTitle === 'Completed') {
-    color = 'title green';
+    color = 'title green d-flex justify-content-between';
     action = 'Review';
   }
 
   return (
-    <div className="task-reel ml-3 mr-3 mb-1 text-white bg-darkest">
+    <div className="task-reel text-white bg-darkest">
       <div className={color}>
-        <h4 className="text-primary pl-2">{props.reelTitle}</h4>
+        <h4 className="text-primary pl-2 mb-0">{props.reelTitle}</h4>
+        <div id='task-count' className="d-flex align-items-center mr-3">
+          <img className="" src='/icons/card-icon.svg' alt='card' width={22} height={22}></img>
+          <h5 className="mb-0 text-primary">{data.length}</h5>
+        </div>
       </div>
       <div className="task-box-container">
         {dataList.map((task) =>
