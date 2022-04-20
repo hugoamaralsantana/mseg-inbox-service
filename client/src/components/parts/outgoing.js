@@ -11,6 +11,9 @@ const completedTaskReelURL = 'performanceReview/outgoing/completed';
 
 const Outgoing = (props) => {
     const [requestModalState, updateRequestModalState] = useState(false);
+    const pending = props.data !== undefined ? props.data.filter(task => task.status === 'pending') : []
+    const inProgress = props.data !== undefined ? props.data.filter(task => task.status === 'inProgress') : []
+    const completed = props.data !== undefined ? props.data.filter(task => task.status === 'completed') : []
 
     function showModal() {
         updateRequestModalState(true);
@@ -36,9 +39,9 @@ const Outgoing = (props) => {
                     
                     {/* these endpoints are passed to components where we will fetch data from the API later on*/}
                     <div className='task-reel-container bg-dark m-2'>
-                        <TaskReel source='outgoing' data={props.data.pending} type={props.type} reelTitle={props.reelItems[0]} user={props.user} endpoint={pendingTaskReelURL} />
-                        <TaskReel source='outgoing' data={props.data.inProgress} type={props.type} reelTitle={props.reelItems[1]} user={props.user} endpoint={inProgressTaskReelURL} />
-                        <TaskReel source='outgoing' data={props.data.completed} type={props.type} reelTitle={props.reelItems[2]} user={props.user} endpoint={completedTaskReelURL} />
+                        <TaskReel source='outgoing' data={pending} type={props.type} reelTitle={props.reelItems[0]} user={props.user} endpoint={pendingTaskReelURL} />
+                        <TaskReel source='outgoing' data={inProgress} type={props.type} reelTitle={props.reelItems[1]} user={props.user} endpoint={inProgressTaskReelURL} />
+                        <TaskReel source='outgoing' data={completed} type={props.type} reelTitle={props.reelItems[2]} user={props.user} endpoint={completedTaskReelURL} />
                     </div>
                 </div>
                 {requestModal}

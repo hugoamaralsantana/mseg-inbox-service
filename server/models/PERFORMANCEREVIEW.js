@@ -17,11 +17,6 @@ const performanceReviewSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    recipient_due_date: {
-        type: Date,
-        required: false,
-        default: null
-    },
     sender: {
         type: String,
         required: true
@@ -30,7 +25,7 @@ const performanceReviewSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    sender_due_date: {
+    due_date: {
         type: Date,
         required: false,
         default: null
@@ -80,7 +75,12 @@ const performanceReviewSchema = mongoose.Schema({
         required: false,
         default: ''
     },
-    favorited: {
+    sender_favorited: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    recipient_favorited: {
         type: Boolean,
         required: true,
         default: false,
@@ -93,10 +93,9 @@ const performanceReviewSchema = mongoose.Schema({
 //     "status": "inProgress",
 //     "recipient": "Jacob Matthews",
 //     "recipient_id": "6257a1fd43e724e24c03dd50",
-//     "recipient_due_date": null,
+//     "due_date": "2022-04-25",
 //     "sender": "Colby Jack",
 //     "sender_id": "6257a21d43e724e24c03dd55",
-//     "sender_due_date": null,
 //     "overall_comments": null,
 //     "recipient_comments": null,
 //     "sender_comments": null,
@@ -106,7 +105,8 @@ const performanceReviewSchema = mongoose.Schema({
 // 	   "kindness_comments": null,
 // 	   "delivery_score": null,
 // 	   "delivery_comments": null,
-//     "favorited": false
+//     "sender_favorited": false,
+//     "recipient_favorited": false,
 // }
 
 const PerformanceReview = mongoose.model("PerformanceReview", performanceReviewSchema);

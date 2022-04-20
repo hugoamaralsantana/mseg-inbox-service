@@ -17,11 +17,6 @@ const assignedTrainingSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    recipient_due_date: {
-        type: Date,
-        required: false,
-        default: null
-    },
     sender: {
         type: String,
         required: true
@@ -30,7 +25,7 @@ const assignedTrainingSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    sender_due_date: {
+    due_date: {
         type: Date,
         required: false,
         default: null
@@ -54,7 +49,12 @@ const assignedTrainingSchema = mongoose.Schema({
         required: true,
         default: false,
     },
-    favorited: {
+    sender_favorited: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    recipient_favorited: {
         type: Boolean,
         required: true,
         default: false,
@@ -64,18 +64,18 @@ const assignedTrainingSchema = mongoose.Schema({
 // JSON example body for POST
 // {
 //     "type": "assignedTraining",
-//     "status": "inProgress",
-//     "recipient": "Jacob Matthews",
+//     "status": "pending",
+//     "recipient": "Joe Burrow",
 //     "recipient_id": "625f267aa6aeb39ee40b7aa8",
-//     "recipient_due_date": null,
 //     "sender": "Colby Jack",
 //     "sender_id": "6257a21d43e724e24c03dd55",
-//     "sender_due_date": null,
+//     "due_date": "2022-04-25",
 //     "recipient_comments": null,
 //     "sender_comments": null,
 //     "training": "https://lab.github.com/",
 //     "is_completed": false,
-//     "favorited": false
+//     "sender_favorited": false,
+//     "recipient_favorited": false
 // }
 
 const AssignedTraining = mongoose.model("AssignedTraining", assignedTrainingSchema);

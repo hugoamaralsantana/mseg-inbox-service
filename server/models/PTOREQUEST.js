@@ -17,7 +17,7 @@ const PTORequestSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    recipient_due_date: {
+    due_date: {
         type: Date,
         required: false,
         default: null
@@ -29,11 +29,6 @@ const PTORequestSchema = mongoose.Schema({
     sender_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
-    },
-    sender_due_date: {
-        type: Date,
-        required: false,
-        default: null
     },
     recipient_comments: {
         type: String,
@@ -62,7 +57,12 @@ const PTORequestSchema = mongoose.Schema({
         required: true,
         default: false,
     },
-    favorited: {
+    sender_favorited: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    recipient_favorited: {
         type: Boolean,
         required: true,
         default: false,
@@ -75,16 +75,16 @@ const PTORequestSchema = mongoose.Schema({
 //     "status": "inProgress",
 //     "recipient": "Jacob Matthews",
 //     "recipient_id": "6257a1fd43e724e24c03dd50",
-//     "recipient_due_date": null,
+//     "due_date": null,
 //     "sender": "Colby Jack",
 //     "sender_id": "6257a21d43e724e24c03dd55",
-//     "sender_due_date": null,
 //     "recipient_comments": null,
 //     "sender_comments": null,
-// 	"pto_type": "vacation",
-// 	"pto_start": "11/20/22",
-// 	"pto_end": "11/21/22",
-//     "favorited": false
+// 	   "pto_type": "vacation",
+// 	   "pto_start": "11/20/22",
+// 	   "pto_end": "11/21/22",
+//     "sender_favorited": false
+//     "recipient_favorited": false
 // }
 
 const PTORequest = mongoose.model("PTORequest", PTORequestSchema);
