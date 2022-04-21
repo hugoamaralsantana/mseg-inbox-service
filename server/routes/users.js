@@ -16,6 +16,13 @@ const User = require('../models/USER');
       .catch(err => res.status(404).json({ error: 'No Users found' }));
   });
 
+  // login user (check if email and password matches in database)
+  router.post('/login', (req, res) => {
+    User.findOne({"email":req.body.email, "password": req.body.password})
+      .then(user => res.json(user))
+      .catch(err => res.status(404).json({ error: 'No Users found' }));
+  });
+  
   // get a user by id from database
   router.get('/:id', (req, res) => {
     console.log('hi2')
