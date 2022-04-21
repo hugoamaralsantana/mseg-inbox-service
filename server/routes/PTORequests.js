@@ -54,9 +54,9 @@ const PTORequest = require('../models/PTORequest');
     }),
     check('recipient').isLength({min : 1}),
     check('recipient_id').custom(recipient_id => mongoose.isValidObjectId(recipient_id)),
-    check('due_date').custom(recipient_due_date => {
-      const date = new Date(recipient_due_date);
-      return date instanceof Date && !isNaN(date.valueOf()) || recipient_due_date == null
+    check('due_date').custom(due_date => {
+      const date = new Date(due_date);
+      return date instanceof Date && !isNaN(date.valueOf()) || due_date == null
     }),
     check('sender').isLength({min : 1}),
     check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),

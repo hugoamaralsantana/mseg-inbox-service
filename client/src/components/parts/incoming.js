@@ -20,9 +20,9 @@ const Incoming = (props) => {
           </div>
           {/* these endpoints are passed to components where we will fetch data from the API later on*/}
           <div className='task-reel-container bg-dark mb-2'>
-              <TaskReel source='incoming' data={pending} type={props.type} reelTitle={props.reelItems[0]} user={props.user} endpoint={pendingTaskReelURL} />
-              <TaskReel source='incoming' data={inProgress} type={props.type} reelTitle={props.reelItems[1]} user={props.user} endpoint={inProgressTaskReelURL} />
-              <TaskReel source='incoming' data={completed} type={props.type} reelTitle={props.reelItems[2]} user={props.user} endpoint={completedTaskReelURL} />
+              <TaskReel source='incoming' data={pending} type={props.type} reelTitle={props.reelItems[0]} user={props.user} endpoint={pendingTaskReelURL} updateTask={props.updateTask}/>
+              <TaskReel source='incoming' data={inProgress} type={props.type} reelTitle={props.reelItems[1]} user={props.user} endpoint={inProgressTaskReelURL} updateTask={props.updateTask}/>
+              <TaskReel source='incoming' data={completed} type={props.type} reelTitle={props.reelItems[2]} user={props.user} endpoint={completedTaskReelURL} updateTask={props.updateTask}/>
           </div>
         </div>
     )

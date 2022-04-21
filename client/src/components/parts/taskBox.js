@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
 import React, { useState } from "react";
 import '../../styles/taskbox.css';
 import CompletePerformanceReviewModal from "../modals/completePerformance";
@@ -45,7 +46,7 @@ const TaskBox = (props) => {
 
   const taskBoxCSS = expanded ? 'task-box-expanded bg-secondary d-flex justify-content-between m-2 mb-0' : 'task-box bg-secondary d-flex justify-content-between m-2 mb-0';
   const expandedBoxCSS = expanded ? 'bg-secondary mt-1 ml-2 mr-2 mb-2' : 'expanded-none bg-secondary mt-1 ml-2 mr-2 mb-2'
-  const completeModal = props.type === 'performanceReview' ? <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal}/> :
+  const completeModal = props.type === 'performanceReview' ? <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal} data={props.data} updateTask={props.updateTask}/> :
                         props.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} userType={props.userType}/> :
                         <></>;
   const action = props.source === 'incoming' ? props.action : 

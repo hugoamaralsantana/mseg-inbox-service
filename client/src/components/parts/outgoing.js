@@ -23,7 +23,7 @@ const Outgoing = (props) => {
         updateRequestModalState(false);
     }
 
-    const requestModal = props.type === 'performanceReview' ? <RequestPerformanceReviewModal show={requestModalState} closeModal={closeModal}/> :
+    const requestModal = props.type === 'performanceReview' ? <RequestPerformanceReviewModal show={requestModalState} closeModal={closeModal} createTask={props.createTask}/> :
       props.type === 'PTORequest' ? <PTOModal show={requestModalState} closeModal={closeModal} user={props.user}/> :
       <AssignTrainingModal show={requestModalState} closeModal={closeModal} user={props.user}/>
 

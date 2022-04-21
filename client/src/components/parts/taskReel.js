@@ -163,6 +163,7 @@ const TaskReel = (props) => {
             action={action}
             userType={props.user}
             starTask={starTask}
+            updateTask={props.updateTask}
           />)
         }
       </div>
