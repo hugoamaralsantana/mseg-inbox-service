@@ -84,6 +84,7 @@ const PTORequest = require('../models/PTORequest');
     }),
   ], (req, res) => {
     const errors = validationResult(req);
+    console.log(errors)
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
@@ -129,7 +130,6 @@ const PTORequest = require('../models/PTORequest');
         response.incoming = reviews;
        PTORequest.find(outgoing_query)
         .then(review => {
-          console.debug(review)
           response.outgoing = review;
           return res.json(response);
         })

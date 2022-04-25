@@ -3,21 +3,16 @@ import axios from "axios";
 import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
 import PartContainer from "../parts/partContainer"
-import mockData from "../../mockData.js";
 import moment from 'moment';
 
-const performance_review_data = mockData.data.performanceReviewPage;
-const user_type = mockData.user_type;
-const user_name = mockData.user_name
-
-const joeFirstName = 'Joe'
-const joeLastName = 'Burrow'
-const joeID = '6261c1d13911829f3b31b47a'
-const dickFirstName = 'Dick'
-const dickLastName = 'Sheeney'
-const dickID = '6261c1c33911829f3b31b476'
+console.log(JSON.parse(localStorage.getItem('userData')))
 
 const PerformanceReview = (props) => {
+  const userData = JSON.parse(localStorage.getItem('userData'))
+  const firstName = userData.data.first_name
+  const lastName = userData.data.last_name
+  const id = userData.data._id
+  const userType = userData.data.user_type
   const [expanded, updateState] = useState(true);
   // const [modalState, updateModalState] = useState(false);
   const [performanceReviewData, setPerformanceReviewData] = useState({});
@@ -29,7 +24,7 @@ const PerformanceReview = (props) => {
 
   useEffect(() => {
     async function update() {
-    await axios.get('http://localhost:8082/performanceReviews/userData/6261c1c33911829f3b31b476')
+    await axios.get(`http://localhost:8082/performanceReviews/userData/${id}`)
       .then(res => {
         const incoming = res.data.incoming
         const outgoing = res.data.outgoing
@@ -55,8 +50,8 @@ const PerformanceReview = (props) => {
       .catch(err => console.log(err))
   }
     update()
-  }, [effectCheck])
-//SCORES GOTTA BE NUMBERS
+  }, [effectCheck, id])
+
   async function updateTask(status, task, data) {
     await axios.put(`http://localhost:8082/performanceReviews/${task._id}`, {
         "type": task.type,
@@ -85,7 +80,6 @@ const PerformanceReview = (props) => {
     })
   }
 
-  console.log(typeof(moment().add(14, 'days').format('YYYY-MM-DD')))
   async function createTask(data) {
     console.log(data)
     await axios.post('http://localhost:8082/performanceReviews/', {
@@ -94,8 +88,8 @@ const PerformanceReview = (props) => {
         "recipient": data.recipient,
         "recipient_id": data.recipient_id,
         "due_date": moment().add(14, 'days').format('YYYY-MM-DD'),
-        "sender": dickFirstName + ' ' + dickLastName,
-        "sender_id": dickID,
+        "sender": firstName + ' ' + lastName,
+        "sender_id": id,
         "overall_comments": null,
         "recipient_comments": null,
         "sender_comments": null,
@@ -139,7 +133,7 @@ const PerformanceReview = (props) => {
       <NavBar title="Performance Review" showBox={showBox}/> 
       <div className="d-inline-flex overflow-hidden">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
-        <PartContainer data={performanceReviewData} type='performanceReview' reelItems={reelItems} expanded={expanded} user={user_type} user_name={joeFirstName + ' ' + joeLastName} containerCount='2' boxState={boxState} closeBox={closeBox} updateTask={updateTask} createTask={createTask}/>
+        <PartContainer data={performanceReviewData} type='performanceReview' reelItems={reelItems} expanded={expanded} userType={userType} user_name={firstName + ' ' + lastName} containerCount='2' boxState={boxState} closeBox={closeBox} updateTask={updateTask} createTask={createTask}/>
       </div>
     </div>
   )

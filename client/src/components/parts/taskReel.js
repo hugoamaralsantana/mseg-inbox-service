@@ -161,7 +161,7 @@ const TaskReel = (props) => {
             type={props.type}
             reelTitle={props.reelTitle}
             action={action}
-            userType={props.user}
+            userType={props.userType}
             starTask={starTask}
             updateTask={props.updateTask}
           />)

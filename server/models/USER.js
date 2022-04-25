@@ -25,6 +25,10 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
+    manager_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+    },
     company_name: {
         type: String,
         required: true,
@@ -48,6 +52,7 @@ const userSchema = mongoose.Schema({
 //     "last_name": "Burrow",
 //     "email": joeBurrow@ligma.com,
 //     "company_id": "6257a1fd43e724e24c03dd50",
+//     "manager_id": 
 //     "company_name": "Cool Co",
 //     "position_title": null,
 //     "start_date": null,

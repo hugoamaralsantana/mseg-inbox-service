@@ -37,7 +37,10 @@ const User = require('../models/USER');
     console.log(req.params.email)
     User.find({'email': req.params.email})
       .then(user => res.json(user))
-      .catch(err => res.status(404).json({ error: `No User found at ${req.params.name}` }));
+      .catch(err => {
+        console.log(err)
+        res.status(404).json({ error: `No User found at ${req.params.name}` });
+      })
   });
 
   // create a user and insert into database
@@ -49,6 +52,13 @@ const User = require('../models/USER');
     check('first_name').isLength({min : 1}),
     check('last_name').isLength({min : 1}),
     check('email').isEmail(),
+    check('email').custom(async(email) => {
+      const emailCheck = await User.find({'email': email})
+      console.log(emailCheck)
+      if (emailCheck.length > 0) {
+        return Promise.reject()
+      }
+    }),
     // check to see if company exists in database
     check('company_id').custom(async(company_id) => {
         if (!mongoose.isValidObjectId(company_id)) {
