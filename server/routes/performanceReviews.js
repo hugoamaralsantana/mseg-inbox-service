@@ -56,9 +56,9 @@ const PerformanceReview = require('../models/PERFORMANCEREVIEW');
     check('recipient_id').custom(recipient_id => mongoose.isValidObjectId(recipient_id)),
     check('sender').isLength({min : 1}),
     check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),
-    check('due_date').custom(sender_due_date => {
-      const date = new Date(sender_due_date);
-      return date instanceof Date && !isNaN(date.valueOf()) || sender_due_date == null
+    check('due_date').custom(due_date => {
+      const date = new Date(due_date);
+      return date instanceof Date && !isNaN(date.valueOf()) || due_date == null
     }),
     check('recipient_comments').isLength({max: 200}),
     check('sender_comments').isLength({max: 200}),

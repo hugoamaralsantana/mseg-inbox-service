@@ -11,10 +11,10 @@ import PartContainer from "../parts/partContainer"
 
 const AssignedTraining = (props) => {
   const userData = JSON.parse(localStorage.getItem('userData'))
-  const firstName = userData.data.first_name
-  const lastName = userData.data.last_name
-  const id = userData.data._id
-  const userType = userData.data.user_type
+  const firstName = userData.first_name
+  const lastName = userData.last_name
+  const id = userData._id
+  const userType = userData.user_type
   const [assignedTrainingData, setAssignedTrainingData] = useState({});
   const [expanded, updateState] = useState(true);
   const [boxState, updateBoxState] = useState(false);
