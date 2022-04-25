@@ -8,11 +8,11 @@ import moment from "moment";
 
 const PTORequestPage = (props) => {
   const userData = JSON.parse(localStorage.getItem('userData'))
-  const firstName = userData.data.first_name
-  const lastName = userData.data.last_name
-  const id = userData.data._id
-  const userType = userData.data.user_type
-  const managerid = userData.data.manager_id
+  const firstName = userData.first_name
+  const lastName = userData.last_name
+  const id = userData._id
+  const userType = userData.user_type
+  const managerid = userData.manager_id
   const [expanded, updateState] = useState(true);
   const reelItems = ['Pending', 'In Progress', 'Completed']
   const [PTORequestData, setPTORequestData] = useState({});

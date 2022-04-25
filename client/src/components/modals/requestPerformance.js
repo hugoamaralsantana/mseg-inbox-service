@@ -19,6 +19,7 @@ const RequestPerformanceReviewModal = (props) => {
                'recipient_id': res.data[0]._id
            }
             props.createTask(data)
+            props.closeModal()
         })
     }
 
@@ -37,7 +38,7 @@ const RequestPerformanceReviewModal = (props) => {
                         <textarea className='text ml-3 mr-3' type="text" id="message-text" name="message" rows='12' placeholder='Write anything you want the employee you are requesting a review from to know...'></textarea>
                     </div>
                     <div className='submit bg-primary mr-2 mt-2 text-center d-flex'>
-                        <input className='submit-button bg-primary text-white' type="submit" value="Send"></input>
+                        <div className='submit-button bg-primary text-white' onClick={handleExit}>Send</div>
                     </div>
                 </form>
             </div>

@@ -10,16 +10,17 @@ const PTOModal = (props) => {
     const showHideClassName = props.show ? "modal display-block" : "modal display-none";
 
     function handleChange(e) {
-        if (props.data.status === 'completed') {alert('Cannot edit once submitted'); return;}
         if (e.target.id === 'reason') {updateReason(e.target.value)}
         else if (e.target.id === 'start-date') {updateStartDate(e.target.value)}
         else if (e.target.id === 'end-date') {updateEndDate(e.target.value)}
         else if (e.target.id === 'notes') {updateNotes(e.target.value)}
-        else if (e.target.id === 'answer') {updateAnswer(e.target.value)}
+        else if (e.target.id === 'answer') {
+            if (props.data.status === 'completed') {alert('Cannot edit once submitted'); return;}
+            updateAnswer(e.target.value)
+        }
     }
 
     function handleExit(str) {
-        if (props.data.status === 'completed') {props.closeModal(); return}
         const data = {
             "sender_comments": notes,
             "recipient_comments": answer,
@@ -28,15 +29,19 @@ const PTOModal = (props) => {
             "pto_end": endDate.substring(0, 10),
         }
         if (str === 'exit') {
-            props.updateTask('exit', props.data, data)
             props.closeModal()
+            if (props.data.status !== 'completed') {
+                props.updateTask('submit', props.data, data)
+            }
             return
         } else if (str === 'submit') {
             props.updateTask('submit', props.data, data)
+            props.closeModal()
             return
         }
         console.log('check')
         props.createTask(data)
+        props.closeModal()
     }
 
     const request = (
@@ -44,7 +49,7 @@ const PTOModal = (props) => {
             <div className="main d-flex flex-column">
                 <div className='exit text-end pr-2 pt-1 align-self-end text-black' onClick={props.closeModal}>X</div>
                 <div className='title ml-3 text-primary'><h3>Employee PTO Request</h3></div>
-                <form onSubmit={handleExit}>
+                <form>
                     <div className='reason d-flex flex-column'>
                         <label className='ml-3 mt-2 text-black' htmlFor="reason"><h4 className='mb-0'>Reason:</h4></label>
                         <input className='long-text ml-3' list='reasons' name='reasons' value={reason} id='reason' required placeholder='Select a reason for request' onChange={handleChange}></input>
@@ -70,7 +75,7 @@ const PTOModal = (props) => {
                         <textarea className='long-text ml-3 mr-3' type="text" id="notes" name="notes" rows='4' col='40' value={notes} onChange={handleChange} placeholder='Add some additional details about the nature of this request'></textarea>
                     </div>
                     <div className='submit bg-primary mr-2 mt-1 text-center d-flex'>
-                        <input className='submit-button bg-primary text-white' type="submit" value="Send"></input>
+                        <div className='submit-button bg-primary text-white' onClick={handleExit}>Send</div>
                     </div>
                 </form>
             </div>

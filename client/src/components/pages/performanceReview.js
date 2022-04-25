@@ -9,10 +9,10 @@ console.log(JSON.parse(localStorage.getItem('userData')))
 
 const PerformanceReview = (props) => {
   const userData = JSON.parse(localStorage.getItem('userData'))
-  const firstName = userData.data.first_name
-  const lastName = userData.data.last_name
-  const id = userData.data._id
-  const userType = userData.data.user_type
+  const firstName = userData.first_name
+  const lastName = userData.last_name
+  const id = userData._id
+  const userType = userData.user_type
   const [expanded, updateState] = useState(true);
   // const [modalState, updateModalState] = useState(false);
   const [performanceReviewData, setPerformanceReviewData] = useState({});

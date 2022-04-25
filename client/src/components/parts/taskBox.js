@@ -99,7 +99,7 @@ const TaskBox = (props) => {
               {props.source === 'outgoing' ? props.data.recipient: props.data.sender}
             </h6>
             <p className="mb-0 date">Due: {new Date(props.data.due_date).toLocaleDateString("en-US")}</p>
-            <h7 className={`start display-${props.data.status==='completed' ? 'none' : ''}`} onClick={showModal}>{action}</h7>
+            <h7 className={`start display-${props.data.status==='completed' && props.type === 'assignedTraining' ? 'none' : ''}`} onClick={showModal}>{action}</h7>
             <h7 className={`start ml-2 display-${props.type !== 'assignedTraining' || props.data.status !== 'inProgress'  ? 'none' : ''}`} onClick={finishTraining}>Finish</h7>
           </div>
           <div className="right-side">
