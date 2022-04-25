@@ -26,7 +26,7 @@ const Login = () => {
           }
           console.log(response.data)
           // save user data in local storage
-          localStorage.setItem("userData", JSON.stringify(response));
+          localStorage.setItem("userData", JSON.stringify(response.data));
           // route to assigned training page for now
           window.location.href = '/assignedTraining'
         })
