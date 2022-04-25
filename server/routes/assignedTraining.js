@@ -35,7 +35,8 @@ const AssignedTraining = require('../models/ASSIGNEDTRAINING');
     check('sender_comments').isLength({max: 200}),
     check('training').isURL(),
     check('is_completed').custom(is_completed => is_completed === false),
-    check('favorited').custom(favorited => favorited === false),
+    check('sender_favorited').custom(favorited => favorited === false),
+    check('recipient_favorited').custom(favorited => favorited === false),
   ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -54,13 +55,9 @@ const AssignedTraining = require('../models/ASSIGNEDTRAINING');
     }),
     check('recipient').isLength({min : 1}),
     check('recipient_id').custom(recipient_id => mongoose.isValidObjectId(recipient_id)),
-    check('recipient_due_date').custom(recipient_due_date => {
-      const date = new Date(recipient_due_date);
-      return date instanceof Date && !isNaN(date.valueOf()) || recipient_due_date == null
-    }),
     check('sender').isLength({min : 1}),
     check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),
-    check('sender_due_date').custom(sender_due_date => {
+    check('due_date').custom(sender_due_date => {
       const date = new Date(sender_due_date);
       return date instanceof Date && !isNaN(date.valueOf()) || sender_due_date == null
     }),
@@ -68,7 +65,8 @@ const AssignedTraining = require('../models/ASSIGNEDTRAINING');
     check('sender_comments').isLength({max: 200}),
     check('training').isURL(),
     check('is_completed').isBoolean(),
-    check('favorited').isBoolean(),
+    check('sender_favorited').isBoolean(),
+    check('recipient_favorited').isBoolean(),
   ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -96,6 +94,26 @@ const AssignedTraining = require('../models/ASSIGNEDTRAINING');
       .then(trainings => {
         response[type] = trainings;
         return res.json(response);
+      })
+      .catch(err => res.status(404).json({ error: `No Trainings found at ${req.params.id}` }));
+  });
+
+  router.get('/userData/:userId', (req, res) => {
+    // if we want incoming -> we look for recipient id
+    // if we want outgoing -> we look for sender id
+    const userId = req.params.userId;
+    if (!userId) {
+      return res.json({error: "An error occured getting user data"});
+    }
+    const response = {incoming: [], outgoing: []}
+    AssignedTraining.find({recipient_id: userId})
+      .then(trainings => {
+        response['incoming'] = trainings;
+        AssignedTraining.find({sender_id: userId})
+          .then(trainings => {
+            response['outgoing'] = trainings;
+            return res.json(response);
+        })
       })
       .catch(err => res.status(404).json({ error: `No Trainings found at ${req.params.id}` }));
   });

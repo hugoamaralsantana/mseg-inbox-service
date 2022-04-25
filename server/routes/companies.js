@@ -23,9 +23,9 @@ router.get('/test', (req, res) => res.send('company route testing!'));
   // create a company and insert into database
   // if company already exists, nothing happens
   router.post('/', [
-    check('name').isLength({min : 20}).isAlphanumeric(),
+    check('name').isLength({min : 5}).isAlphanumeric(),
   ],(req, res) => {
-    Company.findOneAndUpdate(req.body, {upsert:true})
+    Company.create(req.body)
      .then(company => res.json(company))
      .catch(err => res.status(400).json({ error: `Unable to add this company ${req.body}` }));
   });

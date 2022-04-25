@@ -4,6 +4,7 @@ import '../../styles/taskbox.css';
 import CompletePerformanceReviewModal from "../modals/completePerformance";
 import PTOModal from "../modals/PTO";
 
+
 const TaskBox = (props) => {
   const [completeModalState, updateCompleteModalState] = useState(false);
   const [requestModalState, updateRequestModalState] = useState(false);
@@ -11,6 +12,8 @@ const TaskBox = (props) => {
   const [remindExpand, updateRemind] = useState(false)
   const [dueDateExpand, updatedueDate] = useState(false)
   const [isStarred, updateStar] = useState(false);
+
+  const starFavorited = props.source === 'incoming' ? props.data.recipient_favorited : props.data.sender_favorited
 
 
   function showModal(e) {
@@ -36,12 +39,12 @@ const TaskBox = (props) => {
 
   function clickStar(e) {
     updateStar(!isStarred);
-    props.starTask(props.data.task_id)
+    props.starTask(props.data)
     e.stopPropagation();
   }
 
   const taskBoxCSS = expanded ? 'task-box-expanded bg-secondary d-flex justify-content-between m-2 mb-0' : 'task-box bg-secondary d-flex justify-content-between m-2 mb-0';
-  const expandedBoxCSS = expanded ? 'expanded bg-secondary mt-1 ml-2 mr-2 mb-2' : 'expanded-none bg-secondary mt-1 ml-2 mr-2 mb-2'
+  const expandedBoxCSS = expanded ? 'bg-secondary mt-1 ml-2 mr-2 mb-2' : 'expanded-none bg-secondary mt-1 ml-2 mr-2 mb-2'
   const completeModal = props.type === 'performanceReview' ? <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal}/> :
                         props.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} userType={props.userType}/> :
                         <></>;
@@ -71,26 +74,25 @@ const TaskBox = (props) => {
   </div> : ''
 
   const Star = () => {
-    return isStarred 
+    return starFavorited
       ? <img id="star-button" className="star-button" src='/icons/star-button-filled.svg' alt='' onClick={clickStar}></img>
       : <img id="star-button" className="star-button" src='/icons/star-button-unfilled.svg' alt='' onClick={clickStar}></img>;
   }
-
   return (
     <div>
       <div className={taskBoxCSS} onClick={expandBox}>
           <div className="left-side pl-2">
             <h6 className="mb-0 lead address">
               {props.source === 'outgoing' ? 'To: ': 'From: '} 
-              {props.data.recipient}
+              {props.source === 'outgoing' ? props.data.recipient: props.data.sender}
             </h6>
-            <p className="mb-0 date">Recieved: {props.data.date.format('MM/DD/YYYY')}</p>
+            <p className="mb-0 date">Due: {new Date(props.data.due_date).toLocaleDateString("en-US")}</p>
             <h7 className="start" onClick={showModal}>{action}</h7>
           </div>
           <div className="right-side">
             <Star/>
             <div className="profile-icon">
-              <div className="profile-icon-initial">{props.data.recipient[0]}</div>
+              <div className="profile-icon-initial">{props.source === 'outgoing' ? props.data.recipient[0]: props.data.sender[0]}</div>
             </div>
           </div>
       </div>

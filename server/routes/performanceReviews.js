@@ -34,7 +34,8 @@ const PerformanceReview = require('../models/PERFORMANCEREVIEW');
     check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),
     check('recipient_comments').isLength({max: 200}),
     check('sender_comments').isLength({max: 200}),
-    check('favorited').custom(favorited => favorited === false),
+    check('sender_favorited').custom(favorited => favorited === false),
+    check('recipient_favorited').custom(favorited => favorited === false),
   ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -53,19 +54,16 @@ const PerformanceReview = require('../models/PERFORMANCEREVIEW');
     }),
     check('recipient').isLength({min : 1}),
     check('recipient_id').custom(recipient_id => mongoose.isValidObjectId(recipient_id)),
-    check('recipient_due_date').custom(recipient_due_date => {
-      const date = new Date(recipient_due_date);
-      return date instanceof Date && !isNaN(date.valueOf()) || recipient_due_date == null
-    }),
     check('sender').isLength({min : 1}),
     check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),
-    check('sender_due_date').custom(sender_due_date => {
-      const date = new Date(sender_due_date);
-      return date instanceof Date && !isNaN(date.valueOf()) || sender_due_date == null
+    check('due_date').custom(due_date => {
+      const date = new Date(due_date);
+      return date instanceof Date && !isNaN(date.valueOf()) || due_date == null
     }),
     check('recipient_comments').isLength({max: 200}),
     check('sender_comments').isLength({max: 200}),
-    check('favorited').isBoolean(),
+    check('sender_favorited').isBoolean(),
+    check('recipient_favorited').isBoolean(),
     check('overall_comments').custom(overall_comments => !overall_comments || overall_comments.length < 200),
     check('growth_score').custom(growth_score => !growth_score || [1, 2, 3, 4, 5].includes(growth_score)),
     check('growth_comments').custom(growth_comments => !growth_comments || growth_comments.length < 200),

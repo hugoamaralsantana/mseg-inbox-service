@@ -34,7 +34,8 @@ const PTORequest = require('../models/PTORequest');
     check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),
     check('recipient_comments').isLength({max: 200}),
     check('sender_comments').isLength({max: 200}),
-    check('favorited').custom(favorited => favorited === false),
+    check('sender_favorited').custom(favorited => favorited === false),
+    check('recipient_favorited').custom(favorited => favorited === false),
     check('pto_start').custom(pto_start => {
       const date = new Date(pto_start);
       return date instanceof Date && !isNaN(date.valueOf())
@@ -43,6 +44,7 @@ const PTORequest = require('../models/PTORequest');
       const date = new Date(pto_end);
       return date instanceof Date && !isNaN(date.valueOf())
     }),
+
   ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -61,19 +63,16 @@ const PTORequest = require('../models/PTORequest');
     }),
     check('recipient').isLength({min : 1}),
     check('recipient_id').custom(recipient_id => mongoose.isValidObjectId(recipient_id)),
-    check('recipient_due_date').custom(recipient_due_date => {
-      const date = new Date(recipient_due_date);
-      return date instanceof Date && !isNaN(date.valueOf()) || recipient_due_date == null
+    check('due_date').custom(due_date => {
+      const date = new Date(due_date);
+      return date instanceof Date && !isNaN(date.valueOf()) || due_date == null
     }),
     check('sender').isLength({min : 1}),
     check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),
-    check('sender_due_date').custom(sender_due_date => {
-      const date = new Date(sender_due_date);
-      return date instanceof Date && !isNaN(date.valueOf()) || sender_due_date == null
-    }),
     check('recipient_comments').isLength({max: 200}),
     check('sender_comments').isLength({max: 200}),
-    check('favorited').isBoolean(),
+    check('sender_favorited').isBoolean(),
+    check('recipient_favorited').isBoolean(),
     check('pto_start').custom(pto_start => {
       const date = new Date(pto_start);
       return date instanceof Date && !isNaN(date.valueOf())
@@ -111,6 +110,35 @@ const PTORequest = require('../models/PTORequest');
         return res.json(response);
       })
       .catch(err => res.status(404).json({ error: `No PTOs found at ${req.params.id}` }));
+  });
+
+
+  router.get('/userData/:userId', (req, res) => {
+    // if we want incoming -> we look for recipient id
+    // if we want outgoing -> we look for sender id
+    const userId = req.params.userId;
+    if (!userId) {
+      return res.json({error: "An error occured getting user data"});
+    }
+    const response = {incoming: [], outgoing: []}
+    const incoming_query = {recipient_id: userId};
+    const outgoing_query = {sender_id: userId};
+    try {
+      PTORequest.find(incoming_query)
+      .then(reviews => {
+        response.incoming = reviews;
+       PTORequest.find(outgoing_query)
+        .then(review => {
+          console.debug(review)
+          response.outgoing = review;
+          return res.json(response);
+        })
+      })
+      .catch(err => res.status(404).json({ error: 'Error getting data for user' }));
+    }
+    catch {
+      return res.json({error: "An error occured getting user data"});
+    }
   });
 
   router.delete('/:PTORequestId', (req, res) => {
