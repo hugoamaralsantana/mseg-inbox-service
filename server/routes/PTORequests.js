@@ -44,7 +44,6 @@ const PTORequest = require('../models/PTORequest');
       const date = new Date(pto_end);
       return date instanceof Date && !isNaN(date.valueOf())
     }),
-
   ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -73,6 +72,8 @@ const PTORequest = require('../models/PTORequest');
     check('sender_comments').isLength({max: 200}),
     check('sender_favorited').isBoolean(),
     check('recipient_favorited').isBoolean(),
+    check('recipient_comments').isLength({max: 200}),
+    check('sender_comments').isLength({max: 200}),
     check('pto_start').custom(pto_start => {
       const date = new Date(pto_start);
       return date instanceof Date && !isNaN(date.valueOf())
@@ -83,6 +84,7 @@ const PTORequest = require('../models/PTORequest');
     }),
   ], (req, res) => {
     const errors = validationResult(req);
+    console.log(errors)
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
@@ -112,7 +114,6 @@ const PTORequest = require('../models/PTORequest');
       .catch(err => res.status(404).json({ error: `No PTOs found at ${req.params.id}` }));
   });
 
-
   router.get('/userData/:userId', (req, res) => {
     // if we want incoming -> we look for recipient id
     // if we want outgoing -> we look for sender id
@@ -129,7 +130,6 @@ const PTORequest = require('../models/PTORequest');
         response.incoming = reviews;
        PTORequest.find(outgoing_query)
         .then(review => {
-          console.debug(review)
           response.outgoing = review;
           return res.json(response);
         })

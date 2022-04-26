@@ -1,4 +1,4 @@
 
 {
-    "mongoURI": "enter db info here"
+    "mongoURI": "mongodb+srv://Ggarber:Greggar420@cluster0.wlv4a.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }

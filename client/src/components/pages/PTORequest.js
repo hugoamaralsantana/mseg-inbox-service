@@ -4,21 +4,26 @@ import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
 import PartContainer from "../parts/partContainer"
 import mockData from "../../mockData.js";
-
-const pto_request_data = mockData.data.PTORequestPage;
-const user_type = mockData.user_type;
-const user_name = mockData.user_name
+import moment from "moment";
 
 const PTORequestPage = (props) => {
+  const userData = JSON.parse(localStorage.getItem('userData'))
+  const firstName = userData.first_name
+  const lastName = userData.last_name
+  const id = userData._id
+  const userType = userData.user_type
+  const managerid = userData.manager_id
   const [expanded, updateState] = useState(true);
   const reelItems = ['Pending', 'In Progress', 'Completed']
-  const user = user_type;
   const [PTORequestData, setPTORequestData] = useState({});
   const [boxState, updateBoxState] = useState(false);
+  const [effectCheck, updateCheck] = useState(false)
+
+  console.log(userData)
 
   useEffect(() => {
     async function update() {
-    await axios.get('http://localhost:8082/PTORequests/userData/625f267aa6aeb39ee40b7aa8')
+    await axios.get(`http://localhost:8082/PTORequests/userData/${id}`)
       .then(res => {
         console.log(res.data)
         const incoming = res.data.incoming
@@ -45,7 +50,60 @@ const PTORequestPage = (props) => {
       .catch(err => console.log(err))
   }
     update()
-  }, [])
+  }, [effectCheck, id])
+
+  async function updateTask(status, task, data) {
+    console.log(data)
+    console.log(status)
+    console.log(task)
+    await axios.put(`http://localhost:8082/PTORequests/${task._id}`, {
+      "type": "PTORequest",
+      "status": status === 'exit' ? 'inProgress' : status === 'submit' ? 'completed' : 'pending',
+      "recipient": task.recipient,
+      "recipient_id": task.recipient_id,
+      "due_date": task.due_date,
+      "sender": task.sender,
+      "sender_id": task.sender_id,
+      "recipient_comments": status === 'exit' || status === 'submit' ? data.recipient_comments : task.recipient_comments,
+      "sender_comments": task.sender_comments,
+      "pto_type": task.pto_type,
+      "pto_start": task.pto_start,
+      "pto_end": task.pto_end,
+      "sender_favorited": task.sender_favorited,
+      "recipient_favorited": task.recipient_favorited
+    })
+    .then(res => {
+      if (effectCheck) {updateCheck(false)}
+      else updateCheck(true)
+    })
+  }
+
+  async function createTask(data) {
+    await axios.get(`http://localhost:8082/users/${managerid}`)
+    .then(async (res) => {
+      console.log(res.data)
+      await axios.post('http://localhost:8082/PTORequests/', {
+        "type": "PTORequest",
+        "status": "pending",
+        "recipient": res.data.first_name + ' ' + res.data.last_name,
+        "recipient_id": managerid,
+        "due_date": "2022-04-25",
+        "sender": firstName + ' ' + lastName,
+        "sender_id": id,
+        "recipient_comments": null,
+        "sender_comments": data.sender_comments,
+        "pto_type": data.pto_type,
+        "pto_start": data.pto_start,
+        "pto_end": data.pto_end,
+        "sender_favorited": false,
+        "recipient_favorited": false
+      })
+      .then(res => {
+        if (effectCheck) {updateCheck(false)}
+        else updateCheck(true)
+      })
+    })
+  }
 
 
   function showBox() {
@@ -69,7 +127,7 @@ const PTORequestPage = (props) => {
       <NavBar title="PTO Request" showBox={showBox}/> 
       <div className="d-flex">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
-        <PartContainer data={PTORequestData} type='PTORequest' reelItems={reelItems} expanded={expanded} user={user} user_name={user_name} containerCount='1' boxState={boxState} closeBox={closeBox}/>
+        <PartContainer data={PTORequestData} type='PTORequest' reelItems={reelItems} expanded={expanded} userType={userType} user_name={firstName + ' ' + lastName} containerCount='1' boxState={boxState} closeBox={closeBox} updateTask={updateTask} createTask={createTask}/>
       </div>
     </div>
   )

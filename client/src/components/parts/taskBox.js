@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
 import React, { useState } from "react";
 import '../../styles/taskbox.css';
 import CompletePerformanceReviewModal from "../modals/completePerformance";
@@ -17,8 +18,19 @@ const TaskBox = (props) => {
 
 
   function showModal(e) {
-    updateCompleteModalState(true)
-    e.stopPropagation();
+    if (props.type === 'assignedTraining'){
+      props.updateTask('inProgress', props.data)
+      //open new link
+      window.open(props.data.training);
+    }
+    else {
+      updateCompleteModalState(true)
+      e.stopPropagation();
+    }
+  }
+
+  function finishTraining() {
+    props.updateTask('completed', props.data)
   }
 
   function closeModal() {
@@ -45,8 +57,8 @@ const TaskBox = (props) => {
 
   const taskBoxCSS = expanded ? 'task-box-expanded bg-secondary d-flex justify-content-between m-2 mb-0' : 'task-box bg-secondary d-flex justify-content-between m-2 mb-0';
   const expandedBoxCSS = expanded ? 'bg-secondary mt-1 ml-2 mr-2 mb-2' : 'expanded-none bg-secondary mt-1 ml-2 mr-2 mb-2'
-  const completeModal = props.type === 'performanceReview' ? <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal}/> :
-                        props.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} userType={props.userType}/> :
+  const completeModal = props.type === 'performanceReview' ? <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal} data={props.data} updateTask={props.updateTask}/> :
+                        props.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} userType={props.userType + '-complete'} data={props.data} updateTask={props.updateTask}/> :
                         <></>;
   const action = props.source === 'incoming' ? props.action : 
                  props.reelTitle === 'Completed' ? props.action : ''
@@ -87,7 +99,8 @@ const TaskBox = (props) => {
               {props.source === 'outgoing' ? props.data.recipient: props.data.sender}
             </h6>
             <p className="mb-0 date">Due: {new Date(props.data.due_date).toLocaleDateString("en-US")}</p>
-            <h7 className="start" onClick={showModal}>{action}</h7>
+            <h7 className={`start display-${props.data.status==='completed' && props.type === 'assignedTraining' ? 'none' : ''}`} onClick={showModal}>{action}</h7>
+            <h7 className={`start ml-2 display-${props.type !== 'assignedTraining' || props.data.status !== 'inProgress'  ? 'none' : ''}`} onClick={finishTraining}>Finish</h7>
           </div>
           <div className="right-side">
             <Star/>
