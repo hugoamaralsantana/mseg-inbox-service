@@ -9,7 +9,9 @@ const completedTaskReelURL = 'performanceReview/incoming/completed';
 
 
 const Incoming = (props) => {
-  console.log(props.data.pending)
+  const pending = props.data !== undefined ? props.data.filter(task => task.status === 'pending') : []
+  const inProgress = props.data !== undefined ? props.data.filter(task => task.status === 'inProgress') : []
+  const completed = props.data !== undefined ? props.data.filter(task => task.status === 'completed') : []
   const incomingCSS = props.containerCount === '1' ? "incoming-expanded d-flex bg-dark ml-3 mr-3 mb-2 flex-column justify-content-around" : "incoming d-flex bg-dark ml-3 mr-3 mb-2 flex-column justify-content-around"
     return (
         <div className={incomingCSS}>
@@ -18,9 +20,9 @@ const Incoming = (props) => {
           </div>
           {/* these endpoints are passed to components where we will fetch data from the API later on*/}
           <div className='task-reel-container bg-dark mb-2'>
-              <TaskReel source='incoming' data={props.data.pending} type={props.type} reelTitle={props.reelItems[0]} user={props.user} endpoint={pendingTaskReelURL} />
-              <TaskReel source='incoming' data={props.data.inProgress} type={props.type} reelTitle={props.reelItems[1]} user={props.user} endpoint={inProgressTaskReelURL} />
-              <TaskReel source='incoming' data={props.data.completed} type={props.type} reelTitle={props.reelItems[2]} user={props.user} endpoint={completedTaskReelURL} />
+              <TaskReel source='incoming' data={pending} type={props.type} reelTitle={props.reelItems[0]} userType={props.userType} endpoint={pendingTaskReelURL} updateTask={props.updateTask}/>
+              <TaskReel source='incoming' data={inProgress} type={props.type} reelTitle={props.reelItems[1]} userType={props.userType} endpoint={inProgressTaskReelURL} updateTask={props.updateTask}/>
+              <TaskReel source='incoming' data={completed} type={props.type} reelTitle={props.reelItems[2]} userType={props.userType} endpoint={completedTaskReelURL} updateTask={props.updateTask}/>
           </div>
         </div>
     )

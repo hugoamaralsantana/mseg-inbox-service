@@ -11,6 +11,9 @@ const completedTaskReelURL = 'performanceReview/outgoing/completed';
 
 const Outgoing = (props) => {
     const [requestModalState, updateRequestModalState] = useState(false);
+    const pending = props.data !== undefined ? props.data.filter(task => task.status === 'pending') : []
+    const inProgress = props.data !== undefined ? props.data.filter(task => task.status === 'inProgress') : []
+    const completed = props.data !== undefined ? props.data.filter(task => task.status === 'completed') : []
 
     function showModal() {
         updateRequestModalState(true);
@@ -20,9 +23,9 @@ const Outgoing = (props) => {
         updateRequestModalState(false);
     }
 
-    const requestModal = props.type === 'performanceReview' ? <RequestPerformanceReviewModal show={requestModalState} closeModal={closeModal}/> :
-      props.type === 'PTORequest' ? <PTOModal show={requestModalState} closeModal={closeModal} user={props.user}/> :
-      <AssignTrainingModal show={requestModalState} closeModal={closeModal} user={props.user}/>
+    const requestModal = props.type === 'performanceReview' ? <RequestPerformanceReviewModal show={requestModalState} closeModal={closeModal} createTask={props.createTask}/> :
+      props.type === 'PTORequest' ? <PTOModal show={requestModalState} closeModal={closeModal} userType={props.userType} createTask={props.createTask}/> :
+      <AssignTrainingModal show={requestModalState} closeModal={closeModal} userType={props.userType} createTask={props.createTask}/>
 
     const outgoingCSS = props.containerCount === '1' ? 'outgoing-expanded d-flex bg-dark ml-3 mr-3 mb-2 flex-column justify-content-around' : 'outgoing d-flex bg-dark ml-3 mr-3 mb-2 flex-column justify-content-around'
 
@@ -36,9 +39,9 @@ const Outgoing = (props) => {
                     
                     {/* these endpoints are passed to components where we will fetch data from the API later on*/}
                     <div className='task-reel-container bg-dark m-2'>
-                        <TaskReel source='outgoing' data={props.data.pending} type={props.type} reelTitle={props.reelItems[0]} user={props.user} endpoint={pendingTaskReelURL} />
-                        <TaskReel source='outgoing' data={props.data.inProgress} type={props.type} reelTitle={props.reelItems[1]} user={props.user} endpoint={inProgressTaskReelURL} />
-                        <TaskReel source='outgoing' data={props.data.completed} type={props.type} reelTitle={props.reelItems[2]} user={props.user} endpoint={completedTaskReelURL} />
+                        <TaskReel source='outgoing' data={pending} type={props.type} reelTitle={props.reelItems[0]} userType={props.userType} endpoint={pendingTaskReelURL} />
+                        <TaskReel source='outgoing' data={inProgress} type={props.type} reelTitle={props.reelItems[1]} userType={props.userType} endpoint={inProgressTaskReelURL} />
+                        <TaskReel source='outgoing' data={completed} type={props.type} reelTitle={props.reelItems[2]} userType={props.userType} endpoint={completedTaskReelURL} />
                     </div>
                 </div>
                 {requestModal}

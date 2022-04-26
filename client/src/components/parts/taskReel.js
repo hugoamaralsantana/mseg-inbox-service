@@ -1,37 +1,137 @@
+import axios from "axios";
 import TaskBox from "../parts/taskBox"
 import '../../styles/taskReel.css'
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-// TODO: fetch data from API using props.endpoint later on
+// TODO: outgoing fix
 
 const TaskReel = (props) => {
   const data = props.data;
-  console.log(props.data)
-  console.log(data.length)
-  const favoritedOrder = favoriteOrder(data)
-  const [dataList, updateTaskBoxOrder] = useState(favoritedOrder)
+  const userData = JSON.parse(localStorage.getItem('userData'))
+  const id = userData._id
+  //console.log(data)
+  // const favoritedOrder = favoriteOrder(data)
+  const [dataList, updateTaskBoxOrder] = useState([])
+  const isMounted = useRef(false);
+  const favorited = props.source === 'outgoing' ? 'sender_favorited' : 'recipient_favorited'
   let color;
   let action;
 
-  function favoriteOrder(arr) {
-    arr.sort((a, b) => (b.date._d > a.date._d) ? 1: -1)
-    let favoritedOrdered = []
-    arr.forEach((taskbox) => {
-      if (taskbox.favorited) {
-        favoritedOrdered.unshift(taskbox); return;}
-      else {favoritedOrdered.push(taskbox)}
-    })
-    return favoritedOrdered
-  }
-
-  function starTask(id) {
-    dataList.forEach((task) => {
-      if (task.task_id === id) {
-        task.favorited = !task.favorited;
+  useEffect(() => {
+    function update() {
+      if (!isMounted.current) {
+        updateTaskBoxOrder(props.data)
       }
-    })
-    const newList = favoriteOrder(dataList)
-    updateTaskBoxOrder(newList);
+    }
+    update()
+  })
+
+  async function starTask(task) {
+    isMounted.current = true
+    console.log(task)
+    if (task.type === 'assignedTraining') {
+      await axios.put(`http://localhost:8082/${task.type}s/${task._id}`, {
+          "type": task.type,
+          "status": task.status,
+          "recipient": task.recipient,
+          "recipient_id": task.recipient_id,
+          "sender": task.sender,
+          "sender_id": task.sender_id,
+          "due_date": task.due_date,
+          "recipient_comments": task.recipient_comments,
+          "sender_comments": task.sender_comments,
+          "training": task.training,
+          "is_completed": task.is_completed,
+          "recipient_favorited": task.recipient_id === id ? !task.recipient_favorited : task.recipient_favorited,
+          "sender_favorited": task.sender_id === id ? !task.sender_favorited : task.sender_favorited
+      })
+      .then((res) => {
+        const newArr = dataList.map(dataTask => {
+          if (dataTask._id === task._id) {
+            return res.data
+          } return dataTask
+        })
+        let returnArr = []
+        newArr.sort((a, b) => (b.due_date > a.due_date) ? 1: -1)
+        newArr.forEach(task => {
+          if (task[favorited]) {
+            returnArr.unshift(task)
+          } else {returnArr.push(task)}
+        })
+        updateTaskBoxOrder(returnArr)
+      })
+    } else if (task.type === 'performanceReview') {
+        await axios.put(`http://localhost:8082/${task.type}s/${task._id}`, {
+          "type": task.type,
+          "status": task.status,
+          "recipient": task.recipient,
+          "recipient_id": task.recipient_id,
+          "due_date": task.due_date,
+          "sender": task.sender,
+          "sender_id": task.sender_id,
+          "overall_comments": task.overall_comments,
+          "recipient_comments": task.recipient_comments,
+          "sender_comments": task.sender_comments,
+          "growth_score": task.growth_score,
+          "growth_comments": task.growth_comments,
+          "kindness_score": task.kindness_score,
+          "kindness_comments": task.kindness_comments,
+          "delivery_score": task.delivery_score,
+          "delivery_comments": task.delivery_comments,
+          "sender_favorited": task.sender_id === id ? !task.sender_favorited : task.sender_favorited,
+          "recipient_favorited": task.recipient_id === id ? !task.recipient_favorited : task.recipient_favorited
+        })
+        .then((res) => {
+          const newArr = dataList.map(dataTask => {
+            if (dataTask._id === task._id) {
+              return res.data
+            } return dataTask
+          })
+          let returnArr = []
+          newArr.sort((a, b) => (b.due_date > a.due_date) ? 1: -1)
+          newArr.forEach(task => {
+            if (task[favorited]) {
+              returnArr.unshift(task)
+            } else {returnArr.push(task)}
+          })
+          updateTaskBoxOrder(returnArr)
+        })
+    } else if (task.type === 'PTORequest') {
+      await axios.put(`http://localhost:8082/${task.type}s/${task._id}`, {
+        "type": task.type,
+        "status": task.status,
+        "recipient": task.recipient,
+        "recipient_id": task.recipient_id,
+        "due_date": task.due_date,
+        "sender": task.sender,
+        "sender_id": task.sender_id,
+        "recipient_comments": task.recipient_comments,
+        "sender_comments": task.sender_comments,
+         "pto_type": task.pto_type,
+         "pto_start": task.pto_start,
+         "pto_end": task.pto_end,
+        "sender_favorited": task.sender_id === id ? !task.sender_favorited : task.sender_favorited,
+        "recipient_favorited": task.recipient_id === id ? !task.recipient_favorited : task.recipient_favorited
+        })
+        .then((res) => {
+          const newArr = dataList.map(dataTask => {
+            if (dataTask._id === task._id) {
+              return res.data
+            } return dataTask
+          })
+          let returnArr = []
+          newArr.sort((a, b) => (b.due_date > a.due_date) ? 1: -1)
+          newArr.forEach(task => {
+            if (task[favorited]) {
+              returnArr.unshift(task)
+            } else {returnArr.push(task)}
+          })
+          updateTaskBoxOrder(returnArr)
+        })
+    }
+    if (props.type === 'landingPage') {
+      window.location.reload(false);
+    }
   }
 
   if (props.reelTitle === 'Pending') {
@@ -73,14 +173,15 @@ const TaskReel = (props) => {
       <div className="task-box-container">
         {dataList.map((task) =>
           <TaskBox 
-            key={task.task_id}
+            key={task._id}
             data={task}
             source={props.source}
             type={props.type}
             reelTitle={props.reelTitle}
             action={action}
-            userType={props.user}
+            userType={props.userType}
             starTask={starTask}
+            updateTask={props.updateTask}
           />)
         }
       </div>

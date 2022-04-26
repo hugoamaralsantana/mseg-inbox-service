@@ -1,66 +1,62 @@
 const mongoose = require('mongoose');
 
-
-/*
-    Example User
-        {
-        "firstName" : "Hans",
-        "lastName" : "Barton",
-        "employeeId" : 1,
-        "email" : "Hans_Barton@atlastechnology.com",
-        "companyId" : 2,
-        "companyName" : "Atlas Technology",
-        "positionTitle" : "CEO",
-        "startDate" : "2005-02-20",
-        "isManager" : true,
-        "password" : "bartonha"
-        }
-
-*/
-
 const userSchema = mongoose.Schema({
-    firstName: {
+    user_type: {
         type: String,
-        required: true,
-    },
-    lastName: {
-        type: String,
-        required: true,
-    },
-    employeeId: {
-        type: Number,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-    },
-    companyId: {
-        type: Number,
-        required: true,
-    },
-    companyName: {
-        type: String,
-        required: true,
-    },
-    positionTitle: {
-        type: String,
-        required: true,
-    },
-    startDate: {
-        type: Date,
-        required: true,
-        default: Date.now
-    },
-    isManager: {
-        type: Boolean,
         required: true,
     },
     password: {
         type: String,
         required: true,
     },
+    first_name: {
+        type: String,
+        required: true,
+    },
+    last_name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+    },
+    company_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+    manager_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+    },
+    company_name: {
+        type: String,
+        required: true,
+    },
+    position_title: {
+        type: String,
+        required: true,
+    },
+    start_date: {
+        type: Date,
+        required: false,
+        default: null
+    }
 }, {timestamps: true});
+
+// JSON example body for POST
+// {
+//     "user_type": "employee",
+//     "password": "1234",
+//     "first_name": "Joe",
+//     "last_name": "Burrow",
+//     "email": joeBurrow@ligma.com,
+//     "company_id": "6257a1fd43e724e24c03dd50",
+//     "manager_id": 
+//     "company_name": "Cool Co",
+//     "position_title": null,
+//     "start_date": null,
+// }
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

@@ -1,6 +1,4 @@
 
 {
-    "mongoURI":
-     "mongodb+srv://admin:amenhoodie@mseg-inboxing-service.mz2u8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-
+    "mongoURI": "mongodb+srv://Ggarber:Greggar420@cluster0.wlv4a.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }

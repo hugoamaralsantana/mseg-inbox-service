@@ -1,29 +1,30 @@
+const { json } = require('body-parser');
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 
-const AssignedTraining = require('../models/ASSIGNEDTRAINING');
+const PTORequest = require('../models/PTORequest');
 
-  router.get('/test', (req, res) => res.send('assigned training route testing!'));
+  router.get('/test', (req, res) => res.send('PTO request route testing!'));
 
-  // get all assigned trainings from database
+  // get all PTOs from database
   router.get('/', (req, res) => {
-    AssignedTraining.find()
-      .then(trainings => res.json(trainings))
-      .catch(err => res.status(404).json({ error: 'No Trainings found' }));
+    PTORequest.find()
+      .then(ptos => res.json(ptos))
+      .catch(err => res.status(404).json({ error: 'No PTOs found' }));
   });
 
-  // get an assigned training by id from database
+  // get a PTO by id from database
   router.get('/getById/:id', (req, res) => {
-    AssignedTraining.findById(req.params.id)
-      .then(training => res.json(training))
-      .catch(err => res.status(404).json({ error: `No Training found at ${req.params.id}` }));
+    PTORequest.findById(req.params.id)
+      .then(pto => res.json(pto))
+      .catch(err => res.status(404).json({ error: `No PTO found at ${req.params.id}` }));
   });
 
-  // create an assigned training and insert into the database
+  // create a PTO and insert into the database
   router.post('/', [
-    check('type').custom(type => type === "assignedTraining"),
+    check('type').custom(type => type === "PTORequest"),
     check('status').custom(status => {
       return status === 'pending' || status === 'inProgress' || status === 'completed'; 
     }),
@@ -33,54 +34,68 @@ const AssignedTraining = require('../models/ASSIGNEDTRAINING');
     check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),
     check('recipient_comments').isLength({max: 200}),
     check('sender_comments').isLength({max: 200}),
-    check('training').isURL(),
-    check('is_completed').custom(is_completed => is_completed === false),
     check('sender_favorited').custom(favorited => favorited === false),
     check('recipient_favorited').custom(favorited => favorited === false),
+    check('pto_start').custom(pto_start => {
+      const date = new Date(pto_start);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
+    check('pto_end').custom(pto_end => {
+      const date = new Date(pto_end);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
+  ], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    PTORequest.create(req.body)
+      .then(pto => res.json(pto))
+      .catch(err => res.status(400).json(err));
+  });
+
+  // update a PTO in the database
+  router.put('/:id', [
+    check('type').custom(type => type === "PTORequest"),
+    check('status').custom(status => {
+      return status === 'pending' || status === 'inProgress' || status === 'completed'; 
+    }),
+    check('recipient').isLength({min : 1}),
+    check('recipient_id').custom(recipient_id => mongoose.isValidObjectId(recipient_id)),
+    check('due_date').custom(due_date => {
+      const date = new Date(due_date);
+      return date instanceof Date && !isNaN(date.valueOf()) || due_date == null
+    }),
+    check('sender').isLength({min : 1}),
+    check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),
+    check('recipient_comments').isLength({max: 200}),
+    check('sender_comments').isLength({max: 200}),
+    check('sender_favorited').isBoolean(),
+    check('recipient_favorited').isBoolean(),
+    check('recipient_comments').isLength({max: 200}),
+    check('sender_comments').isLength({max: 200}),
+    check('pto_start').custom(pto_start => {
+      const date = new Date(pto_start);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
+    check('pto_end').custom(pto_end => {
+      const date = new Date(pto_end);
+      return date instanceof Date && !isNaN(date.valueOf())
+    }),
   ], (req, res) => {
     const errors = validationResult(req);
     console.log(errors)
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-    AssignedTraining.create(req.body)
-      .then(training => res.json(training))
-      .catch(err => res.status(400).json(err));
-  });
-
-  // update an assigned training in the database
-  router.put('/:id', [
-    check('type').custom(type => type === "assignedTraining"),
-    check('status').custom(status => {
-      return status === 'pending' || status === 'inProgress' || status === 'completed'; 
-    }),
-    check('recipient').isLength({min : 1}),
-    check('recipient_id').custom(recipient_id => mongoose.isValidObjectId(recipient_id)),
-    check('sender').isLength({min : 1}),
-    check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),
-    check('due_date').custom(sender_due_date => {
-      const date = new Date(sender_due_date);
-      return date instanceof Date && !isNaN(date.valueOf()) || sender_due_date == null
-    }),
-    check('recipient_comments').isLength({max: 200}),
-    check('sender_comments').isLength({max: 200}),
-    check('training').isURL(),
-    check('is_completed').isBoolean(),
-    check('sender_favorited').isBoolean(),
-    check('recipient_favorited').isBoolean(),
-  ], (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
-    AssignedTraining.findByIdAndUpdate(req.params.id, req.body, {new:true})
-      .then(training => res.json(training))
+    PTORequest.findByIdAndUpdate(req.params.id, req.body, {new:true})
+      .then(pto => res.json(pto))
       .catch(err =>
         res.status(400).json({ error: 'Unable to update the Database' })
       );
   });
 
-  // get an assigned training data for a user from database
+  // get a PTO data for a user from database
   router.get('/userData/:userId/:type', (req, res) => {
     // if we want incoming -> we look for recipient id
     // if we want outgoing -> we look for sender id
@@ -91,12 +106,12 @@ const AssignedTraining = require('../models/ASSIGNEDTRAINING');
     }
     const response = {incoming: [], outgoing: []}
     const query = type === 'incoming' ? {recipient_id: userId} : {sender_id: userId};
-    AssignedTraining.find(query)
-      .then(trainings => {
-        response[type] = trainings;
+    PTORequest.find(query)
+      .then(ptos => {
+        response[type] = ptos;
         return res.json(response);
       })
-      .catch(err => res.status(404).json({ error: `No Trainings found at ${req.params.id}` }));
+      .catch(err => res.status(404).json({ error: `No PTOs found at ${req.params.id}` }));
   });
 
   router.get('/userData/:userId', (req, res) => {
@@ -107,22 +122,29 @@ const AssignedTraining = require('../models/ASSIGNEDTRAINING');
       return res.json({error: "An error occured getting user data"});
     }
     const response = {incoming: [], outgoing: []}
-    AssignedTraining.find({recipient_id: userId})
-      .then(trainings => {
-        response['incoming'] = trainings;
-        AssignedTraining.find({sender_id: userId})
-          .then(trainings => {
-            response['outgoing'] = trainings;
-            return res.json(response);
+    const incoming_query = {recipient_id: userId};
+    const outgoing_query = {sender_id: userId};
+    try {
+      PTORequest.find(incoming_query)
+      .then(reviews => {
+        response.incoming = reviews;
+       PTORequest.find(outgoing_query)
+        .then(review => {
+          response.outgoing = review;
+          return res.json(response);
         })
       })
-      .catch(err => res.status(404).json({ error: `No Trainings found at ${req.params.id}` }));
+      .catch(err => res.status(404).json({ error: 'Error getting data for user' }));
+    }
+    catch {
+      return res.json({error: "An error occured getting user data"});
+    }
   });
 
-  router.delete('/:assignedTrainingId', (req, res) => {
-    AssignedTraining.findByIdAndRemove(req.params.assignedTrainingId, req.body)
-      .then(trainings => res.json({ success: 'Training entry deleted successfully' }))
-      .catch(err => res.status(404).json({ error: 'No such a training' }));
+  router.delete('/:PTORequestId', (req, res) => {
+    PTORequest.findByIdAndRemove(req.params.PTORequestId, req.body)
+      .then(pto => res.json({ success: 'PTO deleted successfully' }))
+      .catch(err => res.status(404).json({ error: 'No such PTO' }));
   });
   
   module.exports = router;
