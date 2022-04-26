@@ -3,6 +3,8 @@ import axios from "axios";
 import '../../styles/completePerformanceReviewModal.css'
 
 const RequestPerformanceReviewModal = (props) => {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    const email = userData.email
     const [recipient, updateRecipient] = useState('')
     const showHideClassName = props.show ? "modal display-block" : "modal display-none";
     function handleInput(e) {
@@ -11,6 +13,7 @@ const RequestPerformanceReviewModal = (props) => {
 
     async function handleExit(string) {
         console.log('bling')
+        if (recipient === email) {alert('Cant send request to yourself'); return}
         await axios.get(`http://localhost:8082/users/email/${recipient}`)
         .then(res => {
             console.log(res.data[0])

@@ -3,6 +3,8 @@ import axios from "axios";
 import '../../styles/assignTrainingModal.css'
 
 const AssignTrainingModal = (props) => {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    const email = userData.email
     const [recipient, updateRecipient] = useState('')
     const [link, updateLink] = useState('')
 
@@ -13,6 +15,7 @@ const AssignTrainingModal = (props) => {
 
     async function handleExit() {
         console.log()
+        if (recipient === email) {return}
         await axios.get(`http://localhost:8082/users/email/${recipient}`)
         .then(res => {
             console.log('bofa')

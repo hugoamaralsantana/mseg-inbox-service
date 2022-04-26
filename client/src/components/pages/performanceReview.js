@@ -23,6 +23,7 @@ const PerformanceReview = (props) => {
   const isMounted = useRef(false);
 
   useEffect(() => {
+    console.log('cheese')
     async function update() {
     await axios.get(`http://localhost:8082/performanceReviews/userData/${id}`)
       .then(res => {

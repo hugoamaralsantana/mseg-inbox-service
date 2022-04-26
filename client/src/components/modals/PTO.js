@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import '../../styles/PTOModal.css'
 
 const PTOModal = (props) => {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    const email = userData.email
     const [reason, updateReason] = useState(props.userType === 'Employee' ? '' : props.data.pto_type)
     const [startDate, updateStartDate] = useState(props.userType === 'Employee' ? '' : props.data.pto_start.substring(0, 10))
     const [endDate, updateEndDate] = useState(props.userType === 'Employee' ? '' : props.data.pto_end.substring(0, 10))
