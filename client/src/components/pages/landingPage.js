@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import moment from "moment";
 import { Link } from "react-router-dom";
@@ -21,10 +21,13 @@ const LandingPage = (props) => {
   const id = userData._id
   const userType = userData.user_type
   const [landingpageData, setLandingPageData] = useState({});
+  const [changingData, updateChangeingData] = useState({})
   const [expanded, updateState] = useState(true);
   const reelItems = ['Favorited', 'Coming up']
   const user = user_type;
   const [boxState, updateBoxState] = useState(false);
+  const [effectCheck, updateCheck] = useState(false)
+  const check = useRef(false)
 
   function expandSideBar() {
     if (expanded) {
@@ -61,7 +64,6 @@ const LandingPage = (props) => {
         allData = allData.concat(incoming)
         allData = allData.concat(outgoing)
       })
-      console.log(allData)
       allData.forEach(task => {
         if (task.sender_id === id && task.sender_favorited) {data.favorited.push(task)}
         else if (task.recipient_id === id && task.recipient_favorited) {data.favorited.push(task)}
@@ -69,15 +71,43 @@ const LandingPage = (props) => {
         const serverDateTime= moment();
         const newDate = new Date(task.due_date);
         //Calculate difference btw the two dates, and convert to days
-        console.log((newDate - serverDateTime)/one_day)
         const diff = Math.ceil((newDate - serverDateTime)/one_day);
         if(diff <= 7 && task.status !== 'completed') {data.comingUp.push(task)}  
       })
-      console.log(data)
       setLandingPageData(data)
+      if (!check.current) {
+        updateChangeingData(data)
+        check.current = true
+      }
     }
     update()
-  }, [id])
+  }, [effectCheck, id])
+
+  async function filterData(filter) {
+    console.log(';ligma')
+    let returnData = {'favorited': [], 'comingUp': []}
+    const favorited = changingData.favorited
+    const comingUp = changingData.comingUp
+    console.log(comingUp)
+    favorited.forEach(task => {
+      if (task.recipient_id === id && task.sender.toLowerCase().startsWith(filter.toLowerCase())) {
+        returnData.favorited.push(task)
+      }
+      else if (task.sender_id === id && task.recipient.toLowerCase().startsWith(filter.toLowerCase())) {
+        returnData.favorited.push(task)
+      }
+    })
+    console.log('pizza')
+    comingUp.forEach(task => {
+      if (task.sender_id === id && task.recipient.toLowerCase().startsWith(filter.toLowerCase())) {
+        returnData.comingUp.push(task)
+      }
+      else if (task.recipient_id === id && task.sender.toLowerCase().startsWith(filter.toLowerCase())) {
+        returnData.comingUp.push(task)
+      }
+    })
+    setLandingPageData(returnData)
+  }
 
   function showBox() {
     updateBoxState(true);
@@ -89,7 +119,7 @@ function closeBox() {
 
   return (
     <div>
-      <NavBar title="Landing Page" showBox={showBox}/>
+      <NavBar title="Landing Page" showBox={showBox} filterData={filterData}/>
       <div className="d-inline-flex overflow-hidden">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
         <PartContainer data={landingpageData} type='landingPage' reelItems={reelItems} expanded={expanded} userType={userType} user_name={firstName + ' ' + lastName} containerCount='1' boxState={boxState} closeBox={closeBox}/>

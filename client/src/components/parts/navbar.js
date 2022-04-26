@@ -7,6 +7,9 @@ import '../../styles/navbar.css'
 
 const NavBar = (props) => {
     const pageTitle = props.title
+    function handleFilter() {
+        props.filterData(document.getElementById('search-bar').value)
+    }
     return(
         <nav id="navbar" className="navbar navbar-light bg-secondary d-flex align-items-center justify-content-between">
             <div className='brand d-flex align-items-center'>
@@ -14,7 +17,7 @@ const NavBar = (props) => {
                 <h1 id="inbox-title" className="brand-part">Inbox -</h1>
                 <h1 id="page-title" className="brand-part">{pageTitle}</h1>
                 <form className="form brand-part" height={150}>
-                        <input id="search-bar" type="search" placeholder={"Search " + pageTitle} aria-label="Search"></input>
+                        <input id="search-bar" type="search" placeholder={"Search " + pageTitle} onKeyUp={handleFilter} aria-label="Search"></input>
                 </form>
             </div>
             <div class="navbarSupportedContent">

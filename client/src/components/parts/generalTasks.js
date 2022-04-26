@@ -5,7 +5,6 @@ import TaskReel from "./taskReel";
 const pendingTaskReelURL = 'performanceReview/incoming/pending';
 
 const GeneralTasks = (props) => {
-    console.log(props.data)
     const favorited = props.data.favorited === undefined ? [] : props.data.favorited
     const comingUp = props.data.comingUp === undefined ? [] : props.data.comingUp
     return (

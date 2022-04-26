@@ -16,7 +16,6 @@ const TaskBox = (props) => {
   const [dueDateExpand, updatedueDate] = useState(false)
   const [isStarred, updateStar] = useState(false);
   const [changeDate, changeDueDate] = useState('')
-  console.log(props.data)
   const starFavorited = props.data.recipient_id === id ? props.data.recipient_favorited : props.data.sender_favorited
   const boxType = props.type === 'assignedTraining' ? 'Assigned Training' : props.type === 'PTORequest' ? 'PTO Request' : 'Performance Review'
 

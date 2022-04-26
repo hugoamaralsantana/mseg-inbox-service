@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
@@ -16,8 +16,10 @@ const PTORequestPage = (props) => {
   const [expanded, updateState] = useState(true);
   const reelItems = ['Pending', 'In Progress', 'Completed']
   const [PTORequestData, setPTORequestData] = useState({});
+  const [changingData, updateChangeingData] = useState({})
   const [boxState, updateBoxState] = useState(false);
   const [effectCheck, updateCheck] = useState(false)
+  const check = useRef(false)
 
   console.log(userData)
 
@@ -46,11 +48,32 @@ const PTORequestPage = (props) => {
         returnData.incoming = incomingArr
         returnData.outgoing = outgoingArr
         setPTORequestData(returnData)
+        if (!check.current) {
+          updateChangeingData(returnData)
+          check.current = true
+        }
       })
       .catch(err => console.log(err))
   }
     update()
   }, [effectCheck, id])
+
+  function filterData(filter) {
+    let returnData = {'incoming': [], 'outgoing': []}
+    const incoming = changingData.incoming
+    const outgoing = changingData.outgoing
+    incoming.forEach(task => {
+      if (task.sender.toLowerCase().startsWith(filter.toLowerCase())) {
+        returnData.incoming.push(task)
+      }
+    })
+    outgoing.forEach(task => {
+      if (task.recipient.toLowerCase().startsWith(filter.toLowerCase())) {
+        returnData.outgoing.push(task)
+      }
+    })
+    setPTORequestData(returnData)
+  }
 
   async function updateTask(status, task, data) {
     console.log(data)
@@ -124,7 +147,7 @@ const PTORequestPage = (props) => {
   }
   return (
     <div>
-      <NavBar title="PTO Request" showBox={showBox}/> 
+      <NavBar title="PTO Request" showBox={showBox} filterData={filterData}/> 
       <div className="d-flex overflow-hidden">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
         <PartContainer data={PTORequestData} type='PTORequest' reelItems={reelItems} expanded={expanded} userType={userType} user_name={firstName + ' ' + lastName} containerCount='1' boxState={boxState} closeBox={closeBox} updateTask={updateTask} createTask={createTask}/>
