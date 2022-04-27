@@ -72,7 +72,7 @@ const TaskBox = (props) => {
                         props.data.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} userType={props.userType + '-complete'} data={props.data} updateTask={props.updateTask}/> :
                         <></>;
                         console.log(completeModal)
-  const action = props.data.recipient_id === id ? props.action : 
+  const action = props.data.recipient_id === id ? props.data.status === 'pending' ? 'Start' : props.data.status === 'inProgress' ? "Continue" : "Review" : 
                  props.reelTitle === 'Completed' ? props.action : ''
   const filterCSS = remindExpand ? 'd-flex ml-1' : 'none ml-1'
   const dueDateCSS = dueDateExpand ? 'd-flex ml-1' : 'none ml-1'
