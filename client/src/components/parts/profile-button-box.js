@@ -12,6 +12,11 @@ const ProfileButtonBox = (props) => {
         }
     })
 
+    function handleColumnOpening() {
+        props.closeBox()
+        props.showProfileColumn()
+    }
+
     return (
         <div className={expanded + showHideClassName}>
             <div  id='main'>
@@ -21,7 +26,7 @@ const ProfileButtonBox = (props) => {
                     </div>
                     <div id='name' className="ml-2"><h6 className="fw-bold">{props.user_name}</h6></div>
                 </div>
-                <div id='profile-button' className="m-1 p-1"><h7 className="">Profile</h7></div>
+                <div id='profile-button' className="m-1 p-1"><h7 className="" onClick={handleColumnOpening}>Profile</h7></div>
                 <div id='logout' className="m-1 p-1"><div id='profile-button' className=""><h7 className="">Sign Out</h7></div></div>
             </div>
         </div>
