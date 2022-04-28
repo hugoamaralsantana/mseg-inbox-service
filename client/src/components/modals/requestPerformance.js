@@ -12,11 +12,9 @@ const RequestPerformanceReviewModal = (props) => {
     }
 
     async function handleExit(string) {
-        console.log('bling')
         if (recipient === email) {alert('Cant send request to yourself'); return}
         await axios.get(`http://localhost:8082/users/email/${recipient}`)
         .then(res => {
-            console.log(res.data[0])
            const data = {
                'recipient': res.data[0].first_name + ' ' + res.data[0].last_name,
                'recipient_id': res.data[0]._id

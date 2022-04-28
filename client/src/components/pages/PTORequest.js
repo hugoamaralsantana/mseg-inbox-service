@@ -21,13 +21,11 @@ const PTORequestPage = (props) => {
   const [effectCheck, updateCheck] = useState(false)
   const check = useRef(false)
 
-  console.log(userData)
 
   useEffect(() => {
     async function update() {
     await axios.get(`http://localhost:8082/PTORequests/userData/${id}`)
       .then(res => {
-        console.log(res.data)
         const incoming = res.data.incoming
         const outgoing = res.data.outgoing
         let returnData = {'incoming': [], 'outgoing': []}
@@ -76,9 +74,6 @@ const PTORequestPage = (props) => {
   }
 
   async function updateTask(status, task, data) {
-    console.log(data)
-    console.log(status)
-    console.log(task)
     await axios.put(`http://localhost:8082/PTORequests/${task._id}`, {
       "type": "PTORequest",
       "status": status === 'exit' ? 'inProgress' : status === 'submit' ? 'completed' : 'pending',
@@ -104,7 +99,6 @@ const PTORequestPage = (props) => {
   async function createTask(data) {
     await axios.get(`http://localhost:8082/users/${managerid}`)
     .then(async (res) => {
-      console.log(res.data)
       await axios.post('http://localhost:8082/PTORequests/', {
         "type": "PTORequest",
         "status": "pending",

@@ -39,7 +39,6 @@ const AssignedTraining = require('../models/ASSIGNEDTRAINING');
     check('recipient_favorited').custom(favorited => favorited === false),
   ], (req, res) => {
     const errors = validationResult(req);
-    console.log(errors)
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }

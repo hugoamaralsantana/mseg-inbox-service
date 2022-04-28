@@ -7,7 +7,6 @@ import PTOModal from "../modals/PTO";
 
 
 const TaskBox = (props) => {
-  console.log(props.data.type)
   const userData = JSON.parse(localStorage.getItem('userData'))
   const id = userData._id
   const [completeModalState, updateCompleteModalState] = useState(false);
@@ -33,7 +32,6 @@ const TaskBox = (props) => {
       else if (props.data.type === 'PTORequest') {window.location.href = '/PTORequest'}
     }
     else {
-      console.log('check')
       updateCompleteModalState(true)
       e.stopPropagation();
     }
@@ -69,14 +67,12 @@ const TaskBox = (props) => {
     props.updateDate(changeDate, props.data)
   }
 
-  console.log(completeModalState)
 
   const taskBoxCSS = expanded ? 'task-box-expanded bg-secondary d-flex justify-content-between m-2 mb-0' : 'task-box bg-secondary d-flex justify-content-between m-2 mb-0';
   const expandedBoxCSS = expanded ? 'bg-secondary mt-1 ml-2 mr-2 mb-2' : 'expanded-none bg-secondary mt-1 ml-2 mr-2 mb-2'
   const completeModal = props.data.type === 'performanceReview' ? <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal} data={props.data} updateTask={props.updateTask}/> :
                         props.data.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} userType={props.userType + '-complete'} data={props.data} updateTask={props.updateTask}/> :
                         <></>;
-                        console.log(completeModal)
   const action = props.type === 'landingPage' ? 'Go' : props.data.recipient_id === id ? props.action : 
                  props.reelTitle === 'Completed' ? props.action : ''
   const filterCSS = remindExpand ? 'd-flex ml-1' : 'none ml-1'

@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import moment from 'moment';
 
 let now = moment();
-console.log(now)
+
 
 const randomInt = (min, max) => {
     return Math.random() * (max - min) + min;

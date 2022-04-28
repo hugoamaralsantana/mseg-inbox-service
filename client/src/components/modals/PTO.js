@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import '../../styles/PTOModal.css'
 
 const PTOModal = (props) => {
-    console.log(props.userType)
     const userData = JSON.parse(localStorage.getItem('userData'))
     const email = userData.email
     const [reason, updateReason] = useState(props.userType === 'Employee' ? '' : props.data.pto_type)
@@ -42,7 +41,6 @@ const PTOModal = (props) => {
             props.closeModal()
             return
         }
-        console.log('check')
         props.createTask(data)
         props.closeModal()
     }

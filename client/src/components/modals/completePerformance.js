@@ -16,7 +16,6 @@ const CompletePerformanceReviewModal = (props) => {
             props.closeModal();
             return;
         }
-        console.log('check1')
         const data ={
             "overall_comments": overallComments,
             "growth_score": growthScore !== '' ? parseInt(growthScore) : null,
@@ -30,13 +29,11 @@ const CompletePerformanceReviewModal = (props) => {
             props.closeModal();
             props.updateTask(string, props.data, data)
         } else {
-            console.log('check2')
             props.updateTask(string, props.data, data)
         }
     }
 
     function handleInput(e) {
-        // console.log(event)
         if (props.data.status === 'completed') {alert('Cannot edit once submitted'); return;}
         if (e.target.id === 'overall-comments') {updateOverallComments(e.target.value)} 
         else if (e.target.id === 'growth-score') {updateGrowthScore(e.target.value)}
