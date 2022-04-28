@@ -111,6 +111,10 @@ const TaskBox = (props) => {
               {props.data.sender_id === id ? 'To: ': 'From: '} 
               {props.data.sender_id === id ? props.data.recipient: props.data.sender}
             </h6>
+            { 
+              props.data.sender_comments ? 
+              <p className="mb-0">Notes: {props.data.sender_comments}</p> : null
+            }
             <p className="mb-0 date">Due: {new Date(props.data.due_date).toLocaleDateString("en-US")}</p>
             <p className={`mb-0 date display-${props.type !== 'landingPage' ? 'none' : ''}`}>{boxType}</p>
             <h7 className={`start display-${props.data.status==='completed' && props.type === 'assignedTraining' ? 'none' : ''}`} onClick={showModal}>{action}</h7>

@@ -3,10 +3,51 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const Company = require('../models/COMPANY');
 const mongoose = require('mongoose');
+const Atlas_Technology = require('../UKG_client_data/Atlas_Technology-employees.json')
 
 const User = require('../models/USER');
 
   router.get('/test', (req, res) => res.send('user route testing!'));
+
+  // populate database with fake users
+  router.post('/populate', (req, res) => {
+
+    const parseDate = (date) => {
+        2015-04-06
+        const year = date.slice(0, 4)
+        const month = date.slice(5,7)
+        const day = date.slice(8,10)
+        return month  + '/' + day + '/' + year
+    }
+
+    const getUsers = () => {
+        const users = Atlas_Technology;
+        return users.map(user => {
+            const newUser = {
+                user_type: user.isManager ? 'Manager' : 'Employee',
+                password: user.password,
+                first_name: user.firstName,
+                last_name: user.lastName,
+                email: user.email,
+                company_id: '6267230829c9494013400be6',
+                manager_id: null,
+                company_name: user.companyName,
+                position_title: user.positionTitle,
+                start_date: parseDate(user.startDate)
+            }
+            return newUser;
+        });
+    }
+
+    const users = getUsers();
+
+    users.forEach((user) => {
+      User.create(user)
+      .catch(err => res.status(400).json({ err }));
+    })
+
+    return res.json({message: "Successfully populated database"});
+  });
 
   // get all users from database
   router.get('/', (req, res) => {
@@ -48,7 +89,7 @@ const User = require('../models/USER');
     check('user_type').custom(user_type => {
       return user_type === 'Manager' || user_type === 'Admin' || user_type === 'Employee'; 
     }),
-    check('password').isLength({min : 10}).isAlphanumeric(),
+    check('password').isLength({min : 4}).isAlphanumeric(),
     check('first_name').isLength({min : 1}),
     check('last_name').isLength({min : 1}),
     check('email').isEmail(),
@@ -84,7 +125,7 @@ const User = require('../models/USER');
     }
     User.create(req.body)
      .then(user => res.json(user))
-     .catch(err => res.status(400).json({ error: `Unable to add this user ${req.body}` }));
+     .catch(err => res.status(400).json({ err }));
   });
 
   // update a user in the database
@@ -92,7 +133,7 @@ const User = require('../models/USER');
     check('user_type').custom(user_type => {
       return user_type === 'Manager' || user_type === 'Admin' || user_type === 'Employee'; 
     }),
-    check('password').isLength({min : 10}).isAlphanumeric(), 
+    check('password').isLength({min : 4}).isAlphanumeric(),
     check('first_name').isLength({min : 1}),
     check('last_name').isLength({min : 1}),
     check('email').isEmail(),
