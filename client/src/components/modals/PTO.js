@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import '../../styles/PTOModal.css'
 
 const PTOModal = (props) => {
+    console.log(props.userType)
     const userData = JSON.parse(localStorage.getItem('userData'))
     const email = userData.email
     const [reason, updateReason] = useState(props.userType === 'Employee' ? '' : props.data.pto_type)
@@ -33,7 +34,7 @@ const PTOModal = (props) => {
         if (str === 'exit') {
             props.closeModal()
             if (props.data.status !== 'completed') {
-                props.updateTask('submit', props.data, data)
+                props.updateTask('exit', props.data, data)
             }
             return
         } else if (str === 'submit') {
@@ -116,7 +117,7 @@ const PTOModal = (props) => {
                     </div>
                     <div className='submit-answer d-flex justify-content-between'>
                         <div className='answer'>
-                            <input className='shortest-text ml-3 mt-1 text-black' list='answers' id='answer' name='answers' value={answer} disabled={props.userType === 'Employee' ? '' : props.data.status === 'completed' ? 'disabled' : ''} onChange={handleChange} placeholder='Yes/No'></input>
+                            <input className='shortest-text ml-3 mt-1 text-black' list='answers' id='answer' name='answers' value={answer} disabled={props.userType === 'Employee' ? '' : props.data.status === 'completed' ? 'disabled' : ''} onChange={handleChange} required placeholder='Yes/No'></input>
                             <datalist id='answers'>
                                 <option value='Yes'></option>
                                 <option value='No'></option>
@@ -131,7 +132,7 @@ const PTOModal = (props) => {
             </div>
         </div>
     )
-    return props.userType === 'Manager' || props.userType === 'Employee-complete' ? approve : request
+    return props.userType === 'Manager-complete' || props.userType === 'Employee-complete' ? approve : request
 }
 
 export default PTOModal
