@@ -104,11 +104,11 @@ const AssignedTraining = (props) => {
 
   async function createTask(data) {
     console.log(data)
-    await axios.post('http://localhost:8082/assignedTrainings/', {
+    await axios.post('http://localhost:8082/assignedTrainings/sendAll', {
       "type": "assignedTraining",
       "status": "pending",
-      "recipient": data.recipient,
-      "recipient_id": data.recipient_id,
+      "recipient": null,
+      "recipient_id": null,
       "sender": firstName + ' ' + lastName,
       "sender_id": id,
       "due_date": moment().add(14, 'days').format('YYYY-MM-DD'),
