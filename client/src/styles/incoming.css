@@ -3,10 +3,13 @@
   margin: auto;
   margin-top: 0px;
   min-height: 300px;
+  overflow: hidden;
 }
 
 .incoming-expanded {
   height: 90vh;
+  margin: auto;
+  margin-top: 0px;
 }
 
 .task-reel-container {

@@ -5,8 +5,6 @@ import NavBar from "../parts/navbar";
 import PartContainer from "../parts/partContainer"
 import moment from 'moment';
 
-console.log(JSON.parse(localStorage.getItem('userData')))
-
 const PerformanceReview = (props) => {
   const userData = JSON.parse(localStorage.getItem('userData'))
   const firstName = userData.first_name
@@ -17,11 +15,12 @@ const PerformanceReview = (props) => {
   const [expanded, updateState] = useState(sideBarLocalStorage);
   // const [modalState, updateModalState] = useState(false);
   const [performanceReviewData, setPerformanceReviewData] = useState({});
+  const [changingData, updateChangeingData] = useState({})
   const reelItems = ['Pending', 'In Progress', 'Completed']
   //problem is that theres just one modal for this page, we need each task to have its own
   const [boxState, updateBoxState] = useState(false);
   const [effectCheck, updateCheck] = useState(false)
-  const isMounted = useRef(false);
+  const check = useRef(false);
 
   useEffect(() => {
     async function update() {
@@ -47,11 +46,36 @@ const PerformanceReview = (props) => {
         returnData.incoming = incomingArr
         returnData.outgoing = outgoingArr
         setPerformanceReviewData(returnData)
+        if (!check.current) {
+          updateChangeingData(returnData)
+          check.current = true
+        }
       })
       .catch(err => console.log(err))
   }
     update()
   }, [effectCheck, id])
+
+  function filterData(filter) {
+    if (filter === '') {
+      if (effectCheck) {updateCheck(false)}
+      else updateCheck(true)
+    }
+    let returnData = {'incoming': [], 'outgoing': []}
+    const incoming = changingData.incoming
+    const outgoing = changingData.outgoing
+    incoming.forEach(task => {
+      if (task.sender.toLowerCase().startsWith(filter.toLowerCase())) {
+        returnData.incoming.push(task)
+      }
+    })
+    outgoing.forEach(task => {
+      if (task.recipient.toLowerCase().startsWith(filter.toLowerCase())) {
+        returnData.outgoing.push(task)
+      }
+    })
+    setPerformanceReviewData(returnData)
+  }
 
   async function updateTask(status, task, data) {
     await axios.put(`http://localhost:8082/performanceReviews/${task._id}`, {
@@ -75,14 +99,12 @@ const PerformanceReview = (props) => {
         "recipient_favorited": task.recipient_favorited
     })
     .then(res => {
-      console.log(isMounted)
       if (effectCheck) {updateCheck(false)}
       else updateCheck(true)
     })
   }
 
   async function createTask(data) {
-    console.log(data)
     await axios.post('http://localhost:8082/performanceReviews/', {
         "type": 'performanceReview',
         "status": 'pending',
@@ -133,7 +155,7 @@ const PerformanceReview = (props) => {
     <div>
       {/* TODO: when I change title = Performance Review, it gets rid of some 
       of the navbar (styling issue) */}
-      <NavBar title="Performance Review" showBox={showBox}/> 
+      <NavBar title="Performance Review" showBox={showBox} filterData={filterData}/> 
       <div className="d-inline-flex overflow-hidden">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
         <PartContainer data={performanceReviewData} type='performanceReview' reelItems={reelItems} expanded={expanded} userType={userType} user_name={firstName + ' ' + lastName} containerCount='2' boxState={boxState} closeBox={closeBox} updateTask={updateTask} createTask={createTask}/>

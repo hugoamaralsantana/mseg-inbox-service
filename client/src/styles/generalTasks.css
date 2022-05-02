@@ -1,0 +1,13 @@
+.general-tasks-reel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+@media only screen and (max-width: 610px) {
+  .general-tasks-reel-container {
+    overflow-x: scroll;
+    justify-content: start;
+  }
+}

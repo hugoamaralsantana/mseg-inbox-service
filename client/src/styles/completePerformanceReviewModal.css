@@ -68,6 +68,7 @@
 .submit-button {
   border: none;
   margin: auto;
+  cursor: pointer;
 }
 
 input[type="number"]::-webkit-inner-spin-button {

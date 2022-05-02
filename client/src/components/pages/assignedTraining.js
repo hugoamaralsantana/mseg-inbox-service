@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "../parts/sidebar";
 import NavBar from "../parts/navbar";
@@ -18,15 +18,16 @@ const AssignedTraining = (props) => {
   const [assignedTrainingData, setAssignedTrainingData] = useState({});
   const sideBarLocalStorage = window.localStorage.getItem('sidebar-expanded') === 'true' ? true : false;
   const [expanded, updateState] = useState(sideBarLocalStorage);
+  const [changingData, updateChangeingData] = useState({})
   const [boxState, updateBoxState] = useState(false);
   const reelItems = ['Pending', 'In Progress', 'Completed']
   const [effectCheck, updateCheck] = useState(false)
+  const check = useRef(false);
 
   useEffect(() => {
     async function update() {
     await axios.get(`http://localhost:8082/assignedTrainings/userData/${id}`)
       .then(res => {
-        console.log(res.data)
         const incoming = res.data.incoming
         const outgoing = res.data.outgoing
         let returnData = {'incoming': [], 'outgoing': []}
@@ -47,12 +48,36 @@ const AssignedTraining = (props) => {
         returnData.incoming = incomingArr
         returnData.outgoing = outgoingArr
         setAssignedTrainingData(returnData)
+        if (!check.current) {
+          updateChangeingData(returnData)
+          check.current = true
+        }
       })
       .catch(err => console.log(err))
   }
     update()
-    console.log('HI')
   }, [effectCheck, id])
+
+  function filterData(filter) {
+    if (filter === '') {
+      if (effectCheck) {updateCheck(false)}
+      else updateCheck(true)
+    }
+    let returnData = {'incoming': [], 'outgoing': []}
+    const incoming = changingData.incoming
+    const outgoing = changingData.outgoing
+    incoming.forEach(task => {
+      if (task.sender.toLowerCase().startsWith(filter.toLowerCase())) {
+        returnData.incoming.push(task)
+      }
+    })
+    outgoing.forEach(task => {
+      if (task.recipient.toLowerCase().startsWith(filter.toLowerCase())) {
+        returnData.outgoing.push(task)
+      }
+    })
+    setAssignedTrainingData(returnData)
+  }
 
   async function updateTask(status, task) {
     await axios.put(`http://localhost:8082/assignedTrainings/${task._id}`, {
@@ -77,7 +102,6 @@ const AssignedTraining = (props) => {
   }
 
   async function createTask(data) {
-    console.log(data)
     await axios.post('http://localhost:8082/assignedTrainings/', {
       "type": "assignedTraining",
       "status": "pending",
@@ -118,8 +142,8 @@ const AssignedTraining = (props) => {
   }
   return (
     <div>
-      <NavBar title="Assign Training" showBox={showBox}/> 
-      <div className="d-flex">
+      <NavBar title="Assign Training" showBox={showBox} filterData={filterData}/> 
+      <div className="d-flex overflow-hidden">
         <SideBar expandSideBar={expandSideBar} expanded={expanded}/>
         <PartContainer data={assignedTrainingData} type='assignedTraining' reelItems={reelItems} expanded={expanded} userType={userType} user_name={firstName + ' ' + lastName} containerCount='1' boxState={boxState} closeBox={closeBox} updateTask={updateTask} createTask={createTask}/>
       </div>
