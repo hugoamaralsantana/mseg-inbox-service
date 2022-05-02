@@ -7,6 +7,7 @@ import '../../styles/navbar.css'
 
 const NavBar = (props) => {
     const pageTitle = props.title
+    const userData = JSON.parse(localStorage.getItem('userData'));
     function handleFilter() {
         props.filterData(document.getElementById('search-bar').value)
     }

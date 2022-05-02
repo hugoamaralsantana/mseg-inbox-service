@@ -28,6 +28,7 @@ const userSchema = mongoose.Schema({
     manager_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: false,
+        default: null
     },
     company_name: {
         type: String,

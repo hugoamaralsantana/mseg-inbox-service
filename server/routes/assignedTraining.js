@@ -4,6 +4,7 @@ const { check, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 
 const AssignedTraining = require('../models/ASSIGNEDTRAINING');
+const User = require('../models/USER');
 
   router.get('/test', (req, res) => res.send('assigned training route testing!'));
 
@@ -45,6 +46,43 @@ const AssignedTraining = require('../models/ASSIGNEDTRAINING');
     AssignedTraining.create(req.body)
       .then(training => res.json(training))
       .catch(err => res.status(400).json(err));
+  });
+
+  // create an assigned training for all users and insert into the database
+  router.post('/sendAll', [
+    check('type').custom(type => type === "assignedTraining"),
+    check('status').custom(status => {
+      return status === 'pending' || status === 'inProgress' || status === 'completed'; 
+    }),
+    // check('recipient').isLength({min : 1}),
+    // check('recipient_id').custom(recipient_id => mongoose.isValidObjectId(recipient_id)),
+    check('sender').isLength({min : 1}),
+    check('sender_id').custom(sender_id => mongoose.isValidObjectId(sender_id)),
+    check('recipient_comments').isLength({max: 200}),
+    check('sender_comments').isLength({max: 200}),
+    check('training').isURL(),
+    check('is_completed').custom(is_completed => is_completed === false),
+    check('sender_favorited').custom(favorited => favorited === false),
+    check('recipient_favorited').custom(favorited => favorited === false),
+  ], (req, res) => {
+    const errors = validationResult(req);
+    console.log(errors)
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    User.find()
+    .then(users => {
+      users.forEach(user => {
+        const body = req.body;
+        body.recipient_id = user._id;
+        body.recipient = user.first_name + ' ' + user.last_name;
+        AssignedTraining.create(body)
+        .catch(err => res.status(400).json(err)); 
+      }) 
+    })
+    .catch(err => res.status(404).json({ error: 'No Users found' }));
+    return res.status(200).json({message: "Succesfully sent assigned trainings to all employees."})
   });
 
   // update an assigned training in the database
