@@ -104,7 +104,7 @@ const PTORequestPage = (props) => {
         "status": "pending",
         "recipient": res.data.first_name + ' ' + res.data.last_name,
         "recipient_id": managerid,
-        "due_date": "2022-04-25",
+        "due_date": moment().add(14, 'days').format('YYYY-MM-DD'),
         "sender": firstName + ' ' + lastName,
         "sender_id": id,
         "recipient_comments": null,
