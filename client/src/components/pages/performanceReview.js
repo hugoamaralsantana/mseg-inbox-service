@@ -11,7 +11,8 @@ const PerformanceReview = (props) => {
   const lastName = userData.last_name
   const id = userData._id
   const userType = userData.user_type
-  const [expanded, updateState] = useState(true);
+  const sideBarLocalStorage = window.localStorage.getItem('sidebar-expanded') === 'true' ? true : false;
+  const [expanded, updateState] = useState(sideBarLocalStorage);
   // const [modalState, updateModalState] = useState(false);
   const [performanceReviewData, setPerformanceReviewData] = useState({});
   const [changingData, updateChangeingData] = useState({})
@@ -139,6 +140,8 @@ const PerformanceReview = (props) => {
   }
 
   function expandSideBar() {
+    const sideBar = window.localStorage.getItem('sidebar-expanded') === 'true' ? 'false' : 'true';
+    window.localStorage.setItem('sidebar-expanded', sideBar)
     if (expanded) {
       updateState(false);
     }

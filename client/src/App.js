@@ -13,6 +13,9 @@ import ProfilePage from './components/pages/profilePage';
 import Settings from './components/pages/settings';
 
 const App = () => {
+    if (!window.localStorage.getItem('sidebar-expanded')) {
+      window.localStorage.setItem('sidebar-expanded', 'true');
+    }
     return (
       <Router>
         <div>
