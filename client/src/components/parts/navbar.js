@@ -23,7 +23,6 @@ const NavBar = (props) => {
             </div>
             <div class="navbarSupportedContent">
                 <div class="d-flex justify-content-md-end align-items-center">
-                    <p className="mt-auto mb-auto mr-2 text-white">User Type: {userData.user_type}</p>
                     <img onClick={props.showBox} className="col-md-auto mr-3" id="profile-icon" src='/icons/person-circle-outline.svg' alt="person-circle-outline" width={45} height={45} />
                 </div>
             </div>
