@@ -5,8 +5,6 @@ import NavBar from "../parts/navbar";
 import PartContainer from "../parts/partContainer"
 import moment from 'moment';
 
-console.log(JSON.parse(localStorage.getItem('userData')))
-
 const PerformanceReview = (props) => {
   const userData = JSON.parse(localStorage.getItem('userData'))
   const firstName = userData.first_name
@@ -24,7 +22,6 @@ const PerformanceReview = (props) => {
   const check = useRef(false);
 
   useEffect(() => {
-    console.log('cheese')
     async function update() {
     await axios.get(`http://localhost:8082/performanceReviews/userData/${id}`)
       .then(res => {
@@ -107,7 +104,6 @@ const PerformanceReview = (props) => {
   }
 
   async function createTask(data) {
-    console.log(data)
     await axios.post('http://localhost:8082/performanceReviews/', {
         "type": 'performanceReview',
         "status": 'pending',

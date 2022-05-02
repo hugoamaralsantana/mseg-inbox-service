@@ -17,13 +17,19 @@ const TaskBox = (props) => {
   const [isStarred, updateStar] = useState(false);
   const [changeDate, changeDueDate] = useState('')
   const starFavorited = props.data.recipient_id === id ? props.data.recipient_favorited : props.data.sender_favorited
-  const boxType = props.type === 'assignedTraining' ? 'Assigned Training' : props.type === 'PTORequest' ? 'PTO Request' : 'Performance Review'
+  const boxType = props.data.type === 'assignedTraining' ? 'Assigned Training' : props.data.type === 'PTORequest' ? 'PTO Request' : 'Performance Review'
 
   function showModal(e) {
+
     if (props.type === 'assignedTraining'){
       props.updateTask('inProgress', props.data)
       //open new link
       window.open(props.data.training);
+    }
+    else if (props.type === 'landingPage') {
+      if (props.data.type === 'assignedTraining') {window.location.href = '/assignedTraining'}
+      else if (props.data.type === 'performanceReview') {window.location.href = '/performanceReview'}
+      else if (props.data.type === 'PTORequest') {window.location.href = '/PTORequest'}
     }
     else {
       updateCompleteModalState(true)
@@ -61,12 +67,13 @@ const TaskBox = (props) => {
     props.updateDate(changeDate, props.data)
   }
 
+
   const taskBoxCSS = expanded ? 'task-box-expanded bg-secondary d-flex justify-content-between m-2 mb-0' : 'task-box bg-secondary d-flex justify-content-between m-2 mb-0';
   const expandedBoxCSS = expanded ? 'bg-secondary mt-1 ml-2 mr-2 mb-2' : 'expanded-none bg-secondary mt-1 ml-2 mr-2 mb-2'
-  const completeModal = props.type === 'performanceReview' ? <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal} data={props.data} updateTask={props.updateTask}/> :
-                        props.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} userType={props.userType + '-complete'} data={props.data} updateTask={props.updateTask}/> :
+  const completeModal = props.data.type === 'performanceReview' ? <CompletePerformanceReviewModal show={completeModalState} closeModal={closeModal} data={props.data} updateTask={props.updateTask}/> :
+                        props.data.type === 'PTORequest' ? <PTOModal show={completeModalState} closeModal={closeModal} userType={props.userType + '-complete'} data={props.data} updateTask={props.updateTask}/> :
                         <></>;
-  const action = props.data.recipient_id === id ? props.action : 
+  const action = props.type === 'landingPage' ? 'Go' : props.data.recipient_id === id ? props.action : 
                  props.reelTitle === 'Completed' ? props.action : ''
   const filterCSS = remindExpand ? 'd-flex ml-1' : 'none ml-1'
   const dueDateCSS = dueDateExpand ? 'd-flex ml-1' : 'none ml-1'

@@ -24,7 +24,6 @@ const Login = () => {
             document.getElementById('password').value = ''
             return
           }
-          console.log(response.data)
           // save user data in local storage
           localStorage.setItem("userData", JSON.stringify(response.data));
           // route to assigned training page for now

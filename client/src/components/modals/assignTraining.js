@@ -14,11 +14,9 @@ const AssignTrainingModal = (props) => {
     }
 
     async function handleExit() {
-        console.log()
         if (recipient === email) {return}
         await axios.get(`http://localhost:8082/users/email/${recipient}`)
         .then(res => {
-            console.log('bofa')
            const data = {
                'recipient': res.data[0].first_name + ' ' + res.data[0].last_name,
                'recipient_id': res.data[0]._id,

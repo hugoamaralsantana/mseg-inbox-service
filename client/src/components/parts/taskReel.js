@@ -28,7 +28,6 @@ const TaskReel = (props) => {
 
   async function starTask(task) {
     isMounted.current = true
-    console.log(task)
     if (task.type === 'assignedTraining') {
       await axios.put(`http://localhost:8082/${task.type}s/${task._id}`, {
           "type": task.type,
@@ -46,19 +45,7 @@ const TaskReel = (props) => {
           "sender_favorited": task.sender_id === id ? !task.sender_favorited : task.sender_favorited
       })
       .then((res) => {
-        const newArr = dataList.map(dataTask => {
-          if (dataTask._id === task._id) {
-            return res.data
-          } return dataTask
-        })
-        let returnArr = []
-        newArr.sort((a, b) => (b.due_date > a.due_date) ? 1: -1)
-        newArr.forEach(task => {
-          if (task[favorited]) {
-            returnArr.unshift(task)
-          } else {returnArr.push(task)}
-        })
-        updateTaskBoxOrder(returnArr)
+        sortTasks(res, task)
       })
     } else if (task.type === 'performanceReview') {
         await axios.put(`http://localhost:8082/${task.type}s/${task._id}`, {
@@ -82,19 +69,7 @@ const TaskReel = (props) => {
           "recipient_favorited": task.recipient_id === id ? !task.recipient_favorited : task.recipient_favorited
         })
         .then((res) => {
-          const newArr = dataList.map(dataTask => {
-            if (dataTask._id === task._id) {
-              return res.data
-            } return dataTask
-          })
-          let returnArr = []
-          newArr.sort((a, b) => (b.due_date > a.due_date) ? 1: -1)
-          newArr.forEach(task => {
-            if (task[favorited]) {
-              returnArr.unshift(task)
-            } else {returnArr.push(task)}
-          })
-          updateTaskBoxOrder(returnArr)
+          sortTasks(res, task)
         })
     } else if (task.type === 'PTORequest') {
       await axios.put(`http://localhost:8082/${task.type}s/${task._id}`, {
@@ -114,24 +89,28 @@ const TaskReel = (props) => {
         "recipient_favorited": task.recipient_id === id ? !task.recipient_favorited : task.recipient_favorited
         })
         .then((res) => {
-          const newArr = dataList.map(dataTask => {
-            if (dataTask._id === task._id) {
-              return res.data
-            } return dataTask
-          })
-          let returnArr = []
-          newArr.sort((a, b) => (b.due_date > a.due_date) ? 1: -1)
-          newArr.forEach(task => {
-            if (task[favorited]) {
-              returnArr.unshift(task)
-            } else {returnArr.push(task)}
-          })
-          updateTaskBoxOrder(returnArr)
+          sortTasks(res, task)
         })
     }
     if (props.type === 'landingPage') {
       window.location.reload(false);
     }
+  }
+
+  function sortTasks(res, task) {
+    const newArr = dataList.map(dataTask => {
+      if (dataTask._id === task._id) {
+        return res.data
+      } return dataTask
+    })
+    let returnArr = []
+    newArr.sort((a, b) => (b.due_date > a.due_date) ? 1: -1)
+    newArr.forEach(task => {
+      if (task[favorited]) {
+        returnArr.unshift(task)
+      } else {returnArr.push(task)}
+    })
+    updateTaskBoxOrder(returnArr)
   }
 
   if (props.reelTitle === 'Pending') {
