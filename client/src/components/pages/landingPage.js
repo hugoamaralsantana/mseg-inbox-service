@@ -22,7 +22,8 @@ const LandingPage = (props) => {
   const userType = userData.user_type
   const [landingpageData, setLandingPageData] = useState({});
   const [changingData, updateChangeingData] = useState({})
-  const [expanded, updateState] = useState(true);
+  const sideBarLocalStorage = window.localStorage.getItem('sidebar-expanded') === 'true' ? true : false;
+  const [expanded, updateState] = useState(sideBarLocalStorage);
   const reelItems = ['Favorited', 'Coming up']
   const user = user_type;
   const [boxState, updateBoxState] = useState(false);
@@ -107,6 +108,17 @@ const LandingPage = (props) => {
     setLandingPageData(returnData)
   }
 
+  function expandSideBar() {
+    const sideBar = window.localStorage.getItem('sidebar-expanded') === 'true' ? 'false' : 'true';
+    window.localStorage.setItem('sidebar-expanded', sideBar)
+    if (expanded) {
+      updateState(false);
+    }
+    else {
+      updateState(true);
+    }
+  }
+  
   function showBox() {
     updateBoxState(true);
 }
