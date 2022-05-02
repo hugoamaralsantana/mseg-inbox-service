@@ -29,14 +29,15 @@
 #arrow-expanded {
   color: white;
   font-size: 100px;
+  cursor: pointer;
 }
 
 #arrow {
   color: white;
   font-size: 40px;
   padding-bottom: 10px;
+  cursor: pointer;
 }
-
 
 @media only screen and (max-width: 1050px) {
   .bottom {

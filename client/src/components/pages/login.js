@@ -24,11 +24,10 @@ const Login = () => {
             document.getElementById('password').value = ''
             return
           }
-          console.log(response.data)
           // save user data in local storage
           localStorage.setItem("userData", JSON.stringify(response.data));
           // route to assigned training page for now
-          window.location.href = '/assignedTraining'
+          window.location.href = '/landingPage'
         })
         .catch(err => {
             console.log(err);

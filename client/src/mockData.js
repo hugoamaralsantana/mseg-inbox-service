@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import moment from 'moment';
 
 let now = moment();
-console.log(now)
+
 
 const randomInt = (min, max) => {
     return Math.random() * (max - min) + min;
@@ -150,7 +150,7 @@ const mockPTORequest = (id) => {
 let data = JSON.parse(JSON.stringify(dataJSON));
 
 let id_counter = 0;
-const GENERATE_MOCK_TASK_CYCLE = 5;
+const GENERATE_MOCK_TASK_CYCLE = 7;
 for (let i=0; i<GENERATE_MOCK_TASK_CYCLE; ++i) {
     data.data.performanceReviewPage.incoming.pending.push(mockPerformanceReview(id_counter++));
     data.data.performanceReviewPage.incoming.inProgress.push(mockPerformanceReview(id_counter++));

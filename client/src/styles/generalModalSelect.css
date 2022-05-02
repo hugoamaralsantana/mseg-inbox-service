@@ -1,0 +1,28 @@
+.modal-select {
+  height: 20vh;
+  overflow: hidden;
+}
+
+#modal-select-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-select-button {
+  min-height: 40px;
+  min-width: 275px;
+}
+
+.modal-select-text {
+  font-size: calc(12px + 1.5vw);
+  min-width: 250px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1000px) {
+  #modal-select-buttons {
+    justify-content: start;
+    overflow-x: scroll;
+  }
+}

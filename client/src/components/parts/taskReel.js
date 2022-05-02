@@ -7,6 +7,9 @@ import { useEffect, useState, useRef } from "react";
 
 const TaskReel = (props) => {
   const data = props.data;
+  const userData = JSON.parse(localStorage.getItem('userData'))
+  const id = userData._id
+  //console.log(data)
   // const favoritedOrder = favoriteOrder(data)
   const [dataList, updateTaskBoxOrder] = useState([])
   const isMounted = useRef(false);
@@ -25,9 +28,8 @@ const TaskReel = (props) => {
 
   async function starTask(task) {
     isMounted.current = true
-    console.log(task)
-    if (props.type === 'assignedTraining') {
-      await axios.put(`http://localhost:8082/${props.type}s/${task._id}`, {
+    if (task.type === 'assignedTraining') {
+      await axios.put(`http://localhost:8082/${task.type}s/${task._id}`, {
           "type": task.type,
           "status": task.status,
           "recipient": task.recipient,
@@ -39,26 +41,14 @@ const TaskReel = (props) => {
           "sender_comments": task.sender_comments,
           "training": task.training,
           "is_completed": task.is_completed,
-          "recipient_favorited": props.source === 'incoming' ? !task.recipient_favorited : task.recipient_favorited,
-          "sender_favorited": props.source === 'outgoing' ? !task.sender_favorited : task.sender_favorited
+          "recipient_favorited": task.recipient_id === id ? !task.recipient_favorited : task.recipient_favorited,
+          "sender_favorited": task.sender_id === id ? !task.sender_favorited : task.sender_favorited
       })
       .then((res) => {
-        const newArr = dataList.map(dataTask => {
-          if (dataTask._id === task._id) {
-            return res.data
-          } return dataTask
-        })
-        let returnArr = []
-        newArr.sort((a, b) => (b.due_date > a.due_date) ? 1: -1)
-        newArr.forEach(task => {
-          if (task[favorited]) {
-            returnArr.unshift(task)
-          } else {returnArr.push(task)}
-        })
-        updateTaskBoxOrder(returnArr)
+        sortTasks(res, task)
       })
-    } else if (props.type === 'performanceReview') {
-        await axios.put(`http://localhost:8082/${props.type}s/${task._id}`, {
+    } else if (task.type === 'performanceReview') {
+        await axios.put(`http://localhost:8082/${task.type}s/${task._id}`, {
           "type": task.type,
           "status": task.status,
           "recipient": task.recipient,
@@ -75,26 +65,14 @@ const TaskReel = (props) => {
           "kindness_comments": task.kindness_comments,
           "delivery_score": task.delivery_score,
           "delivery_comments": task.delivery_comments,
-          "sender_favorited": props.source === 'outgoing' ? !task.sender_favorited : task.sender_favorited,
-          "recipient_favorited": props.source === 'incoming' ? !task.recipient_favorited : task.recipient_favorited
+          "sender_favorited": task.sender_id === id ? !task.sender_favorited : task.sender_favorited,
+          "recipient_favorited": task.recipient_id === id ? !task.recipient_favorited : task.recipient_favorited
         })
         .then((res) => {
-          const newArr = dataList.map(dataTask => {
-            if (dataTask._id === task._id) {
-              return res.data
-            } return dataTask
-          })
-          let returnArr = []
-          newArr.sort((a, b) => (b.due_date > a.due_date) ? 1: -1)
-          newArr.forEach(task => {
-            if (task[favorited]) {
-              returnArr.unshift(task)
-            } else {returnArr.push(task)}
-          })
-          updateTaskBoxOrder(returnArr)
+          sortTasks(res, task)
         })
-    } else if (props.type === 'PTORequest') {
-      await axios.put(`http://localhost:8082/${props.type}s/${task._id}`, {
+    } else if (task.type === 'PTORequest') {
+      await axios.put(`http://localhost:8082/${task.type}s/${task._id}`, {
         "type": task.type,
         "status": task.status,
         "recipient": task.recipient,
@@ -107,25 +85,32 @@ const TaskReel = (props) => {
          "pto_type": task.pto_type,
          "pto_start": task.pto_start,
          "pto_end": task.pto_end,
-        "sender_favorited": props.source === 'outgoing' ? !task.sender_favorited : task.sender_favorited,
-        "recipient_favorited": props.source === 'incoming' ? !task.recipient_favorited : task.recipient_favorited
+        "sender_favorited": task.sender_id === id ? !task.sender_favorited : task.sender_favorited,
+        "recipient_favorited": task.recipient_id === id ? !task.recipient_favorited : task.recipient_favorited
         })
         .then((res) => {
-          const newArr = dataList.map(dataTask => {
-            if (dataTask._id === task._id) {
-              return res.data
-            } return dataTask
-          })
-          let returnArr = []
-          newArr.sort((a, b) => (b.due_date > a.due_date) ? 1: -1)
-          newArr.forEach(task => {
-            if (task[favorited]) {
-              returnArr.unshift(task)
-            } else {returnArr.push(task)}
-          })
-          updateTaskBoxOrder(returnArr)
+          sortTasks(res, task)
         })
     }
+    if (props.type === 'landingPage') {
+      window.location.reload(false);
+    }
+  }
+
+  function sortTasks(res, task) {
+    const newArr = dataList.map(dataTask => {
+      if (dataTask._id === task._id) {
+        return res.data
+      } return dataTask
+    })
+    let returnArr = []
+    newArr.sort((a, b) => (b.due_date > a.due_date) ? 1: -1)
+    newArr.forEach(task => {
+      if (task[favorited]) {
+        returnArr.unshift(task)
+      } else {returnArr.push(task)}
+    })
+    updateTaskBoxOrder(returnArr)
   }
 
   if (props.reelTitle === 'Pending') {
@@ -141,10 +126,22 @@ const TaskReel = (props) => {
     action = 'Review';
   }
 
-  // console.log(data)
+  else if (props.reelTitle === 'Favorited') {
+    color = 'title green d-flex justify-content-between';
+    action = 'Review';
+  }
+
+  else if (props.reelTitle === 'Coming up') {
+    color = 'title green d-flex justify-content-between';
+    action = 'Review';
+  }
+
+  const taskReelCSS = props.type === 'landingPage' ? 'task-reel-landing text-white bg-darkest' : 'task-reel text-white bg-darkest'
+
+
 
   return (
-    <div className="task-reel text-white bg-darkest">
+    <div className={taskReelCSS}>
       <div className={color}>
         <h4 className="text-primary pl-2 mb-0">{props.reelTitle}</h4>
         <div id='task-count' className="d-flex align-items-center mr-3">
