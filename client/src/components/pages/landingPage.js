@@ -39,7 +39,6 @@ const LandingPage = (props) => {
   }
 
   useEffect(() => {
-    console.log('cheese')
     async function update() {
       const data = {'favorited': [], 'comingUp': []}
       let allData = []
@@ -64,15 +63,17 @@ const LandingPage = (props) => {
         allData = allData.concat(incoming)
         allData = allData.concat(outgoing)
       })
+      allData.sort((a, b) => (a.due_date > b.due_date) ? 1: -1)
       allData.forEach(task => {
         if (task.sender_id === id && task.sender_favorited) {data.favorited.push(task)}
         else if (task.recipient_id === id && task.recipient_favorited) {data.favorited.push(task)}
-        const one_day=1000*60*60*24;
-        const serverDateTime= moment();
-        const newDate = new Date(task.due_date);
-        //Calculate difference btw the two dates, and convert to days
-        const diff = Math.ceil((newDate - serverDateTime)/one_day);
-        if(diff <= 7 && task.status !== 'completed') {data.comingUp.push(task)}  
+        data.comingUp.push(task)
+        // const one_day=1000*60*60*24;
+        // const serverDateTime= moment();
+        // const newDate = new Date(task.due_date);
+        // //Calculate difference btw the two dates, and convert to days
+        // const diff = Math.ceil((newDate - serverDateTime)/one_day);
+        // if(diff <= 7 && task.status !== 'completed') {data.comingUp.push(task)}  
       })
       setLandingPageData(data)
       if (!check.current) {
@@ -84,11 +85,9 @@ const LandingPage = (props) => {
   }, [effectCheck, id])
 
   async function filterData(filter) {
-    console.log(';ligma')
     let returnData = {'favorited': [], 'comingUp': []}
     const favorited = changingData.favorited
     const comingUp = changingData.comingUp
-    console.log(comingUp)
     favorited.forEach(task => {
       if (task.recipient_id === id && task.sender.toLowerCase().startsWith(filter.toLowerCase())) {
         returnData.favorited.push(task)
@@ -97,7 +96,6 @@ const LandingPage = (props) => {
         returnData.favorited.push(task)
       }
     })
-    console.log('pizza')
     comingUp.forEach(task => {
       if (task.sender_id === id && task.recipient.toLowerCase().startsWith(filter.toLowerCase())) {
         returnData.comingUp.push(task)

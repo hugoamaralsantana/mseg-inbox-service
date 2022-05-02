@@ -51,7 +51,6 @@ const User = require('../models/USER');
 
   // get all users from database
   router.get('/', (req, res) => {
-    console.log('hi1')
     User.find()
       .then(users => res.json(users))
       .catch(err => res.status(404).json({ error: 'No Users found' }));
@@ -66,7 +65,6 @@ const User = require('../models/USER');
   
   // get a user by id from database
   router.get('/:id', (req, res) => {
-    console.log('hi2')
     User.findById(req.params.id)
       .then(user => res.json(user))
       .catch(err => res.status(404).json({ error: `No User found at ${req.params.id}` }));
@@ -74,12 +72,9 @@ const User = require('../models/USER');
 
   // get a user by name from database
   router.get('/email/:email', (req, res) => {
-    console.log('hi3')
-    console.log(req.params.email)
     User.find({'email': req.params.email})
       .then(user => res.json(user))
       .catch(err => {
-        console.log(err)
         res.status(404).json({ error: `No User found at ${req.params.name}` });
       })
   });
@@ -95,7 +90,6 @@ const User = require('../models/USER');
     check('email').isEmail(),
     check('email').custom(async(email) => {
       const emailCheck = await User.find({'email': email})
-      console.log(emailCheck)
       if (emailCheck.length > 0) {
         return Promise.reject()
       }

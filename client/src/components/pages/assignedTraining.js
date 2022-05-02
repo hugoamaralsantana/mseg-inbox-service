@@ -27,7 +27,6 @@ const AssignedTraining = (props) => {
     async function update() {
     await axios.get(`http://localhost:8082/assignedTrainings/userData/${id}`)
       .then(res => {
-        console.log(res.data)
         const incoming = res.data.incoming
         const outgoing = res.data.outgoing
         let returnData = {'incoming': [], 'outgoing': []}
@@ -56,7 +55,6 @@ const AssignedTraining = (props) => {
       .catch(err => console.log(err))
   }
     update()
-    console.log('HI')
   }, [effectCheck, id])
 
   function filterData(filter) {

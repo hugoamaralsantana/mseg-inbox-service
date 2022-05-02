@@ -14,7 +14,6 @@ const AssignTrainingModal = (props) => {
     }
 
     async function handleExit() {
-        console.log()
         if (recipient === email) {return}
         const data = {
             'training': link
