@@ -126,6 +126,7 @@ const PerformanceReview = (props) => {
         "recipient_favorited": false
     })
     .then(res => {
+      check.current = false;
       if (effectCheck) {updateCheck(false)}
       else updateCheck(true)
     })
