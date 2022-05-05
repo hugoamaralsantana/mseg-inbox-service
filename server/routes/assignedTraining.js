@@ -70,11 +70,10 @@ const User = require('../models/USER');
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-
-    User.find()
+    const body = req.body;
+    User.find({'_id': {$ne: body.sender_id}})
     .then(users => {
       users.forEach(user => {
-        const body = req.body;
         body.recipient_id = user._id;
         body.recipient = user.first_name + ' ' + user.last_name;
         AssignedTraining.create(body)

@@ -51,6 +51,8 @@
 .right-side {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   margin-right: 0.5em;
 }
 
@@ -58,14 +60,13 @@
   height: 20px;
   width: 20px;
   margin-top: 0.3em;
-  margin: auto;
   cursor: pointer;
 }
 
 .profile-icon {
   height: 25px;
   width: 25px;
-  margin: auto;
+  margin-bottom: 0.3em;
   background-color: #d4f0f1;
   border-radius: 50%;
 }
