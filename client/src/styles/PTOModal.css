@@ -64,7 +64,10 @@
   border-radius: 15px;
 }
 
-.submit-button {
+.submit-button-pto {
   border: none;
   margin: auto;
+  width: 200px;
+  border-radius: 15px;
+  text-align: center;
 }

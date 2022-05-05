@@ -38,6 +38,7 @@
   height: 30px;
   float: right;
   border-radius: 15px;
+  cursor: pointer;
 }
 
 .submit-button {

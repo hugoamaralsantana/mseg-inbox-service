@@ -59,16 +59,18 @@
 }
 
 .submit {
-  width: 90px;
   height: 30px;
   float: right;
   border-radius: 15px;
 }
 
-.submit-button {
+.submit-button-cp {
   border: none;
   margin: auto;
   cursor: pointer;
+  width: 200px;
+  border-radius: 15px;
+  height: 30px;
 }
 
 input[type="number"]::-webkit-inner-spin-button {

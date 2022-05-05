@@ -76,7 +76,7 @@ const PTOModal = (props) => {
                         <textarea className='long-text ml-3 mr-3' type="text" id="notes" name="notes" rows='4' col='40' value={notes} onChange={handleChange} placeholder='Add some additional details about the nature of this request'></textarea>
                     </div>
                     <div className='submit bg-primary mr-2 mt-1 text-center d-flex'>
-                        <div className='submit-button bg-primary text-white' onClick={handleExit}>Send</div>
+                        <div className='submit-button-pto bg-primary text-white' onClick={handleExit}>Send</div>
                     </div>
                 </form>
             </div>
@@ -122,7 +122,7 @@ const PTOModal = (props) => {
                             </datalist>
                         </div>
                         <div className={`submit bg-primary mr-2 mt-1 text-center d-${props.userType === 'Employee' ? 'flex' : props.data.status === 'completed' ? 'none' : 'flex'}`}>
-                            <input className='submit-button bg-primary text-white' type="submit" value="Send"></input>
+                            <input className='submit-button-pto bg-primary text-white' type="submit" value="Send"></input>
                         </div>
                     </div>
                     
