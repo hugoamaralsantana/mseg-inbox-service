@@ -36,7 +36,7 @@
 .long-text {
   width: 390px;
   background-color: #bfbfbf;
-  opacity: 61%;
+  opacity: 78%;
   color: black;
 }
 
@@ -48,7 +48,7 @@
 
 .shortest-text {
   background-color: #bfbfbf;
-  opacity: 61%;
+  opacity: 78%;
   color: black;
   width: 80px;
 }
