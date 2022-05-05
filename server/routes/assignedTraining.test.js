@@ -55,7 +55,7 @@ describe('POST assigned trainings testing', () => {
             .send({
                 type: "PTORequests",
                 recipient: "John Cena",
-                recipeint_id: "youcantseeme123",
+                recipient_id: "youcantseeme123",
                 sender: "Randy Orton",
                 sender_id: "rko",
             });
@@ -98,7 +98,7 @@ describe('PUT assigned trainings testing', () => {
                 type: "PTORequests",
                 status: "done",
                 recipient: "John Cena",
-                recipeint_id: "youcantseeme123",
+                recipient_id: "youcantseeme123",
                 sender: "Randy Orton",
                 sender_id: "rko",
             });
