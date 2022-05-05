@@ -55,7 +55,7 @@ describe('POST PTO requests testing', () => {
             .send({
                 type: "assignedTrainings",
                 recipient: "John Cena",
-                recipeint_id: "youcantseeme123",
+                recipient_id: "youcantseeme123",
                 sender: "Randy Orton",
                 sender_id: "rko",
             });
@@ -99,7 +99,7 @@ describe('PUT PTO requests testing', () => {
                 type: "assignedTrainings",
                 status: "done",
                 recipient: "John Cena",
-                recipeint_id: "youcantseeme123",
+                recipient_id: "youcantseeme123",
                 sender: "Randy Orton",
                 sender_id: "rko",
             });
