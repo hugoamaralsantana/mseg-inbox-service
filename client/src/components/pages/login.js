@@ -38,9 +38,9 @@ const Login = () => {
         <div className="login-background bg-primary">
             <div className="form-signin">
             <form className="wrapperLogin">
-                <div className='login-logo-title d-flex mb-2'>
-                    <img className="mt-1" src='/ukg_logo.svg' alt="UKG-LOGO" width={72} height={57} />
-                    <h2 className='mt-3 ml-2 fw-bold text-primary'>Inbox</h2>
+                <div className='login-logo-title d-flex align-items-center justify-content-center mb-2'>
+                    <img className="" src='/ukg_logo.svg' alt="UKG-LOGO" width={72} height={57} />
+                    <h2 className='ml-2 mt-0 mr-0 mb-0 p-0 fw-bold text-primary'>Inbox</h2>
                 </div>
                 <h3 className="mb-3 fw-bold text-primary">Login</h3>
                 <div className="form-floating mb-3">
