@@ -80,8 +80,8 @@ const User = require('../models/USER');
         .catch(err => res.status(400).json(err)); 
       }) 
     })
+    .then(() => res.status(200).json({message: "Succesfully sent assigned trainings to all employees."}))
     .catch(err => res.status(404).json({ error: 'No Users found' }));
-    return res.status(200).json({message: "Succesfully sent assigned trainings to all employees."})
   });
 
   // update an assigned training in the database

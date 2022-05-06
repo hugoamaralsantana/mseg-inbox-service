@@ -122,12 +122,11 @@ const AssignedTraining = (props) => {
       "recipient_favorited": false
     })
     .then(res => {
-      check.current = false;
-      console.log('1')
-      setTimeout(() => {
+      if (res.data) {
+        check.current = false;
         if (effectCheck) {updateCheck(false)}
         else updateCheck(true)
-      }, 3000)
+      }
     })
   }
 
