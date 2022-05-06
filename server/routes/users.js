@@ -13,7 +13,6 @@ const User = require('../models/USER');
   router.post('/populate', (req, res) => {
 
     const parseDate = (date) => {
-        2015-04-06
         const year = date.slice(0, 4)
         const month = date.slice(5,7)
         const day = date.slice(8,10)
