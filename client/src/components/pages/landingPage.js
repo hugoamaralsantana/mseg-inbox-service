@@ -43,13 +43,15 @@ const LandingPage = (props) => {
     async function update() {
       const data = {'favorited': [], 'comingUp': []}
       let allData = []
-      await axios.get(`http://localhost:8082/assignedTrainings/userData/${id}`)
-      .then(res => {
-        const incoming = res.data.incoming
-        const outgoing = res.data.outgoing
-        allData = allData.concat(incoming)
-        allData = allData.concat(outgoing)
-      })
+      if (userType !== 'Admin') {
+        await axios.get(`http://localhost:8082/assignedTrainings/userData/${id}`)
+        .then(res => {
+          const incoming = res.data.incoming
+          const outgoing = res.data.outgoing
+          allData = allData.concat(incoming)
+          allData = allData.concat(outgoing)
+        })
+      }
       await axios.get(`http://localhost:8082/performanceReviews/userData/${id}`)
       .then(res => {
         const incoming = res.data.incoming
@@ -66,6 +68,7 @@ const LandingPage = (props) => {
       })
       allData.sort((a, b) => (a.due_date > b.due_date) ? 1: -1)
       allData.forEach(task => {
+        if (task.status === 'completed') {return}
         if (task.sender_id === id && task.sender_favorited) {data.favorited.push(task)}
         else if (task.recipient_id === id && task.recipient_favorited) {data.favorited.push(task)}
         data.comingUp.push(task)

@@ -26,6 +26,7 @@ const AssignedTraining = (props) => {
 
   useEffect(() => {
     async function update() {
+      console.log('2')
     await axios.get(`http://localhost:8082/assignedTrainings/userData/${id}`)
       .then(res => {
         const incoming = res.data.incoming
@@ -47,6 +48,8 @@ const AssignedTraining = (props) => {
         })
         returnData.incoming = incomingArr
         returnData.outgoing = outgoingArr
+        console.log(returnData)
+        console.log('3')
         setAssignedTrainingData(returnData)
         if (!check.current) {
           updateChangeingData(returnData)
@@ -120,8 +123,11 @@ const AssignedTraining = (props) => {
     })
     .then(res => {
       check.current = false;
-      if (effectCheck) {updateCheck(false)}
-      else updateCheck(true)
+      console.log('1')
+      setTimeout(() => {
+        if (effectCheck) {updateCheck(false)}
+        else updateCheck(true)
+      }, 3000)
     })
   }
 

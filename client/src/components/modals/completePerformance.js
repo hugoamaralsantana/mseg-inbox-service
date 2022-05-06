@@ -88,7 +88,7 @@ const CompletePerformanceReviewModal = (props) => {
                         </div>
                     </div>
                     <div className={`submit bg-primary mr-2 mt-1 text-center d-${props.data.status === 'completed' ? 'none' : 'flex'}`}>
-                        <input className='submit-button bg-primary text-white'  type="submit" value="Send"></input>
+                        <input className='w-80 submit-button-cp bg-primary text-white'  type="submit" value="Send"></input>
                     </div>
                 </form>
             </div>
