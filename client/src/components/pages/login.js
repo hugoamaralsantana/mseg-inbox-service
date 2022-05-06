@@ -51,7 +51,6 @@ const Login = () => {
                     <input id="password"  type="password" className="form-control" placeholder="Password" />
                     <label id="password" htmlFor="password">Password</label>
                 </div>
-                <a href="#" className="text-primary font-weight-bold mb-4 mt-2 text-decoration-none">Forgot Password</a>
                 <a id="login" onClick={handleLogin}><button className="pl-4 pr-4 btn btn-med btn-primary rounded-pill">Login</button></a>
             </form>     
             </div>

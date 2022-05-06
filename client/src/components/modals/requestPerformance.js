@@ -34,8 +34,8 @@ const RequestPerformanceReviewModal = (props) => {
                         <label className='ml-3 mt-2 text-black' htmlFor="to-person"><h4>To:</h4></label>
                         <input className='text ml-3 mr-3' type="text" id="to-person" name="to-person" placeholder='Insert Employee Email' value={recipient} onChange={handleInput} required></input>
                     </div>
-                    <div className='submit bg-primary mr-2 mt-2 text-center d-flex'>
-                        <div className='submit-button bg-primary text-white' onClick={handleExit}>Send</div>
+                    <div className='submit bg-primary mr-2 mt-2 text-center d-flex' onClick={handleExit}>
+                        <div className='submit-button bg-primary text-white'>Send</div>
                     </div>
                 </form>
             </div>
